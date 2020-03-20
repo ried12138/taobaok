@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <property name="TAOBAOK_LOG" value="/data/tobaoklogs/logs"/>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${TAOBAOK_LOG}/%d{yyyyMMdd}/TAOBAOK_dubug.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- email  start-->
+    <!--    <property name="smtpHost" value="smtphm.qiye.163.com"/>-->
+    <!--    <property name="smtpPort" value="994"/>-->
+    <!--    <property name="username" value="bpg_monitor@teddymobile.cn"/>-->
+    <!--    <property name="password" value="RKhwk5tKUkmzW1KL"/>-->
+    <!--    <property name="SSL" value="true"/>-->
+    <!--    <property name="email_to" value="devdsp@teddymobile.cn"/>-->
+    <!--    <property name="email_from" value="bpg_monitor@teddymobile.cn"/>-->
+    <!--    <property name="email_subject" value="【DSP-Error】: %logger"/>-->
+
+    <!--    <appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">-->
+    <!--        <smtpHost>${smtpHost}</smtpHost>-->
+    <!--        <smtpPort>${smtpPort}</smtpPort>-->
+    <!--        <username>${username}</username>-->
+    <!--        <password>${password}</password>-->
+    <!--        <asynchronousSending>true</asynchronousSending>-->
+    <!--        <SSL>${SSL}</SSL>-->
+    <!--        <to>${email_to}</to>-->
+    <!--        <from>${email_from}</from>-->
+    <!--        <subject>${email_subject}</subject>-->
+    <!--        &lt;!&ndash; html格式&ndash;&gt;-->
+    <!--        <layout class="ch.qos.logback.classic.html.HTMLLayout">-->
+    <!--            <Pattern>%date%level%thread%logger{0}%line%message</Pattern>-->
+    <!--        </layout>-->
+    <!-- 这里采用等级过滤器 指定等级相符才发送 -->
+    <!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+    <!--            <level>ERROR</level>-->
+    <!--            <onMatch>ACCEPT</onMatch>-->
+    <!--            <onMismatch>DENY</onMismatch>-->
+    <!--        </filter>-->
+    <!--        <cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">-->
+    <!--            &lt;!&ndash; 每个电子邮件只发送一个日志条目 &ndash;&gt;-->
+    <!--            <bufferSize>1</bufferSize>-->
+    <!--        </cyclicBufferTracker>-->
+    <!--    </appender>-->
+    <!-- email  end-->
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="EMAIL"/>
+    </root>
+
+</configuration>
