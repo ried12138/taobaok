@@ -26,9 +26,9 @@
     <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
   </listener>
 
-  <!--    <listener>-->
-  <!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-  <!--    </listener>-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
   <!-- 防止spring内存溢出监听器 -->
   <listener>
@@ -49,7 +49,7 @@
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
     <!-- / 表示所有的请求都要经过此serlvet -->
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
 
   <!-- 配置字符编码过滤 -->
@@ -79,5 +79,7 @@
     <filter-name>HiddenHttpMethodFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>
