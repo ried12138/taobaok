@@ -1,4 +1,4 @@
-package xyz.taobaok.www.util;
+package xyz.taobaok.www.util.wechatutil;
 
 
 import org.dom4j.Document;

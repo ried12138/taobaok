@@ -5,4 +5,5 @@ package xyz.taobaok.www.util.dataoke;
  */
 public class SearchUtil {
 
+
 }

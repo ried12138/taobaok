@@ -3,10 +3,11 @@ package xyz.taobaok.www.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import xyz.taobaok.www.util.MessageType;
-import xyz.taobaok.www.util.wechatutil.WebChatService;
+import xyz.taobaok.www.util.wechatutil.MessageType;
+import xyz.taobaok.www.weixinserver.WebChatService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +23,16 @@ public class WeixinPostRequestController {
     private static String token ="0ADCEAF6CCE07DF3";            //服务器链接校验token
     private static Logger logger = LoggerFactory.getLogger(WeixinPostRequestController.class);
 
+    @Autowired
+    WebChatService webChatService;
 
 
-
+    /**
+     *  接收微信请求方法 POST方式
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping(value = "/wechat",method = RequestMethod.POST)
     @ResponseBody
     public void RequestPostWeiXinInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -43,9 +51,9 @@ public class WeixinPostRequestController {
         String msgType = map.get("MsgType");
         String xml=null;
         if (msgType.equals(MessageType.REQ_MESSAGE_TYPE_EVENT)){
-            xml = WebChatService.parseEvent(map);           //事件处理
+            xml = webChatService.parseEvent(map);           //事件处理
         }else{
-            xml = WebChatService.parseMessage(map);         //信息处理
+            xml = webChatService.parseMessage(map);         //信息处理
         }
         try {
             response.getWriter().write(xml);
@@ -53,6 +61,7 @@ public class WeixinPostRequestController {
             response.getWriter().write("");
         }
     }
+
     /**
      *  服务器与微信公众号校验token值
      * @param signature
@@ -65,7 +74,6 @@ public class WeixinPostRequestController {
     @ResponseBody
     public String RequestGetWeixin(@RequestParam("signature") String signature, @RequestParam("timestamp") String timestamp,
                                     @RequestParam("nonce") String nonce,@RequestParam("echostr")String echostr){
-
         //字典顺序排序
         String[] attr = {token,timestamp,nonce};
         Arrays.sort(attr);
@@ -73,14 +81,13 @@ public class WeixinPostRequestController {
         for (int i =0;i < attr.length; i++){
             content.append(attr[i]);
         }
-
         //sha1加密
         MessageDigest md = null;
         String temp = null;
         try {
             md = MessageDigest.getInstance("SHA-1");
             byte[] digest = md.digest(content.toString().getBytes());
-            temp = byteTStr(digest);
+            temp = webChatService.byteTStr(digest);
             logger.info("加密后的token："+temp);
             //小写对比
             if ((temp.toLowerCase()).equals(signature)){
@@ -93,19 +100,19 @@ public class WeixinPostRequestController {
         }
         return "";
     }
-    private static String byteTStr(byte[]byteArray){
-        String strDigest = "";
-        for (int i = 0; i < byteArray.length; i++) {
-            strDigest += byteToHexStr(byteArray[i]);
-        }
-        return strDigest;
-    }
-    private static String byteToHexStr(byte mByte){
-        char[] Digit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A','B', 'C', 'D', 'E', 'F' };
-        char[] tempArr = new char[2];
-        tempArr[0] = Digit[(mByte >>> 4)& 0X0F];
-        tempArr[1] = Digit[mByte & 0X0F];
-        String s = new String(tempArr);
-        return s;
-    }
+//    private static String byteTStr(byte[]byteArray){
+//        String strDigest = "";
+//        for (int i = 0; i < byteArray.length; i++) {
+//            strDigest += byteToHexStr(byteArray[i]);
+//        }
+//        return strDigest;
+//    }
+//    private static String byteToHexStr(byte mByte){
+//        char[] Digit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A','B', 'C', 'D', 'E', 'F' };
+//        char[] tempArr = new char[2];
+//        tempArr[0] = Digit[(mByte >>> 4)& 0X0F];
+//        tempArr[1] = Digit[mByte & 0X0F];
+//        String s = new String(tempArr);
+//        return s;
+//    }
 }

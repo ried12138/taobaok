@@ -1,4 +1,4 @@
-package xyz.taobaok.www.util;
+package xyz.taobaok.www.util.dataoke;
 
 
 import org.python.modules._systemrestart;
@@ -114,7 +114,6 @@ public class SendPostUtil {
         }
         return isMatch("^([0-9]+)$", str);
     }
-
 
     /**
      * 正则表达式校验,符合返回True

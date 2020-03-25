@@ -1,4 +1,4 @@
-package xyz.taobaok.www.util;
+package xyz.taobaok.www.util.dataoke;
 
 import java.security.MessageDigest;
 import java.util.Iterator;

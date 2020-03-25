@@ -1,22 +1,31 @@
-package xyz.taobaok.www.util.wechatutil;
+package xyz.taobaok.www.weixinserver.weixinserverImpl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import xyz.taobaok.www.util.MessageType;
-import xyz.taobaok.www.util.SendPostUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import xyz.taobaok.www.dataokeService.DataokeService;
+import xyz.taobaok.www.util.wechatutil.MessageType;
+import xyz.taobaok.www.util.dataoke.SendPostUtil;
 import xyz.taobaok.www.util.dataoke.DaTaoKeJsonToObjectResponse;
-import xyz.taobaok.www.util.dataoke.DaTaoKeUtil;
 import xyz.taobaok.www.util.dataoke.Dataa;
-
+import xyz.taobaok.www.util.wechatutil.XmlUtil;
+import xyz.taobaok.www.weixinserver.WebChatService;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebChatService {
+/**
+ * 微信消息回复处理
+ */
+@Service
+public class WebChatServiceImpl implements WebChatService {
 
+    @Autowired
+    DataokeService dataokeService;
     // 处理微信发来的请求 map 消息业务处理分发
-    public static String parseMessage(Map<String,String> map) throws IOException {
-
+    @Override
+    public String parseMessage(Map<String,String> map) throws IOException {
         //发送方账号
         String fromUserName = map.get("FromUserName");
         //开发者微信号
@@ -37,7 +46,7 @@ public class WebChatService {
             if (content.contains("https://item.taobao.com/item.htm?id=")){
                 int i = content.indexOf("=");
                 id = content.substring(i+1,content.length());
-                String goods = DaTaoKeUtil.SenDaTaoKeApiGoods(id);
+                String goods = dataokeService.SenDaTaoKeApiGoods(id);
                 if (!goods.equals("")){
                     JSONObject jsonObject = JSON.parseObject(goods);
                     String data = jsonObject.getString("data");
@@ -71,7 +80,7 @@ public class WebChatService {
                 info.append("抱歉,该商品没有优惠券！正在努力开发中...");
             }
             //大淘客响应json
-            String json = DaTaoKeUtil.senDaTaoKeApiLink(id);
+            String json = dataokeService.senDaTaoKeApiLink(id);
             if (!json.equals("")){
                 //json转对象
                 DaTaoKeJsonToObjectResponse parse = JSONObject.parseObject(json, DaTaoKeJsonToObjectResponse.class);
@@ -101,7 +110,8 @@ public class WebChatService {
     }
 
     //事件消息业务分发
-    public static String parseEvent(Map<String,String> map){
+    @Override
+    public String parseEvent(Map<String,String> map){
         String respXml=null;
         String fromUserName = map.get("FromUserName");      //发送方账号
         String toUserName = map.get("ToUserName");          //接收方账号（开发者账号）
@@ -132,5 +142,28 @@ public class WebChatService {
 //
 //        }
         return respXml;
+    }
+
+
+    /**
+     * 微信校验token加密
+     * @param byteArray
+     * @return
+     */
+    @Override
+    public String byteTStr(byte[]byteArray){
+        String strDigest = "";
+        for (int i = 0; i < byteArray.length; i++) {
+            strDigest += byteToHexStr(byteArray[i]);
+        }
+        return strDigest;
+    }
+    private static String byteToHexStr(byte mByte){
+        char[] Digit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A','B', 'C', 'D', 'E', 'F' };
+        char[] tempArr = new char[2];
+        tempArr[0] = Digit[(mByte >>> 4)& 0X0F];
+        tempArr[1] = Digit[mByte & 0X0F];
+        String s = new String(tempArr);
+        return s;
     }
 }

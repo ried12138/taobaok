@@ -7,7 +7,11 @@ import xyz.taobaok.www.util.StringUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-//封装和处理xml文件
+/**
+ * 封装和处理xml文件
+ * 响应微信消息格式封装
+ */
+
 public class XmlUtil {
     private static final String PREFIX_XML = "<xml>";
     private static final String SUFFIX_XML = "</xml>";

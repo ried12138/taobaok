@@ -130,11 +130,21 @@
 	<!--					<property name="contentType" value="text/html" />-->
 	<!--					<property name="prefix" value="/" />-->
 	<!--					<property name="suffix" value=".jsp" />-->
-	<!--				</bean>-->
+
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name = "prefix" value="/WEB-INF/"/>
 		<property name = "suffix" value=".jsp"/>
 	</bean>
+<!--	<bean id="propertyPlaceHolderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+<!--		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />-->
+<!--		<property name="ignoreResourceNotFound" value="true" />-->
+<!--		<property name="locations">-->
+<!--			<list>-->
+<!--				&lt;!&ndash; 把需要配置的properties文件配置在这里，可以有多个 &ndash;&gt;-->
+<!--				<value>classpath:dev/application.properties</value>-->
+<!--			</list>-->
+<!--		</property>-->
+<!--	</bean>-->
 
 	<!--			</list>-->
 	<!--		</property>-->
@@ -142,7 +152,6 @@
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven/>
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:*.properties" />
-	<!-- 先走默认的web.xml配置的servlet，没有的话才找对应controller,相当于处理配置静态资源，这种方式效率相对比较低,如果DispatcherServlet拦截类似
-		*.do 这种格式的URL，就不存在访问不到静态资源的问题,静态资源访问详见web.xml -->
+
 
 </beans>

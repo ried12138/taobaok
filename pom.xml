@@ -116,11 +116,11 @@
       <artifactId>commons-logging</artifactId>
       <version>${commons-logging.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>${commons-io.version}</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.apache.commons</groupId>-->
+<!--      <artifactId>commons-io</artifactId>-->
+<!--      <version>${commons-io.version}</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
@@ -433,6 +433,9 @@
       <properties>
         <env>online</env>
       </properties>
+<!--      <activation>-->
+<!--        <activeByDefault>true</activeByDefault>-->
+<!--      </activation>-->
     </profile>
   </profiles>
 
@@ -525,12 +528,19 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
-          <version>2.6</version>
+          <version>3.0.0</version>
+<!--          <configuration>-->
+<!--            <webResources>-->
+<!--              <resource>-->
+<!--                <directory>WebContent</directory>-->
+<!--              </resource>-->
+<!--            </webResources>-->
+<!--          </configuration>-->
 
           <configuration>
             <!-- <archive> <manifest> <mainClass>com.onedesk.dsp.utils.JettyServer</mainClass>
                 </manifest> </archive> <warName>${project.artifactId}-standalone</warName> -->
-            <webXml>src/main/WebContent/WEB-INF/web.xml</webXml>
+            <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
           </configuration>
 
         </plugin>

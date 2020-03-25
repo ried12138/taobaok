@@ -22,16 +22,16 @@
     <!--定时任务-->
     <task:annotation-driven/>
     <!-- 引入属性文件:方式二 -->
-    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="ignoreResourceNotFound" value="true"/>
+<!--    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+<!--        <property name="ignoreResourceNotFound" value="true"/>-->
 <!--        <property name="locations">-->
 <!--            <list>-->
-<!--                <value>classpath:jdbc.properties</value>-->
+<!--                <value>classpath:dev/application.properties</value>-->
 <!--                <value>classpath:redis.properties</value>-->
 <!--                <value>classpath:dsp.properties</value>-->
 <!--            </list>-->
 <!--        </property>-->
-    </bean>
+<!--    </bean>-->
 
 <!--    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">-->
 <!--        <property name="driverClass" value="${db.driver}"/>-->

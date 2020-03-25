@@ -11,7 +11,7 @@ public class ViewController {
     //首页访问
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String ViewIndex(){
-        return "home";
+        return "views/home";
     }
 
     /**
@@ -29,6 +29,7 @@ public class ViewController {
      */
     @RequestMapping(value = "/search",method = RequestMethod.GET)
     public String searchIndex(){
+
         return "search/search";
     }
 }
