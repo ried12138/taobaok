@@ -34,7 +34,10 @@
   <listener>
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
-
+<!--自定义监听器 -->
+  <listener>
+    <listener-class>xyz.taobaok.www.listener.StartUpSystemListener</listener-class>
+  </listener>
   <!-- 配置springmvc -->
   <servlet>
     <servlet-name>springmvc</servlet-name>
@@ -74,7 +77,9 @@
     <filter-name>HiddenHttpMethodFilter</filter-name>
     <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
   </filter>
-
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
   <filter-mapping>
     <filter-name>HiddenHttpMethodFilter</filter-name>
     <url-pattern>/*</url-pattern>

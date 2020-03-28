@@ -15,7 +15,7 @@
     <meta name="renderer" content="webkit"/>
     <meta name="force-rendering" content="webkit"/>
     <script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
-    <title>涿鹿领券分享网</title>
+    <title>技术学习分享</title>
     <link type="text/css" rel="stylesheet" href="../../css/style.css" />
     <script type="text/javascript" src="../../js/jquery-1.8.1.min.js"></script>
     <script type="text/javascript" src="../../js/banner.js"></script>
@@ -24,7 +24,7 @@
 <body>
 <div class="topssbox1">
     <div class="topss">
-        <a href="${pageContext.request.contextPath }/search">
+        <a href="${APP_PATH }/search">
             <div class="topssbox">
                 <img src="../../images/s.png" />
             </div>

@@ -51,6 +51,7 @@
      -->
 	<!--	</bean>-->
 
+
 	<!-- 解析json请求数据，将json转换为java对象 -->
 	<bean id="fastjsonConverter"
 		  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">

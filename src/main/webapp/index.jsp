@@ -9,9 +9,10 @@
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <html>
 <head>
-    <title>涿鹿领券分享网</title>
+    <meta http-equiv="refresh" content="3;URL=${APP_PATH }/index">
+    <title>技术学习分享</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath }/index">点击此处跳转首页</a>
+<a href="${APP_PATH }/index">3后后自动跳转首页</a>
 </body>
 </html>

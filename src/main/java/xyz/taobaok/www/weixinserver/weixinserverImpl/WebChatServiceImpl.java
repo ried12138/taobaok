@@ -47,7 +47,7 @@ public class WebChatServiceImpl implements WebChatService {
                 int i = content.indexOf("=");
                 id = content.substring(i+1,content.length());
                 String goods = dataokeService.SenDaTaoKeApiGoods(id);
-                if (!goods.equals("")){
+                if (goods.contains("成功")){
                     JSONObject jsonObject = JSON.parseObject(goods);
                     String data = jsonObject.getString("data");
                     JSONObject jsonObject1 = JSON.parseObject(data);
@@ -56,6 +56,9 @@ public class WebChatServiceImpl implements WebChatService {
                 }else{
                     id ="";
                     info.append("抱歉,该商品没有优惠券！正在努力开发中...");
+                    replyMap.put("Content",info.toString());
+                    respXml = XmlUtil.xmlFormat(replyMap, true);
+                    return respXml;
                 }
             }else if (content.contains("https://")){
                 int idnex = content.indexOf("/");
@@ -76,12 +79,20 @@ public class WebChatServiceImpl implements WebChatService {
                 httpurl.append("https://").append(url);
                 //返回商品id
                 id = SendPostUtil.SendGetTaobaoUrl(httpurl.toString());
+            }else if (!content.contains("https://")){
+                info.append("请输入正确的商品链接！不然我无法帮你找到优惠券。");
+                replyMap.put("Content",info.toString());
+                respXml = XmlUtil.xmlFormat(replyMap, true);
+                return respXml;
             }else{
                 info.append("抱歉,该商品没有优惠券！正在努力开发中...");
+                replyMap.put("Content",info.toString());
+                respXml = XmlUtil.xmlFormat(replyMap, true);
+                return respXml;
             }
             //大淘客响应json
             String json = dataokeService.senDaTaoKeApiLink(id);
-            if (!json.equals("")){
+            if (json.contains("成功")){
                 //json转对象
                 DaTaoKeJsonToObjectResponse parse = JSONObject.parseObject(json, DaTaoKeJsonToObjectResponse.class);
                 Dataa data = parse.getData();
@@ -104,6 +115,7 @@ public class WebChatServiceImpl implements WebChatService {
             }else{
                 replyMap.put("Content","抱歉,该商品没有优惠券！正在努力开发中...");
                 respXml = XmlUtil.xmlFormat(replyMap, true);
+                return respXml;
             }
         }
         return respXml;

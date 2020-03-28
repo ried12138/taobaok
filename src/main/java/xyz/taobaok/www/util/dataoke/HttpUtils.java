@@ -48,11 +48,11 @@ public class HttpUtils {
     }
 
 
-    public static String sendGet(String getUrl,Map<String, String> paraMap){
+    public static String sendGet(String getUrl,Map<String, Object> paraMap){
         if(paraMap == null){
-            paraMap = new HashMap<String,String>();
+            paraMap = new HashMap<String,Object>();
         }
-        paraMap= new TreeMap<String,String>(paraMap);
+        paraMap= new TreeMap<String,Object>(paraMap);
         StringBuilder sb = new StringBuilder();
         paraMap.entrySet().stream().forEach(entry ->{
             sb.append(entry.getKey());

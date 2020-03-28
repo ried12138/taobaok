@@ -8,5 +8,8 @@ public interface DataokeService {
 
     String SenDaTaoKeApiGoods(String id);
 
+    String SendDaTaoKeApiTop();
+
+    String SendDaTaoKeListSuperGoods(String search);
 //    sendGet(String getUrl, Map<String, String> paraMap);
 }

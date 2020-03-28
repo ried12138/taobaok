@@ -1,5 +1,8 @@
 package xyz.taobaok.www.dataokeService.dataokeServiceImpl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -8,6 +11,7 @@ import xyz.taobaok.www.util.SystemPropsUtil;
 import xyz.taobaok.www.util.dataoke.HttpUtils;
 import xyz.taobaok.www.util.dataoke.SignMD5Util;
 
+import java.util.List;
 import java.util.TreeMap;
 
 //链接大淘客api对接工具类
@@ -23,34 +27,66 @@ public class DataokeServiceImlp implements DataokeService {
     //转换推广链接
     @Override
     public String senDaTaoKeApiLink(String id){
-        TreeMap<String,String> paraMap = new TreeMap<String,String>();
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("version","v1.1.1");
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("goodsId",id);
-        paraMap.put("pid","mm_47344560_1373500358_110108500483");
+        paraMap.put("pid",SystemPropsUtil.pid);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
         String jsonString = HttpUtils.sendGet(SystemPropsUtil.getPrivilegeLink, paraMap);
-        if (!jsonString.contains("成功")){
-            return "";
-        }
         return jsonString;
     }
 
     //获取商品详情
     @Override
     public String SenDaTaoKeApiGoods(String id){
-        TreeMap<String,String> paraMap = new TreeMap<String,String>();
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("version","v1.2.1");
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("goodsId",id);
-        paraMap.put("pid","mm_47344560_1373500358_110108500483");
+        paraMap.put("pid",SystemPropsUtil.pid);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
         String jsonString = HttpUtils.sendGet(SystemPropsUtil.details, paraMap);
+        return jsonString;
+    }
+
+    //获取大淘客热搜词top100
+    @Override
+    public String SendDaTaoKeApiTop() {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("version","v1.0.1");
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = HttpUtils.sendGet(SystemPropsUtil.getTop100, paraMap);
         if (!jsonString.contains("成功")){
             return "";
         }
+        JSONObject jsonObject = JSON.parseObject(jsonString);
+        String data = jsonObject.getString("data");
+        JSONObject jsonObject1 = JSON.parseObject(data);
+        String hotWords = jsonObject1.getString("hotWords");
+        return hotWords;
+    }
+
+    /**
+     *  关键字商品搜索
+     * @param search
+     * @return
+     */
+    @Override
+    public String SendDaTaoKeListSuperGoods(String search) {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("version","v1.2.1");
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("keyWords",search);
+        paraMap.put("type",0);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = HttpUtils.sendGet(SystemPropsUtil.listSuperGoods, paraMap);
         return jsonString;
     }
+
 //    public String sendGet(String getUrl, Map<String, String> paraMap){
 //        if(paraMap == null){
 //            paraMap = new HashMap<String,String>();

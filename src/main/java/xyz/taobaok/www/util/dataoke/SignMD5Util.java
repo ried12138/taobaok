@@ -18,7 +18,7 @@ public class SignMD5Util {
      * @param secretKey 密钥
      * @return
      */
-    public static String getSignStr(TreeMap<String,String> map, String secretKey){
+    public static String getSignStr(TreeMap<String,Object> map, String secretKey){
 
         if (map.size() == 0 ){
             return "";
