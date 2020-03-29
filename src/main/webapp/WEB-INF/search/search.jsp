@@ -42,10 +42,15 @@
 <div class="zjssbox">
     <img src="images/s.png" class="i1"/>
     <p class="sstxt">最近搜索</p>
-    <img src="images/del.png" class="i2"/>
+    <img src="images/del.png" onclick="delword()" class="i2"/>
 </div>
 <div class="clear"></div>
 <div class="ssbox">
+    <c:if test="${not empty sessionScope.recentSearch}">
+        <c:forEach items="${sessionScope.recentSearch}" var="list">
+            <a class="zjlist" id="${list}">${list}</a>
+        </c:forEach>
+    </c:if>
 <%--    <a href="shoplist.html">羽绒服</a><a href="shoplist.html">毛呢外套</a><a href="shoplist.html">水杯</a><a href="shoplist.html">打底裤</a><a href="shoplist.html">茶壶</a><a href="shoplist.html">面膜</a><a href="shoplist.html">保温杯</a><a href="shoplist.html">宽松毛衣女</a><a href="shoplist.html">剃须刀</a><a href="shoplist.html">核桃夹子</a>--%>
 </div>
 <div class="clear"></div>
@@ -70,12 +75,20 @@
 </div>
 <script src="js/jquery-1.8.1.min.js"></script>
 <script>
+    //获取热搜词id执行搜索
     $(".iclist").each(function(){
         $(this).click(function(){
             var id = $(this).attr("id");
             todo(id);
         });
     });
+    //获取最近搜索词id执行搜索
+    $(".zjlist").each(function () {
+        $(this).click(function () {
+            var id = $(this).attr("id");
+            todo(id);
+        })
+    })
     //同步请求，到搜索结果页
     function todo(id){
         var placeholder = $("#search").attr('placeholder');         //默认词
@@ -93,6 +106,22 @@
             success:function(result){
                 if (result.success){
                     window.location.href="${APP_PATH }/shoplist?wordName="+result.data;
+                }else{
+                    alert(result.message);
+                }
+            }
+        })
+    }
+    function delword() {
+        $.ajax({
+            type:"get",
+            url:"${APP_PATH}/delword",
+            success:function(result){
+                if(result){
+                    //清除最近记录成功刷新元素
+                    window.location.href="${APP_PATH }/search";
+                }else{
+                    alert(result.message);
                 }
             }
         })

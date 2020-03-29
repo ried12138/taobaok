@@ -35,7 +35,7 @@ public class SendPostUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         con.setInstanceFollowRedirects(false);
         con.setConnectTimeout(5000);
         con.setRequestProperty("accept", "*/*");

@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import xyz.taobaok.www.bean.BeanController;
-import xyz.taobaok.www.bean.DataokeLinkBean;
-import xyz.taobaok.www.bean.ItemBean;
-import xyz.taobaok.www.bean.ShopListBean;
+import xyz.taobaok.www.bean.*;
 import xyz.taobaok.www.dataokeService.DataokeService;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,11 +74,16 @@ public class ViewController extends BeanController {
      */
     @RequestMapping(value = "/search",method = RequestMethod.GET)
     public String searchIndex(Map<String,Object> map,HttpSession session){
-        String hotWords = dataokeService.SendDaTaoKeApiTop();
-        List<String> strings = JSONObject.parseObject(hotWords, List.class);
-        List<String> list = strings.subList(0, 19);
+        List<String> hotword = (List<String>) session.getAttribute("hotword");
+        if (hotword==null){
+            String hotWords = dataokeService.SendDaTaoKeApiTop();
+            List<String> strings = JSONObject.parseObject(hotWords, List.class);
+            List<String> list = strings.subList(0, 19);
+            session.setAttribute("hotword",list);
+            hotword = list;
+        }
         //将list放到请求域里
-        map.put("list",list);
+        map.put("list",hotword);
         //获取热词top100
         return "search/search";
     }
@@ -104,6 +107,11 @@ public class ViewController extends BeanController {
                 //默认词
                 data(placeholder);
             }
+//            Map<String,String> end = (Map<String, String>) end();
+//            List<String> recentSearch = RecentSearchBean.getRecentSearchBean();
+//
+//            recentSearch.add(end.get("data"));
+//            session.setAttribute("recentSearch",recentSearch);
             success(true);//成功
             message("成功");
         } catch (Exception e) {
@@ -113,12 +121,12 @@ public class ViewController extends BeanController {
     }
 
     /**
-     * 关键字搜索
+     * 关键字搜索 同时支持post和get
      * @param wordName
      * @return
      */
-    @RequestMapping(value = "/shoplist",method = RequestMethod.GET)
-    public Object searchWord(String wordName){
+    @RequestMapping(value = "/shoplist")
+    public Object searchWord(String wordName,HttpSession session){
         start();
         ModelAndView mode = null;
         String jsonString = "";
@@ -126,24 +134,68 @@ public class ViewController extends BeanController {
         try {
             jsonString = dataokeService.SendDaTaoKeListSuperGoods(wordName);
             if (!jsonString.contains("成功")){
-                success(false);
-                message("获取商品失败，请联系管理员");
-                return end();
+                mode = new ModelAndView("shoplist");
+                mode.addObject("success",false);
+                mode.addObject("message","获取商品失败，请重试");
+//                success(false);
+//                message("获取商品失败，请重试");
+//                return end();
+                return mode;
             }
             JSONObject jsonObject = JSON.parseObject(jsonString);
             String data = jsonObject.getString("data");
             JSONObject jsonObject1 = JSON.parseObject(data);
             String list= jsonObject1.getString("list");
             List<ShopListBean> shopList = JSONObject.parseArray(list, ShopListBean.class);
-            success(true);
-            data(shopList);
+//            success(true);
+//            data(shopList);
             mode = new ModelAndView("shoplist");
+            mode.addObject("success",true);
             mode.addObject("wordName",wordName);
             mode.addObject("shop",shopList);
+            //将最近搜索过的词放到session域中recentSearch
+//            List<String> recentSearch = RecentSearchBean.getRecentSearchBean();
+            List<String> recentSearch = (List<String>) session.getAttribute("recentSearch");
+            if(recentSearch != null){
+                if (!recentSearch.contains(wordName)){
+                    if (recentSearch.size() == 9){
+                        recentSearch.remove(0);
+                    }
+                    recentSearch.add(wordName);
+                    session.setAttribute("recentSearch",recentSearch);
+                }
+            }else {
+                List<String> strings = new ArrayList<>();
+                strings.add(wordName);
+                recentSearch = strings;
+                session.setAttribute("recentSearch",recentSearch);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return mode;
+    }
+
+    /**
+     * 清除最近搜索记录
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delword",method = RequestMethod.GET)
+    public Object getDelword(HttpSession session){
+        start();
+        try {
+            session.removeAttribute("recentSearch");
+            message("最近搜索记录删除成功");
+            success(true);
+        } catch (Exception e) {
+            message("最近搜索记录删除失败,请联系管理员");
+            success(false);
+            e.printStackTrace();
+        }
+        return end();
     }
 
     /**

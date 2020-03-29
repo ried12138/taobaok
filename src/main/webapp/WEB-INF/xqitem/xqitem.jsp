@@ -584,6 +584,8 @@
                     obj = document.getElementById("copyword");
                     durl = result.data.shortUrl;
                     obj.innerHTML="商品名称【${data.title}】优惠码:"+result.data.tpwd+"优惠券额度:"+result.data.couponInfo+"链接:"+result.data.shortUrl+"关注公众号:涿鹿领券分享，购物优惠从现在开始";
+                }else{
+                    alert(result.message);
                 }
             }
         })

@@ -92,9 +92,7 @@
 <div class="totop"><a href="javascript:scrollTo(0,0)"><img src="images/totop.png" /></a></div>
 <div class="kbox"></div>
 <div class="likebox">
-
     <ul id="shoplikebox">
-<%--        <c:if test="${not empty shop}">--%>
             <c:forEach items="${requestScope.shop }" var="list">
                 <li>
                     <a href="${APP_PATH}/item?id=${list.goodsId }">
@@ -104,7 +102,6 @@
                     </a>
                 </li>
             </c:forEach>
-<%--        </c:if>--%>
 <%--        <li>--%>
 <%--            <a href="xq.html">--%>
 <%--                <img src="images/dp8.png" class="proimg"/>--%>
@@ -186,7 +183,68 @@
     </div>
 </div>
 <script type="text/javascript">
-
+ //   $(window).bind("scroll", function () {
+ //       if(getScrollHeight() < getDocumentTop() + getWindowHeight() + 200){
+ //           //当滚动条到底时,这里是触发内容
+ //           //异步请求数据,局部刷新dom
+ //           var word = "${requestScope.wordName}";
+ //           $.ajax({
+ //               type:"post",
+ //               url:"${APP_PATH }/shoplist?wordName",
+ //               data:{
+ //                   //请求输数据
+ //                   word:word
+ //               },
+ //               success:function (result) {
+ //                   if (result.success()){
+ //                       alert("aaaaaa");
+ //                   }else{
+ //                       alert(result.message);
+ //                   }
+ //               }
+ //           })
+ //       }
+ //   });
+//
+ //   //文档高度
+ //   function getDocumentTop() {
+ //       var scrollTop =  0, bodyScrollTop = 0, documentScrollTop = 0;
+ //       if (document.body) {
+ //           bodyScrollTop = document.body.scrollTop;
+ //       }
+ //       if (document.documentElement) {
+ //           documentScrollTop = document.documentElement.scrollTop;
+ //       }
+ //       scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+ //       console.log("scrollTop:"+scrollTop);
+ //       return scrollTop;
+ //   }
+//
+ //   //可视窗口高度
+ //   function getWindowHeight() {
+ //       var windowHeight = 0;
+ //       if (document.compatMode == "CSS1Compat") {
+ //           windowHeight = document.documentElement.clientHeight;
+ //       } else {
+ //           windowHeight = document.body.clientHeight;
+ //       }
+ //       console.log("windowHeight:"+windowHeight);
+ //       return windowHeight;
+ //   }
+//
+ //   //滚动条滚动高度
+ //   function getScrollHeight() {
+ //       var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
+ //       if (document.body) {
+ //           bodyScrollHeight = document.body.scrollHeight;
+ //       }
+ //       if (document.documentElement) {
+ //           documentScrollHeight = document.documentElement.scrollHeight;
+ //       }
+ //       scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
+ //       console.log("scrollHeight:"+scrollHeight);
+ //       return scrollHeight;
+ //   }
 </script>
 </body>
 </html>
