@@ -75,13 +75,15 @@ public class DataokeServiceImlp implements DataokeService {
      * @return
      */
     @Override
-    public String SendDaTaoKeListSuperGoods(String search) {
+    public String SendDaTaoKeListSuperGoods(String search,Integer pageId, Integer pageSize) {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
-        paraMap.put("version","v1.2.1");
         paraMap.put("appKey",SystemPropsUtil.appKey);
-        paraMap.put("pid",SystemPropsUtil.pid);
-        paraMap.put("keyWords",search);
+        paraMap.put("version","v1.2.1");
         paraMap.put("type",0);
+        paraMap.put("pageId",pageId);
+        paraMap.put("pageSize",pageSize);
+        paraMap.put("keyWords",search);
+        paraMap.put("pid",SystemPropsUtil.pid);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
         String jsonString = HttpUtils.sendGet(SystemPropsUtil.listSuperGoods, paraMap);
         return jsonString;

@@ -57,7 +57,7 @@
             <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>
         </div>
         <div class="headerC0">
-            <a id="word" href="seacher.html" style="display:block; width:100%; height:100%" >${requestScope.wordName}</a>
+            <a id="word" style="display:block; width:100%; height:100%" >${requestScope.wordName}</a>
         </div>
         <div class="headerR">
             <a href="${APP_PATH }/search">取消</a>
@@ -92,16 +92,16 @@
 <div class="totop"><a href="javascript:scrollTo(0,0)"><img src="images/totop.png" /></a></div>
 <div class="kbox"></div>
 <div class="likebox">
-    <ul id="shoplikebox">
-            <c:forEach items="${requestScope.shop }" var="list">
-                <li>
-                    <a href="${APP_PATH}/item?id=${list.goodsId }">
-                        <img src="${list.mainPic }" class="proimg"/>
-                        <p class="tit">${list.title }</p>
-                        <p class="price">￥${list.actualPrice }<span>￥${list.originalPrice }</span><img src="images/f3.png" /></p>
-                    </a>
-                </li>
-            </c:forEach>
+    <ul id="shoplikebox1">
+<%--            <c:forEach items="${requestScope.shop }" var="list">--%>
+<%--                <li>--%>
+<%--                    <a href="${APP_PATH}/item?id=${list.goodsId }">--%>
+<%--                        <img src="${list.mainPic }" class="proimg"/>--%>
+<%--                        <p class="tit">${list.title }</p>--%>
+<%--                        <p class="price">￥${list.actualPrice }<span>￥${list.originalPrice }</span><img src="images/f3.png" /></p>--%>
+<%--                    </a>--%>
+<%--                </li>--%>
+<%--            </c:forEach>--%>
 <%--        <li>--%>
 <%--            <a href="xq.html">--%>
 <%--                <img src="images/dp8.png" class="proimg"/>--%>
@@ -110,24 +110,50 @@
 <%--            </a>--%>
 <%--        </li>--%>
     </ul>
+    <ul id="shoplikebox2">
+    </ul>
+    <ul id="shoplikebox3">
+    </ul>
+    <ul id="shoplikebox4">
+    </ul>
+    <ul id="shoplikebox5">
+    </ul>
+    <ul id="shoplikebox6">
+    </ul>
+    <ul id="shoplikebox7">
+    </ul>
 </div>
 <div class="shoplist" style="display:none">
-    <ul>
-        <c:forEach items="${requestScope.shop }" var="list">
-            <li>
-                <a href="xq.html">
-                    <div class="listL"><img src="${list.mainPic }" /></div>
-                    <div class="listR">
-                        <div class="v1">${list.title}</div>
-                        <div class="v2"><span>包邮</span></div>
-                        <div class="v3">
-                            <p class="p1">￥${list.actualPrice }<span>￥${list.originalPrice }</span></p>
-                            <p class="p2">${list.dailySales }人付款</p>
-                        </div>
-                    </div>
-                </a>
-            </li>
-        </c:forEach>
+    <ul id="shoplistbox1">
+    </ul>
+    <ul id="shoplistbox2">
+    </ul>
+    <ul id="shoplistbox3">
+    </ul>
+    <ul id="shoplistbox4">
+    </ul>
+    <ul id="shoplistbox5">
+    </ul>
+    <ul id="shoplistbox6">
+    </ul>
+    <ul id="shoplistbox7">
+    </ul>
+
+<%--        <c:forEach items="${requestScope.shop }" var="list">--%>
+<%--            <li>--%>
+<%--                <a href="xq.html">--%>
+<%--                    <div class="listL"><img src="${list.mainPic }" /></div>--%>
+<%--                    <div class="listR">--%>
+<%--                        <div class="v1">${list.title}</div>--%>
+<%--                        <div class="v2"><span>包邮</span></div>--%>
+<%--                        <div class="v3">--%>
+<%--                            <p class="p1">￥${list.actualPrice }<span>￥${list.originalPrice }</span></p>--%>
+<%--                            <p class="p2">${list.dailySales }人付款</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--        </c:forEach>--%>
 <%--        <li>--%>
 <%--            <a href="xq.html">--%>
 <%--                <div class="listL"><img src="images/dp4.png" /></div>--%>
@@ -141,7 +167,7 @@
 <%--                </div>--%>
 <%--            </a>--%>
 <%--        </li>--%>
-    </ul>
+<%--    </ul>--%>
 </div>
 <div class="sxbox">
     <div class="sxbox0">
@@ -183,68 +209,123 @@
     </div>
 </div>
 <script type="text/javascript">
- //   $(window).bind("scroll", function () {
- //       if(getScrollHeight() < getDocumentTop() + getWindowHeight() + 200){
- //           //当滚动条到底时,这里是触发内容
- //           //异步请求数据,局部刷新dom
- //           var word = "${requestScope.wordName}";
- //           $.ajax({
- //               type:"post",
- //               url:"${APP_PATH }/shoplist?wordName",
- //               data:{
- //                   //请求输数据
- //                   word:word
- //               },
- //               success:function (result) {
- //                   if (result.success()){
- //                       alert("aaaaaa");
- //                   }else{
- //                       alert(result.message);
- //                   }
- //               }
- //           })
- //       }
- //   });
-//
- //   //文档高度
- //   function getDocumentTop() {
- //       var scrollTop =  0, bodyScrollTop = 0, documentScrollTop = 0;
- //       if (document.body) {
- //           bodyScrollTop = document.body.scrollTop;
- //       }
- //       if (document.documentElement) {
- //           documentScrollTop = document.documentElement.scrollTop;
- //       }
- //       scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
- //       console.log("scrollTop:"+scrollTop);
- //       return scrollTop;
- //   }
-//
- //   //可视窗口高度
- //   function getWindowHeight() {
- //       var windowHeight = 0;
- //       if (document.compatMode == "CSS1Compat") {
- //           windowHeight = document.documentElement.clientHeight;
- //       } else {
- //           windowHeight = document.body.clientHeight;
- //       }
- //       console.log("windowHeight:"+windowHeight);
- //       return windowHeight;
- //   }
-//
- //   //滚动条滚动高度
- //   function getScrollHeight() {
- //       var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
- //       if (document.body) {
- //           bodyScrollHeight = document.body.scrollHeight;
- //       }
- //       if (document.documentElement) {
- //           documentScrollHeight = document.documentElement.scrollHeight;
- //       }
- //       scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
- //       console.log("scrollHeight:"+scrollHeight);
- //       return scrollHeight;
- //   }
+    var page =1;
+    window.onload = function(){
+        reqpage();
+    }
+    window.onscroll = function () {
+        //scrollTop就是触发滚轮事件时滚轮的高度
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        // console.log("滚动距离" + scrollTop);
+        //变量windowHeight是可视区的高度
+        var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        // console.log("可视高度" + windowHeight);
+        //变量scrollHeight是滚动条的总高度
+        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+        console.log("总高度" + scrollHeight);
+        //判断滚动条是否到底部
+        if (scrollTop + windowHeight == scrollHeight) {
+            reqpage();
+            //加载数据
+            // console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
+            // alert("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
+            // addData();
+        }
+    }
+    // var con ="<li>";
+    // con +="<p>已经到底了</p>";
+    // con +="</li>";
+    // if (page >= 7){
+    //     $("#shoplikebox7").html(con); //局部刷新
+    //     $("#shoplistbox7").html(con);
+    // }else{
+        function reqpage() {
+            if (page >= 7){
+                var con ='';
+                con +='<li>';
+                con +=' <a>';
+                con +='<p>已经到底了</p>';
+                con +='</a>';
+                con +='</li>';
+                $("#shoplikebox7").html(con); //局部刷新
+                $("#shoplistbox7").html(con);
+            }else{
+                $.ajax({
+                    type:"post",
+                    url:"${APP_PATH}/shoplist",
+                    data:{
+                        wordName:"${wordName}",
+                        pageId:page,
+                        pageSize:70
+                    },
+                    success:function(result){
+                        if (result.success){
+                            var content = '';
+                            $.each(result.data,function (i,list) {
+                                content+='<li>';
+                                content+='    <a href="${APP_PATH}/item?id='+list.goodsId+'">';
+                                content+='        <img src="'+list.mainPic+'" class="proimg"/>';
+                                content+='        <p class="tit">'+list.title+'</p>';
+                                content+='        <p class="price">￥'+list.actualPrice+'<span>￥'+list.originalPrice+'</span><img src="images/f3.png" /></p>';
+                                content+='    </a>';
+                                content+='</li>';
+                            });
+                            var contentlist = '';
+                            $.each(result.data,function (i,lists) {
+                                contentlist+='<li>';
+                                contentlist+='   <a href="${APP_PATH}/item?id='+lists.goodsId+'">';
+                                contentlist+='       <div class="listL"><img src="'+lists.mainPic+'" /></div>';
+                                contentlist+='       <div class="listR">';
+                                contentlist+='           <div class="v1">'+lists.title+'</div>';
+                                contentlist+='           <div class="v2"><span>包邮</span></div>';
+                                contentlist+='           <div class="v3">';
+                                contentlist+='               <p class="p1">￥'+lists.actualPrice+'<span>￥'+lists.originalPrice+'</span></p>';
+                                contentlist+='               <p class="p2">'+lists.dailySales+'人付款</p>';
+                                contentlist+='           </div>';
+                                contentlist+='       </div>';
+                                contentlist+='   </a>';
+                                contentlist+='</li>';
+                            })
+                            switch (page) {
+                                case 1:
+                                    $("#shoplikebox1").html(content); //局部刷新
+                                    $("#shoplistbox1").html(contentlist);
+                                    page = 1+1;
+                                    break;
+                                case 2:
+                                    $("#shoplikebox2").html(content); //局部刷新
+                                    $("#shoplistbox2").html(contentlist);
+                                    page = 2+1;
+                                    break;
+                                case 3:
+                                    $("#shoplikebox3").html(content); //局部刷新
+                                    $("#shoplistbox3").html(contentlist);
+                                    page = 3+1;
+                                    break;
+                                case 4:
+                                    $("#shoplikebox4").html(content); //局部刷新
+                                    $("#shoplistbox4").html(contentlist);
+                                    page = 4+1;
+                                    break;
+                                case 5:
+                                    $("#shoplikebox5").html(content); //局部刷新
+                                    $("#shoplistbox5").html(contentlist);
+                                    page = 5+1;
+                                    break;
+                                case 6:
+                                    $("#shoplikebox6").html(content); //局部刷新
+                                    $("#shoplistbox6").html(contentlist);
+                                    aaa = 6+1;
+                                    break;
+                            }
+
+                        }
+                    }
+                })
+            }
+        // }
+    }
 </script>
 </body>
 </html>

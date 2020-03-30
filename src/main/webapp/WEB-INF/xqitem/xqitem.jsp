@@ -207,7 +207,15 @@
         <p class="tit">${data.title}</p>
         <div class="qita">
             <p class="p1">￥${data.originalPrice}<span>新品促销</span></p>
-            <p class="p2">当日销量${data.dailySales}</p>
+            <c:choose>
+                <c:when test="${data.dailySales} <0">
+                    <p class="p2">当日销量0</p>
+                </c:when>
+                <c:otherwise>
+                    <p class="p2">当日销量${data.dailySales}</p>
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </div>
 </a>

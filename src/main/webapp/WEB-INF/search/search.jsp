@@ -105,7 +105,7 @@
             },
             success:function(result){
                 if (result.success){
-                    window.location.href="${APP_PATH }/shoplist?wordName="+result.data;
+                    window.location.href="${APP_PATH }/shoplists?wordName="+result.data;
                 }else{
                     alert(result.message);
                 }

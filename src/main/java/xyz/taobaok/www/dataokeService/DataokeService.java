@@ -10,6 +10,6 @@ public interface DataokeService {
 
     String SendDaTaoKeApiTop();
 
-    String SendDaTaoKeListSuperGoods(String search);
+    String SendDaTaoKeListSuperGoods(String wordName, Integer pageid, Integer pagesize);
 //    sendGet(String getUrl, Map<String, String> paraMap);
 }

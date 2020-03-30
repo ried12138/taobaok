@@ -53,7 +53,7 @@ public class ViewController extends BeanController {
                 JSONObject jsonObject = JSONObject.parseObject(item);
                 String data = jsonObject.getString("data");
                 ItemBean list = JSONObject.parseObject(data, ItemBean.class);
-                List<String> reimgs = list.getReimgs();
+//                List<String> reimgs = list.getReimgs();
                 data(list);
                 success(true);
             }
@@ -94,7 +94,7 @@ public class ViewController extends BeanController {
      */
     @ResponseBody
     @RequestMapping(value = "/Word",method = RequestMethod.POST)
-    public Object Word(String search, String placeholder, String hotword,HttpSession session){
+    public Object Word(String search, String placeholder, String hotword){
         start();
         try {
             if (hotword!=null){
@@ -107,11 +107,6 @@ public class ViewController extends BeanController {
                 //默认词
                 data(placeholder);
             }
-//            Map<String,String> end = (Map<String, String>) end();
-//            List<String> recentSearch = RecentSearchBean.getRecentSearchBean();
-//
-//            recentSearch.add(end.get("data"));
-//            session.setAttribute("recentSearch",recentSearch);
             success(true);//成功
             message("成功");
         } catch (Exception e) {
@@ -119,42 +114,46 @@ public class ViewController extends BeanController {
         }
         return end();
     }
-
     /**
-     * 关键字搜索 同时支持post和get
+     * 关键字搜索 支持get
      * @param wordName
      * @return
      */
-    @RequestMapping(value = "/shoplist")
-    public Object searchWord(String wordName,HttpSession session){
+    @ResponseBody
+    @RequestMapping(value = "/shoplists",method = RequestMethod.GET)
+    public Object searchWord(String wordName){
+        ModelAndView mode = new ModelAndView("shoplist");
+        mode.addObject("wordName",wordName);
+        return mode;
+    }
+
+    /**
+     * 关键字搜索 支持post
+     * @param wordName
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/shoplist",method = RequestMethod.POST)
+    public Object searchWord(String wordName,Integer pageId,Integer pageSize,HttpSession session){
         start();
-        ModelAndView mode = null;
         String jsonString = "";
         Map<String,Object> map = new HashMap<String,Object>();
         try {
-            jsonString = dataokeService.SendDaTaoKeListSuperGoods(wordName);
+            jsonString = dataokeService.SendDaTaoKeListSuperGoods(wordName,pageId,pageSize);
             if (!jsonString.contains("成功")){
-                mode = new ModelAndView("shoplist");
-                mode.addObject("success",false);
-                mode.addObject("message","获取商品失败，请重试");
-//                success(false);
-//                message("获取商品失败，请重试");
-//                return end();
-                return mode;
+                success(false);
+                message("获取商品失败，请重试");
+                return end();
             }
             JSONObject jsonObject = JSON.parseObject(jsonString);
             String data = jsonObject.getString("data");
             JSONObject jsonObject1 = JSON.parseObject(data);
             String list= jsonObject1.getString("list");
             List<ShopListBean> shopList = JSONObject.parseArray(list, ShopListBean.class);
-//            success(true);
-//            data(shopList);
-            mode = new ModelAndView("shoplist");
-            mode.addObject("success",true);
-            mode.addObject("wordName",wordName);
-            mode.addObject("shop",shopList);
+            success(true);
+            message(wordName);
+            data(shopList);
             //将最近搜索过的词放到session域中recentSearch
-//            List<String> recentSearch = RecentSearchBean.getRecentSearchBean();
             List<String> recentSearch = (List<String>) session.getAttribute("recentSearch");
             if(recentSearch != null){
                 if (!recentSearch.contains(wordName)){
@@ -162,7 +161,8 @@ public class ViewController extends BeanController {
                         recentSearch.remove(0);
                     }
                     recentSearch.add(wordName);
-                    session.setAttribute("recentSearch",recentSearch);
+                    session.setAttribute("wordName",wordName);      //当前搜索词
+                    session.setAttribute("recentSearch",recentSearch);//最近搜索搜词
                 }
             }else {
                 List<String> strings = new ArrayList<>();
@@ -170,11 +170,10 @@ public class ViewController extends BeanController {
                 recentSearch = strings;
                 session.setAttribute("recentSearch",recentSearch);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return mode;
+        return end();
     }
 
     /**
