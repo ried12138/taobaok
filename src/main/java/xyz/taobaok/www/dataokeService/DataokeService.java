@@ -1,7 +1,5 @@
 package xyz.taobaok.www.dataokeService;
 
-import java.util.Map;
-
 public interface DataokeService {
 
     String senDaTaoKeApiLink(String id);
@@ -10,6 +8,6 @@ public interface DataokeService {
 
     String SendDaTaoKeApiTop();
 
-    String SendDaTaoKeListSuperGoods(String wordName, Integer pageid, Integer pagesize);
+    String SendDaTaoKeListSuperGoods(String wordName, Integer pageid, Integer pagesize, String sort);
 //    sendGet(String getUrl, Map<String, String> paraMap);
 }

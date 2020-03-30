@@ -2,16 +2,12 @@ package xyz.taobaok.www.dataokeService.dataokeServiceImpl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import xyz.taobaok.www.dataokeService.DataokeService;
 import xyz.taobaok.www.util.SystemPropsUtil;
 import xyz.taobaok.www.util.dataoke.HttpUtils;
 import xyz.taobaok.www.util.dataoke.SignMD5Util;
 
-import java.util.List;
 import java.util.TreeMap;
 
 //链接大淘客api对接工具类
@@ -72,10 +68,11 @@ public class DataokeServiceImlp implements DataokeService {
     /**
      *  关键字商品搜索
      * @param search
+     * @param sort
      * @return
      */
     @Override
-    public String SendDaTaoKeListSuperGoods(String search,Integer pageId, Integer pageSize) {
+    public String SendDaTaoKeListSuperGoods(String search, Integer pageId, Integer pageSize, String sort) {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("version","v1.2.1");
@@ -83,6 +80,7 @@ public class DataokeServiceImlp implements DataokeService {
         paraMap.put("pageId",pageId);
         paraMap.put("pageSize",pageSize);
         paraMap.put("keyWords",search);
+        paraMap.put("sort",sort);
         paraMap.put("pid",SystemPropsUtil.pid);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
         String jsonString = HttpUtils.sendGet(SystemPropsUtil.listSuperGoods, paraMap);

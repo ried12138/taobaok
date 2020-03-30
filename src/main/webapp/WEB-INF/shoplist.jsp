@@ -67,23 +67,23 @@
 <div class="clear"></div>
 <div class="shopType">
     <ul>
-        <li class="on">
-            <a href="shoplist.html">综合</a>
+        <li id="comp" class="on">
+            <a onclick="reqpage('','default')">综合</a>
         </li>
-        <li>
-            <a href="shoplist.html">销量</a>
+        <li id="sales">
+            <a onclick="reqpage('','total_sales_des')">销量</a>
         </li>
-        <li>
-            <a href="shoplist.html">价格</a>
-            <span class="pricebtn1"></span>
-            <span class="pricebtn2"></span>
+        <li id="price">
+            <a onclick="reqpage('','price_asc')">价格</a>
+            <span id="asc" onclick="priceasc()" class="pricebtn1"></span>
+            <span id="des" onclick="pricedes()" class="pricebtn2"></span>
         </li>
-        <li>
-            <a href="dplist.html">店铺</a>
-        </li>
-        <li>
-            <a href="javascript:void()" class="a_sx">筛选</a>
-        </li>
+<%--        <li>--%>
+<%--            <a href="dplist.html">店铺</a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="javascript:void()" class="a_sx">筛选</a>--%>
+<%--        </li>--%>
     </ul>
 </div>
 <div class="clear"></div>
@@ -210,9 +210,14 @@
 </div>
 <script type="text/javascript">
     var page =1;
+    var ment = "default";
+    var roll ="roll";
+    var sort = "sort";
     window.onload = function(){
-        reqpage();
+        reqpage(roll,ment);
     }
+    var scrollTop = 0;
+    var windowHeight = 0;
     window.onscroll = function () {
         //scrollTop就是触发滚轮事件时滚轮的高度
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -226,105 +231,198 @@
         console.log("总高度" + scrollHeight);
         //判断滚动条是否到底部
         if (scrollTop + windowHeight == scrollHeight) {
-            reqpage();
-            //加载数据
-            // console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
-            // alert("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
-            // addData();
+            reqpage(roll,sort);
+
         }
     }
-    // var con ="<li>";
-    // con +="<p>已经到底了</p>";
-    // con +="</li>";
-    // if (page >= 7){
-    //     $("#shoplikebox7").html(con); //局部刷新
-    //     $("#shoplistbox7").html(con);
-    // }else{
-        function reqpage() {
-            if (page >= 7){
-                var con ='';
-                con +='<li>';
-                con +=' <a>';
-                con +='<p>已经到底了</p>';
-                con +='</a>';
-                con +='</li>';
-                $("#shoplikebox7").html(con); //局部刷新
-                $("#shoplistbox7").html(con);
-            }else{
-                $.ajax({
-                    type:"post",
-                    url:"${APP_PATH}/shoplist",
-                    data:{
-                        wordName:"${wordName}",
-                        pageId:page,
-                        pageSize:70
-                    },
-                    success:function(result){
-                        if (result.success){
-                            var content = '';
-                            $.each(result.data,function (i,list) {
-                                content+='<li>';
-                                content+='    <a href="${APP_PATH}/item?id='+list.goodsId+'">';
-                                content+='        <img src="'+list.mainPic+'" class="proimg"/>';
-                                content+='        <p class="tit">'+list.title+'</p>';
-                                content+='        <p class="price">￥'+list.actualPrice+'<span>￥'+list.originalPrice+'</span><img src="images/f3.png" /></p>';
-                                content+='    </a>';
-                                content+='</li>';
-                            });
-                            var contentlist = '';
-                            $.each(result.data,function (i,lists) {
-                                contentlist+='<li>';
-                                contentlist+='   <a href="${APP_PATH}/item?id='+lists.goodsId+'">';
-                                contentlist+='       <div class="listL"><img src="'+lists.mainPic+'" /></div>';
-                                contentlist+='       <div class="listR">';
-                                contentlist+='           <div class="v1">'+lists.title+'</div>';
-                                contentlist+='           <div class="v2"><span>包邮</span></div>';
-                                contentlist+='           <div class="v3">';
-                                contentlist+='               <p class="p1">￥'+lists.actualPrice+'<span>￥'+lists.originalPrice+'</span></p>';
-                                contentlist+='               <p class="p2">'+lists.dailySales+'人付款</p>';
-                                contentlist+='           </div>';
-                                contentlist+='       </div>';
-                                contentlist+='   </a>';
-                                contentlist+='</li>';
-                            })
-                            switch (page) {
-                                case 1:
-                                    $("#shoplikebox1").html(content); //局部刷新
-                                    $("#shoplistbox1").html(contentlist);
-                                    page = 1+1;
-                                    break;
-                                case 2:
-                                    $("#shoplikebox2").html(content); //局部刷新
-                                    $("#shoplistbox2").html(contentlist);
-                                    page = 2+1;
-                                    break;
-                                case 3:
-                                    $("#shoplikebox3").html(content); //局部刷新
-                                    $("#shoplistbox3").html(contentlist);
-                                    page = 3+1;
-                                    break;
-                                case 4:
-                                    $("#shoplikebox4").html(content); //局部刷新
-                                    $("#shoplistbox4").html(contentlist);
-                                    page = 4+1;
-                                    break;
-                                case 5:
-                                    $("#shoplikebox5").html(content); //局部刷新
-                                    $("#shoplistbox5").html(contentlist);
-                                    page = 5+1;
-                                    break;
-                                case 6:
-                                    $("#shoplikebox6").html(content); //局部刷新
-                                    $("#shoplistbox6").html(contentlist);
-                                    aaa = 6+1;
-                                    break;
-                            }
-
-                        }
+    function priceasc(){
+        alert("升序");
+    }
+    function pricedes(){
+        alert("降序");
+    }
+    //列表加载逻辑
+    function reqpage(roll,sort) {
+        if (page >= 7){
+            var con ='';
+            con +='<li>';
+            con +=' <a>';
+            con +='<p>已经到底了</p>';
+            con +='</a>';
+            con +='</li>';
+            $("#shoplikebox7").html(con); //局部刷新
+            $("#shoplistbox7").html(con);
+        }else{
+            switch (sort) {
+                case "default":         //综合
+                    if (roll ==""){
+                        sort = "default";
+                        scrollTo(0,0)
+                        $("#shoplikebox2").html(""); //局部刷新
+                        $("#shoplistbox2").html("");
+                        $("#shoplikebox3").html(""); //局部刷新
+                        $("#shoplistbox3").html("");
+                        $("#shoplikebox4").html(""); //局部刷新
+                        $("#shoplistbox4").html("");
+                        $("#shoplikebox5").html(""); //局部刷新
+                        $("#shoplistbox5").html("");
+                        $("#shoplikebox6").html(""); //局部刷新
+                        $("#shoplistbox6").html("");
+                        var scrollTop = 0;
+                        var windowHeight = 0;
+                        page =1;            //初始化页码
                     }
-                })
+                    sort = "default";
+                    $("#comp").attr('class','on');
+                    $("#sales").attr('class','off');
+                    $("#price").attr('class','off');
+                    break;
+                case "total_sales_des": //销量
+                    if (roll == ""){
+                        sort = "total_sales_des";
+                        scrollTo(0,0)
+                        $("#shoplikebox2").html(""); //局部刷新
+                        $("#shoplistbox2").html("");
+                        $("#shoplikebox3").html(""); //局部刷新
+                        $("#shoplistbox3").html("");
+                        $("#shoplikebox4").html(""); //局部刷新
+                        $("#shoplistbox4").html("");
+                        $("#shoplikebox5").html(""); //局部刷新
+                        $("#shoplistbox5").html("");
+                        $("#shoplikebox6").html(""); //局部刷新
+                        $("#shoplistbox6").html("");
+                        var scrollTop = 0;
+                        var windowHeight = 0;
+                        page =1;            //初始化页码
+                    }
+                    sort = "total_sales_des";
+                    $("#comp").attr('class','off');
+                    $("#sales").attr('class','on');
+                    $("#price").attr('class','off');
+                    break;
+                case "price_asc":       //价格_升序
+                    if (roll == ""){
+                        sort = "price_asc";
+                        scrollTo(0,0)
+                        $("#shoplikebox2").html(""); //局部刷新
+                        $("#shoplistbox2").html("");
+                        $("#shoplikebox3").html(""); //局部刷新
+                        $("#shoplistbox3").html("");
+                        $("#shoplikebox4").html(""); //局部刷新
+                        $("#shoplistbox4").html("");
+                        $("#shoplikebox5").html(""); //局部刷新
+                        $("#shoplistbox5").html("");
+                        $("#shoplikebox6").html(""); //局部刷新
+                        $("#shoplistbox6").html("");
+                        var scrollTop = 0;
+                        var windowHeight = 0;
+                        page =1;            //初始化页码
+                    }
+                    sort = "total_sales_des";
+                    $("#comp").attr('class','off');
+                    $("#sales").attr('class','off');
+                    $("#price").attr('class','on');
+                    break;
+                case "price_des":       //价格_降序
+                    if (roll == ""){
+                        sort = "price_des";
+                        scrollTo(0,0)
+                        $("#shoplikebox2").html(""); //局部刷新
+                        $("#shoplistbox2").html("");
+                        $("#shoplikebox3").html(""); //局部刷新
+                        $("#shoplistbox3").html("");
+                        $("#shoplikebox4").html(""); //局部刷新
+                        $("#shoplistbox4").html("");
+                        $("#shoplikebox5").html(""); //局部刷新
+                        $("#shoplistbox5").html("");
+                        $("#shoplikebox6").html(""); //局部刷新
+                        $("#shoplistbox6").html("");
+                        var scrollTop = 0;
+                        var windowHeight = 0;
+                        page =1;            //初始化页码
+                    }
+                    sort = "total_sales_des";
+                    $("#comp").attr('class','off');
+                    $("#sales").attr('class','off');
+                    $("#price").attr('class','on');
+                    break;
+                case "sort":
+                    break;
             }
-        // }
+            $.ajax({
+                type:"post",
+                url:"${APP_PATH}/shoplist",
+                data:{
+                    wordName:"${wordName}",
+                    pageId:page,
+                    pageSize:70,
+                    sort:sort              //排序
+                },
+                success:function(result){
+                    if (result.success){
+                        var content = '';
+                        $.each(result.data,function (i,list) {
+                            content+='<li>';
+                            content+='    <a href="${APP_PATH}/item?id='+list.goodsId+'">';
+                            content+='        <img src="'+list.mainPic+'" class="proimg"/>';
+                            content+='        <p class="tit">'+list.title+'</p>';
+                            content+='        <p class="price">￥'+list.actualPrice+'<span>￥'+list.originalPrice+'</span><span style="text-decoration:none;">日销量：'+list.dailySales+'</span><img src="images/f3.png" /></p>';
+                            content+='    </a>';
+                            content+='</li>';
+                        });
+                        var contentlist = '';
+                        $.each(result.data,function (i,lists) {
+                            contentlist+='<li>';
+                            contentlist+='   <a href="${APP_PATH}/item?id='+lists.goodsId+'">';
+                            contentlist+='       <div class="listL"><img src="'+lists.mainPic+'" /></div>';
+                            contentlist+='       <div class="listR">';
+                            contentlist+='           <div class="v1">'+lists.title+'</div>';
+                            contentlist+='           <div class="v2"><span>包邮</span></div>';
+                            contentlist+='           <div class="v3">';
+                            contentlist+='               <p class="p1">￥'+lists.actualPrice+'<span>￥'+lists.originalPrice+'</span></p>';
+                            contentlist+='               <p class="p2">'+lists.dailySales+'人付款</p>';
+                            contentlist+='           </div>';
+                            contentlist+='       </div>';
+                            contentlist+='   </a>';
+                            contentlist+='</li>';
+                        })
+                        switch (page) {
+                            case 1:
+                                $("#shoplikebox1").html(content); //局部刷新
+                                $("#shoplistbox1").html(contentlist);
+                                page = 1+1;
+                                break;
+                            case 2:
+                                $("#shoplikebox2").html(content); //局部刷新
+                                $("#shoplistbox2").html(contentlist);
+                                page = 2+1;
+                                break;
+                            case 3:
+                                $("#shoplikebox3").html(content); //局部刷新
+                                $("#shoplistbox3").html(contentlist);
+                                page = 3+1;
+                                break;
+                            case 4:
+                                $("#shoplikebox4").html(content); //局部刷新
+                                $("#shoplistbox4").html(contentlist);
+                                page = 4+1;
+                                break;
+                            case 5:
+                                $("#shoplikebox5").html(content); //局部刷新
+                                $("#shoplistbox5").html(contentlist);
+                                page = 5+1;
+                                break;
+                            case 6:
+                                $("#shoplikebox6").html(content); //局部刷新
+                                $("#shoplistbox6").html(contentlist);
+                                aaa = 6+1;
+                                break;
+                        }
+
+                    }
+                }
+            })
+        }
     }
 </script>
 </body>

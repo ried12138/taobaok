@@ -134,12 +134,20 @@ public class ViewController extends BeanController {
      */
     @ResponseBody
     @RequestMapping(value = "/shoplist",method = RequestMethod.POST)
-    public Object searchWord(String wordName,Integer pageId,Integer pageSize,HttpSession session){
+    public Object searchWord(String wordName,Integer pageId,Integer pageSize,String sort,HttpSession session){
         start();
         String jsonString = "";
-        Map<String,Object> map = new HashMap<String,Object>();
         try {
-            jsonString = dataokeService.SendDaTaoKeListSuperGoods(wordName,pageId,pageSize);
+            if (sort.equals("sort")){
+                sort = (String) session.getAttribute("sort");
+            }else{
+                session.setAttribute("sort",sort);          //排序格式
+            }
+
+            if (sort.equals("default") || sort.equals("sort")){
+                sort = "";
+            }
+            jsonString = dataokeService.SendDaTaoKeListSuperGoods(wordName,pageId,pageSize,sort);
             if (!jsonString.contains("成功")){
                 success(false);
                 message("获取商品失败，请重试");
@@ -163,6 +171,7 @@ public class ViewController extends BeanController {
                     recentSearch.add(wordName);
                     session.setAttribute("wordName",wordName);      //当前搜索词
                     session.setAttribute("recentSearch",recentSearch);//最近搜索搜词
+//                    session.setAttribute("sort",sort);          //排序格式
                 }
             }else {
                 List<String> strings = new ArrayList<>();
@@ -213,6 +222,7 @@ public class ViewController extends BeanController {
                 success(false);
                 return end();
             }
+
             JSONObject jsonObject = JSONObject.parseObject(jsonString);
             String list = jsonObject.getString("data");
             DataokeLinkBean dataokeLinkBean = JSONObject.parseObject(list, DataokeLinkBean.class);
