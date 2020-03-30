@@ -61,7 +61,7 @@ public class WebChatServiceImpl implements WebChatService {
                     return respXml;
                 }
             }else if (content.contains("https://")){
-                int idnex = content.indexOf("/");
+                int idnex = content.indexOf("；");
                 String substring = content.substring(idnex + 2, content.length() - 1);
                 int last = substring.indexOf(" ");
                 //获取url
@@ -75,10 +75,8 @@ public class WebChatServiceImpl implements WebChatService {
                     respXml = XmlUtil.xmlFormat(replyMap, true);
                     return  respXml;
                 }
-                StringBuffer httpurl = new StringBuffer();
-                httpurl.append("https://").append(url);
                 //返回商品id
-                id = SendPostUtil.SendGetTaobaoUrl(httpurl.toString());
+                id = SendPostUtil.SendGetTaobaoUrl(url);
             }else if (!content.contains("https://")){
                 info.append("请输入正确的商品链接！不然我无法帮你找到优惠券。");
                 replyMap.put("Content",info.toString());
