@@ -332,30 +332,40 @@
     <div class="tjtit">相关推荐</div>
     <div class="tjcon">
         <ul>
-            <li>
-                <a href="xq.html">
-                    <img src="images/xq2.png" />
-                    <div class="tit"><span>￥88.8</span></div>
-                </a>
-            </li>
-            <li>
-                <a href="xq.html">
-                    <img src="images/xq2.png" />
-                    <div class="tit"><span>￥88.8</span></div>
-                </a>
-            </li>
-            <li>
-                <a href="xq.html">
-                    <img src="images/xq2.png" />
-                    <div class="tit"><span>￥88.8</span></div>
-                </a>
-            </li>
-            <li>
-                <a href="xq.html">
-                    <img src="images/xq2.png" />
-                    <div class="tit"><span>￥88.8</span></div>
-                </a>
-            </li>
+            <c:if test="${not empty itemBean}">
+                <c:forEach items="${itemBean}" var="list">
+                    <li>
+                        <a href="${APP_PATH}/item?id=${list.goodsId}">
+                            <img src="${list.mainPic}" />
+                            <div class="tit"><span>券后价:¥${list.actualPrice}</span></div>
+                        </a>
+                    </li>
+                </c:forEach>
+            </c:if>
+<%--            <li>--%>
+<%--                <a href="xq.html">--%>
+<%--                    <img src="images/xq2.png" />--%>
+<%--                    <div class="tit"><span>￥88.8</span></div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--                <a href="xq.html">--%>
+<%--                    <img src="images/xq2.png" />--%>
+<%--                    <div class="tit"><span>￥88.8</span></div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--                <a href="xq.html">--%>
+<%--                    <img src="images/xq2.png" />--%>
+<%--                    <div class="tit"><span>￥88.8</span></div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--                <a href="xq.html">--%>
+<%--                    <img src="images/xq2.png" />--%>
+<%--                    <div class="tit"><span>￥88.8</span></div>--%>
+<%--                </a>--%>
+<%--            </li>--%>
         </ul>
     </div>
 </div>
@@ -373,7 +383,9 @@
     <div class="Contentbox">
         <div id="con_two_1">
             <div class="xqsub">
-                <img src="${data.mainPic}" />
+                <c:forEach items="${data.imgs}" var="list">
+                    <img src="${list}" />
+                </c:forEach>
             </div>
         </div>
 <%--        <div style="display:none" id="con_two_2">--%>

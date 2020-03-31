@@ -2,14 +2,14 @@ package xyz.taobaok.www.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.taobaok.www.bean.*;
@@ -42,6 +42,8 @@ public class ViewController extends BeanController {
     public Object item(String id){
         String item ="";
         ModelAndView modelAndView=null;
+        Map<String, Object> byopen = null;
+        List<ItemBean> itemBean = null;
         start();
         try {
             //获取商品详情页
@@ -53,12 +55,30 @@ public class ViewController extends BeanController {
                 JSONObject jsonObject = JSONObject.parseObject(item);
                 String data = jsonObject.getString("data");
                 ItemBean list = JSONObject.parseObject(data, ItemBean.class);
-//                List<String> reimgs = list.getReimgs();
+                String s = list.getImgs().get(0);
+                String[] split = s.split(",");
+                List<String> imgs = new ArrayList<>();
+                for (String s1 : split) {
+                    imgs.add(s1);
+                }
+                list.setImgs(imgs);
+                //猜你喜欢
+                byopen = new HashMap<String,Object>();
+                item = dataokeService.SendDaTaoKeByOpen(list.getId(),4);
+                if (item.contains("成功")){
+                    JSONObject jsonObject1 = JSONObject.parseObject(item);
+                    String data1 = jsonObject1.getString("data");
+                    itemBean = JSONObject.parseArray(data1, ItemBean.class);
+                    byopen.put("itemBean",itemBean);
+                }else{
+
+                }
                 data(list);
                 success(true);
             }
             //携带参数跳转xqitem页面
             modelAndView = new ModelAndView("xqitem/xqitem", (Map<String,?>) end());
+            modelAndView.addAllObjects(byopen);
         } catch (Exception e) {
             e.printStackTrace();
         }

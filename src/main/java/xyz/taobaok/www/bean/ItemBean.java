@@ -1,7 +1,7 @@
 package xyz.taobaok.www.bean;
-
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,4 +72,5 @@ public class ItemBean {
     private Integer estimateAmount;			//预估淘礼金															Number	25.2
     private String shopLogo;				//店铺logo															String	https://img.alicdn.com/imgextra//59/df/TB1lJVxNFXXXXcoXFXXSutbFXXX.jpg
     private String specialText;				//商品卖点															List
+
 }

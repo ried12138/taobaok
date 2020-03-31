@@ -57,7 +57,7 @@
             <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>
         </div>
         <div class="headerC0">
-            <a id="word" style="display:block; width:100%; height:100%" >${requestScope.wordName}</a>
+            <a id="word" style="display:block; width:100%; height:100%" href="${APP_PATH }/search" >${requestScope.wordName}</a>
         </div>
         <div class="headerR">
             <a href="${APP_PATH }/search">取消</a>
@@ -75,8 +75,8 @@
         </li>
         <li id="price">
             <a onclick="reqpage('','price_asc')">价格</a>
-            <span id="asc" onclick="priceasc()" class="pricebtn1"></span>
-            <span id="des" onclick="pricedes()" class="pricebtn2"></span>
+            <span id="asc" onclick="priceasc()" style="display:none" class="pricebtn1"></span>
+            <span id="des" onclick="pricedes()" style="display:none" class="pricebtn2"></span>
         </li>
 <%--        <li>--%>
 <%--            <a href="dplist.html">店铺</a>--%>
@@ -235,11 +235,19 @@
 
         }
     }
+    //实现降序功能
     function priceasc(){
-        alert("升序");
+        // alert("升序");
+        $("#des").toggle();
+        $("#asc").toggle();
+        reqpage("","price_des");
     }
+    //实现升序功能
     function pricedes(){
-        alert("降序");
+        $("#des").toggle();
+        $("#asc").toggle();
+        reqpage("","price_asc");
+        // alert("降序");
     }
     //列表加载逻辑
     function reqpage(roll,sort) {
@@ -316,6 +324,8 @@
                         $("#shoplistbox6").html("");
                         var scrollTop = 0;
                         var windowHeight = 0;
+                        $("#asc").show();
+                        $("#des").hide();
                         page =1;            //初始化页码
                     }
                     sort = "total_sales_des";

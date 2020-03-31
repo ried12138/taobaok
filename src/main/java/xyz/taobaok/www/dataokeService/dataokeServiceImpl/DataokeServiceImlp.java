@@ -46,6 +46,7 @@ public class DataokeServiceImlp implements DataokeService {
         return jsonString;
     }
 
+
     //获取大淘客热搜词top100
     @Override
     public String SendDaTaoKeApiTop() {
@@ -84,6 +85,25 @@ public class DataokeServiceImlp implements DataokeService {
         paraMap.put("pid",SystemPropsUtil.pid);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
         String jsonString = HttpUtils.sendGet(SystemPropsUtil.listSuperGoods, paraMap);
+        return jsonString;
+    }
+
+    /**
+     * 猜你喜欢
+     * @param id
+     * @param i
+     * @return
+     */
+    @Override
+    public String SendDaTaoKeByOpen(Integer id, int size) {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("version","v1.1.1");
+        paraMap.put("size",size);
+        paraMap.put("id",id);
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = HttpUtils.sendGet(SystemPropsUtil.byopen, paraMap);
         return jsonString;
     }
 

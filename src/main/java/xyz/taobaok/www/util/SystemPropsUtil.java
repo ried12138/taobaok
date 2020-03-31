@@ -29,6 +29,8 @@ public class SystemPropsUtil {
     public static String pid="mm_47344560_1373500358_110108500483";
     //9.9包邮模块
     public static String opgoods = "https://openapi.dataoke.com/api/goods/nine/op-goods-list";
+    //猜你喜欢
+    public static String byopen = "https://openapi.dataoke.com/api/goods/list-similer-goods-by-open";
     /**
      * 初始化所有配置参数
      */
@@ -45,6 +47,7 @@ public class SystemPropsUtil {
         listSuperGoods = p.getValue("listSuperGoods");
         getTbService = p.getValue("getTbService");
         opgoods = p.getValue("opgoods");
+        byopen = p.getValue("byopen");
     }
 
 }
