@@ -1,23 +1,22 @@
-package xyz.taobaok.www.dataokeService.dataokeServiceImpl;
+package xyz.taobaok.www.dataokeapi.Service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.taobaok.www.dataokeService.DataokeService;
+import xyz.taobaok.www.bean.Username;
+import xyz.taobaok.www.dataokeapi.Service.DataokeService;
+import xyz.taobaok.www.manager.dao.DataokeMapper;
 import xyz.taobaok.www.util.SystemPropsUtil;
 import xyz.taobaok.www.util.dataoke.HttpUtils;
 import xyz.taobaok.www.util.dataoke.SignMD5Util;
 
+import java.util.List;
 import java.util.TreeMap;
 
 //链接大淘客api对接工具类
-//固定参数切勿修改，同步大淘客官网后修改
 @Service
 public class DataokeServiceImlp implements DataokeService {
-//    private static String host ="https://openapi.dataoke.com/api/tb-service/get-privilege-link";            //转链
-//    private static String goods = "https://openapi.dataoke.com/api/goods/get-goods-details";                //商品详情
-//    private static final String appSecret = "bee6c934e19eeb5d03462b413f57187a";//应用sercret
-//    private static final String appKey = "5e6c5505bb8eb"; //应用key
 
 
     //转换推广链接
@@ -91,7 +90,7 @@ public class DataokeServiceImlp implements DataokeService {
     /**
      * 猜你喜欢
      * @param id
-     * @param i
+     * @param size
      * @return
      */
     @Override

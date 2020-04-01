@@ -36,12 +36,12 @@
   </properties>
 
   <dependencies>
-      <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-      <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpclient</artifactId>
-        <version>${httpcomponents.version}</version>
-      </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpcomponents.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
@@ -121,11 +121,11 @@
       <artifactId>commons-logging</artifactId>
       <version>${commons-logging.version}</version>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.apache.commons</groupId>-->
-<!--      <artifactId>commons-io</artifactId>-->
-<!--      <version>${commons-io.version}</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.apache.commons</groupId>-->
+    <!--      <artifactId>commons-io</artifactId>-->
+    <!--      <version>${commons-io.version}</version>-->
+    <!--    </dependency>-->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
@@ -192,21 +192,24 @@
       <version>2.4.2</version>
     </dependency>
     <!-- redis -->
-<!--    <dependency>-->
-<!--      <groupId>redis.clients</groupId>-->
-<!--      <artifactId>jedis</artifactId>-->
-<!--      <version>2.9.0</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.mybatis</groupId>-->
-<!--      <artifactId>mybatis</artifactId>-->
-<!--      <version>3.4.2</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.mybatis</groupId>-->
-<!--      <artifactId>mybatis-spring</artifactId>-->
-<!--      <version>1.3.1</version>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>redis.clients</groupId>-->
+    <!--      <artifactId>jedis</artifactId>-->
+    <!--      <version>2.9.0</version>-->
+    <!--    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.4.6</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+
     <!-- protobuff依赖 -->
     <dependency>
       <groupId>com.google.protobuf</groupId>
@@ -445,9 +448,9 @@
       <properties>
         <env>online</env>
       </properties>
-<!--      <activation>-->
-<!--        <activeByDefault>true</activeByDefault>-->
-<!--      </activation>-->
+      <!--      <activation>-->
+      <!--        <activeByDefault>true</activeByDefault>-->
+      <!--      </activation>-->
     </profile>
   </profiles>
 
@@ -541,13 +544,13 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
           <version>3.0.0</version>
-<!--          <configuration>-->
-<!--            <webResources>-->
-<!--              <resource>-->
-<!--                <directory>WebContent</directory>-->
-<!--              </resource>-->
-<!--            </webResources>-->
-<!--          </configuration>-->
+          <!--          <configuration>-->
+          <!--            <webResources>-->
+          <!--              <resource>-->
+          <!--                <directory>WebContent</directory>-->
+          <!--              </resource>-->
+          <!--            </webResources>-->
+          <!--          </configuration>-->
 
           <configuration>
             <!-- <archive> <manifest> <mainClass>com.onedesk.dsp.utils.JettyServer</mainClass>

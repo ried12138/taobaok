@@ -66,8 +66,8 @@
         </li>
         <li>
             <a href="javascript:void()">
-                <img src="../../images/typeicon3.png" />
-                <p>充值中心</p>
+                <img src="../../images/typeicon9.png" />
+                <p>9块9包邮</p>
             </a>
         </li>
         <li>

@@ -1,4 +1,4 @@
-package xyz.taobaok.www.dataokeService;
+package xyz.taobaok.www.dataokeapi.Service;
 
 public interface DataokeService {
 
