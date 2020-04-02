@@ -1,6 +1,5 @@
 package xyz.taobaok.www.manager.dao;
 import org.springframework.stereotype.Repository;
-import xyz.taobaok.www.bean.Username;
 
 import java.util.List;
 
@@ -13,5 +12,6 @@ import java.util.List;
 @Repository
 public interface DataokeMapper {
 
-    List<Username> query();
+    int updateHotWord(String Hotword);
+
 }

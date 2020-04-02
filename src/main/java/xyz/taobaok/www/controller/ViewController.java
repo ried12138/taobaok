@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import xyz.taobaok.www.bean.*;
 import xyz.taobaok.www.dataokeapi.Service.DataokeService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,16 +24,12 @@ public class ViewController extends BeanController {
 
     @Autowired
     DataokeService dataokeService;
-//    @Autowired
-//    DataokeDao dataokeDao;
 
     //首页访问
     @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String ViewIndex(){
-//        Username query = dataokeDao.query();
+    public String ViewIndex(HttpServletRequest request){
         return "views/home";
     }
-
 
     /**
      *  商品详情页
@@ -255,4 +252,46 @@ public class ViewController extends BeanController {
         return end();
     }
 
+    /**
+     * 跳转9.9包邮
+     * @return
+     */
+    @RequestMapping(value = "/jiukuaijiulist",method = RequestMethod.GET)
+    public String jiukuaijiulist(){
+        return "jiukuaijiulist";
+    }
+
+
+    /**
+     * 返回9.9包邮数据
+     * @param pageSize
+     * @param pageId
+     * @param nineCid
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/jiukuaijiulist",method = RequestMethod.POST)
+    public Object jiukuaijiulist(Integer pageSize,String pageId,String nineCid){
+        start();
+        try {
+            String json = dataokeService.SendDaTaoKeNinePriceOPen(pageSize, pageId, nineCid);
+            if (!json.contains("成功")){
+                message("九块九包邮模块数据请求失败，请联系管理员");
+                success(false);
+                return end();
+            }
+            JSONObject jsonObject = JSON.parseObject(json);
+            String data = jsonObject.getString("data");
+            JSONObject jsonObject1 = JSON.parseObject(data);
+            String list= jsonObject1.getString("list");
+            List<ShopListBean> shopList = JSONObject.parseArray(list, ShopListBean.class);
+            success(true);
+            data(shopList);
+        } catch (Exception e) {
+            message("九块九包邮模块数据请求异常，请联系管理员");
+            success(false);
+            return end();
+        }
+        return end();
+    }
 }

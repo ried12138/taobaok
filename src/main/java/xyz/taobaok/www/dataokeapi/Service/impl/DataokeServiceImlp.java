@@ -2,16 +2,12 @@ package xyz.taobaok.www.dataokeapi.Service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.taobaok.www.bean.Username;
 import xyz.taobaok.www.dataokeapi.Service.DataokeService;
-import xyz.taobaok.www.manager.dao.DataokeMapper;
 import xyz.taobaok.www.util.SystemPropsUtil;
 import xyz.taobaok.www.util.dataoke.HttpUtils;
 import xyz.taobaok.www.util.dataoke.SignMD5Util;
 
-import java.util.List;
 import java.util.TreeMap;
 
 //链接大淘客api对接工具类
@@ -103,6 +99,24 @@ public class DataokeServiceImlp implements DataokeService {
         paraMap.put("pid",SystemPropsUtil.pid);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
         String jsonString = HttpUtils.sendGet(SystemPropsUtil.byopen, paraMap);
+        return jsonString;
+    }
+
+    /**
+     * 九块九包邮商品获取
+     * @return
+     */
+    @Override
+    public String SendDaTaoKeNinePriceOPen(Integer pageSize,String pageId,String nineCid) {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("version","v1.1.0");
+        paraMap.put("pageSize",pageSize);
+        paraMap.put("pageId",pageId);
+        paraMap.put("nineCid",nineCid);
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = HttpUtils.sendGet(SystemPropsUtil.opgoods, paraMap);
         return jsonString;
     }
 

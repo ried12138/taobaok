@@ -65,7 +65,7 @@
             </a>
         </li>
         <li>
-            <a href="javascript:void()">
+            <a href="${APP_PATH}/jiukuaijiulist">
                 <img src="../../images/typeicon9.png" />
                 <p>9块9包邮</p>
             </a>

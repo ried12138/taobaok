@@ -169,45 +169,45 @@
 <%--        </li>--%>
 <%--    </ul>--%>
 </div>
-<div class="sxbox">
-    <div class="sxbox0">
-        <div class="f_mask"></div>
-        <div id="sxtj">
-            <div class="sx_1">筛选</div>
-            <div class="sx_2">
-                <p class="tit">品牌</p>
-                <a href="javascript:void()">名斓</a>
-                <a href="javascript:void()">奥蒂莉亚</a>
-                <a href="javascript:void()">GCU</a>
-                <a href="javascript:void()">漫香农</a>
-                <a href="javascript:void()">蒂满庭</a>
-                <a href="javascript:void()">DearWhite</a>
-            </div>
-            <div class="sx_2">
-                <p class="tit">类别</p>
-                <a href="javascript:void()">婚纱</a>
-            </div>
-            <div class="sx_2">
-                <p class="tit">折扣和服务</p>
-                <a href="javascript:void()">包邮</a>
-                <a href="javascript:void()">赠送运费险</a>
-                <a href="javascript:void()">消费者保障</a>
-                <a href="javascript:void()">全球购</a>
-                <a href="javascript:void()">7天内退货</a>
-                <a href="javascript:void()">通用排序</a>
-            </div>
-            <div class="sx_2">
-                <p class="tit">价格区间</p>
-                <div class="pric">
-                    <input name="" type="text" /><label>-</label><input name="" type="text" />
-                </div>
-            </div>
-            <div class="sx_3">
-                <a href="javascript:void()">确定</a>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="sxbox">--%>
+<%--    <div class="sxbox0">--%>
+<%--        <div class="f_mask"></div>--%>
+<%--        <div id="sxtj">--%>
+<%--            <div class="sx_1">筛选</div>--%>
+<%--            <div class="sx_2">--%>
+<%--                <p class="tit">品牌</p>--%>
+<%--                <a href="javascript:void()">名斓</a>--%>
+<%--                <a href="javascript:void()">奥蒂莉亚</a>--%>
+<%--                <a href="javascript:void()">GCU</a>--%>
+<%--                <a href="javascript:void()">漫香农</a>--%>
+<%--                <a href="javascript:void()">蒂满庭</a>--%>
+<%--                <a href="javascript:void()">DearWhite</a>--%>
+<%--            </div>--%>
+<%--            <div class="sx_2">--%>
+<%--                <p class="tit">类别</p>--%>
+<%--                <a href="javascript:void()">婚纱</a>--%>
+<%--            </div>--%>
+<%--            <div class="sx_2">--%>
+<%--                <p class="tit">折扣和服务</p>--%>
+<%--                <a href="javascript:void()">包邮</a>--%>
+<%--                <a href="javascript:void()">赠送运费险</a>--%>
+<%--                <a href="javascript:void()">消费者保障</a>--%>
+<%--                <a href="javascript:void()">全球购</a>--%>
+<%--                <a href="javascript:void()">7天内退货</a>--%>
+<%--                <a href="javascript:void()">通用排序</a>--%>
+<%--            </div>--%>
+<%--            <div class="sx_2">--%>
+<%--                <p class="tit">价格区间</p>--%>
+<%--                <div class="pric">--%>
+<%--                    <input name="" type="text" /><label>-</label><input name="" type="text" />--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="sx_3">--%>
+<%--                <a href="javascript:void()">确定</a>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 <script type="text/javascript">
     var page =1;
     var ment = "default";
@@ -266,8 +266,8 @@
                     if (roll ==""){
                         sort = "default";
                         scrollTo(0,0)
-                        $("#shoplikebox2").html(""); //局部刷新
-                        $("#shoplistbox2").html("");
+                        $("#shoplikebox2").html("");
+                        $("#shoplistbox2").html("");//局部刷新
                         $("#shoplikebox3").html(""); //局部刷新
                         $("#shoplistbox3").html("");
                         $("#shoplikebox4").html(""); //局部刷新
@@ -387,7 +387,7 @@
                             contentlist+='       <div class="listL"><img src="'+lists.mainPic+'" /></div>';
                             contentlist+='       <div class="listR">';
                             contentlist+='           <div class="v1">'+lists.title+'</div>';
-                            contentlist+='           <div class="v2"><span>包邮</span></div>';
+                            // contentlist+='           <div class="v2"><span>包邮</span></div>';
                             contentlist+='           <div class="v3">';
                             contentlist+='               <p class="p1">￥'+lists.actualPrice+'<span>￥'+lists.originalPrice+'</span></p>';
                             contentlist+='               <p class="p2">'+lists.dailySales+'人付款</p>';
