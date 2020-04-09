@@ -1,4 +1,4 @@
-package xyz.taobaok.www.weixinserver.weixinserverImpl;
+package xyz.taobaok.www.wechatserver.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -10,7 +10,7 @@ import xyz.taobaok.www.util.dataoke.SendPostUtil;
 import xyz.taobaok.www.util.dataoke.DaTaoKeJsonToObjectResponse;
 import xyz.taobaok.www.util.dataoke.Dataa;
 import xyz.taobaok.www.util.wechatutil.XmlUtil;
-import xyz.taobaok.www.weixinserver.WebChatService;
+import xyz.taobaok.www.wechatserver.WebChatService;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

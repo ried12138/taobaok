@@ -60,7 +60,7 @@
             <a id="word" style="display:block; width:100%; height:100%" href="${APP_PATH }/search" >${requestScope.wordName}</a>
         </div>
         <div class="headerR">
-            <a href="${APP_PATH }/search">取消</a>
+            <a href="javascript:history.back(-1)">取消</a>
         </div>
     </div>
 </div>

@@ -27,13 +27,13 @@
         </div>
         <div class="headerC0">
             <div class="ssdiv">
-                <input id="search" name="search" type="text" placeholder="进口生鲜今日三折起售" />
+                <input id="search" name="search" type="text" placeholder="${list.get(19).toString()}" />
                 <a onclick="todo()"><img src="images/ss.png" /></a>
 <%--                <a href="shoplist.html"><img src="images/ss.png" /></a>--%>
             </div>
         </div>
         <div class="headerR">
-            <a href="${APP_PATH }/index">取消</a>
+            <a href="javascript:history.back(-1)">取消</a>
         </div>
     </div>
 </div>

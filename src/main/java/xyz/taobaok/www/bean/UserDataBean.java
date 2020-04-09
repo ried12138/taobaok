@@ -8,7 +8,7 @@ import java.util.Date;
 public class UserDataBean {
     private Integer id;
 
-    private String username;
+    private Integer sex;
 
     private String name;
 
@@ -20,7 +20,28 @@ public class UserDataBean {
 
     private String email;
 
-    private Date creatDate;
+    private String creatDate;
+
+    public UserDataBean() {
+    }
+
+    public UserDataBean(Integer sex, String name, String password, String cookieId, String phone, String email, String creatDate) {
+        this.sex = sex;
+        this.name = name;
+        this.password = password;
+        this.cookieId = cookieId;
+        this.phone = phone;
+        this.email = email;
+        this.creatDate = creatDate;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
 
     public Integer getId() {
         return id;
@@ -28,14 +49,6 @@ public class UserDataBean {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
     }
 
     public String getName() {
@@ -78,11 +91,11 @@ public class UserDataBean {
         this.email = email == null ? null : email.trim();
     }
 
-    public Date getCreatDate() {
+    public String getCreatDate() {
         return creatDate;
     }
 
-    public void setCreatDate(Date creatDate) {
+    public void setCreatDate(String creatDate) {
         this.creatDate = creatDate;
     }
 }

@@ -31,6 +31,15 @@ public class SystemPropsUtil {
     public static String opgoods = "https://openapi.dataoke.com/api/goods/nine/op-goods-list";
     //猜你喜欢
     public static String byopen = "https://openapi.dataoke.com/api/goods/list-similer-goods-by-open";
+    //精选专辑
+    public static String catalogue="https://openapi.dataoke.com/api/goods/topic/catalogue";
+    //淘宝官方活动推荐
+    public static String tbTopic="https://openapi.dataoke.com/api/category/get-tb-topic-list";
+    //各大榜单
+    public static String rankingList="https://openapi.dataoke.com/api/goods/get-ranking-list";
+    //超级分类
+    public static String category="https://openapi.dataoke.com/api/category/get-super-category";
+
     /**
      * 初始化所有配置参数
      */
@@ -48,6 +57,10 @@ public class SystemPropsUtil {
         getTbService = p.getValue("getTbService");
         opgoods = p.getValue("opgoods");
         byopen = p.getValue("byopen");
+        catalogue = p.getValue("catalogue");
+        tbTopic = p.getValue("tbTopic");
+        rankingList = p.getValue("rankingList");
+        category = p.getValue("category");
     }
 
 }

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.taobaok.www.bean.*;
 import xyz.taobaok.www.dataokeapi.Service.DataokeService;
+import xyz.taobaok.www.util.RandomNumUtil;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,11 +26,59 @@ public class ViewController extends BeanController {
     DataokeService dataokeService;
 
     //首页访问
+    @ResponseBody
     @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String ViewIndex(HttpServletRequest request){
-        return "views/home";
+    public Object ViewIndex(){
+        //精彩专辑
+        ModelAndView modelAndView = new ModelAndView("views/home");
+        String json = dataokeService.senDaTaoKetbTopic(4,"1",2);
+        if (!json.contains("成功")){
+
+        }else{
+            JSONObject jsonObject = JSON.parseObject(json);
+            String data = jsonObject.getString("data");
+            List<TopicBean> topicBean = JSONObject.parseArray(data, TopicBean.class);
+            modelAndView.addObject("topicBean",topicBean);
+        }
+        return modelAndView;
     }
 
+    /**
+     * 超级分类
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/category",method = RequestMethod.GET)
+    public Object category(){
+        ModelAndView modelAndView = new ModelAndView("shoptype");
+        String shoptype = dataokeService.SendDaTaoKeCategory();
+        if (shoptype.contains("成功")){
+            JSONObject jsonObject = JSON.parseObject(shoptype);
+            String data = jsonObject.getString("data");
+            List<ShopTypeBean> shopTypeBeans = JSONObject.parseArray(data, ShopTypeBean.class);
+            modelAndView.addObject("shoptype",shopTypeBeans);
+        }
+        return modelAndView;
+    }
+    //精彩专辑
+    @ResponseBody
+    @RequestMapping(value = "/Catalogue",method = RequestMethod.POST)
+    public Object Catalogue(){
+        //拉去精彩专辑
+        start();
+        try {
+            String json = dataokeService.SendDaTaoKeCatalogue();
+            JSONObject jsonObject = JSON.parseObject(json);
+            String data = jsonObject.getString("data");
+            List<CatalogueBean> catalogueBeans = JSONObject.parseArray(data, CatalogueBean.class);
+            success(true);
+            data(catalogueBeans);
+        } catch (Exception e) {
+           success(false);
+           message("拉取精彩专辑失败");
+        }
+        return end();
+    }
     /**
      *  商品详情页
      * @return
@@ -96,9 +144,15 @@ public class ViewController extends BeanController {
         if (hotword==null){
             String hotWords = dataokeService.SendDaTaoKeApiTop();
             List<String> strings = JSONObject.parseObject(hotWords, List.class);
-            List<String> list = strings.subList(0, 19);
-            session.setAttribute("hotword",list);
-            hotword = list;
+            session.setAttribute("hotword",strings);
+            hotword = strings;
+        }
+        String s = RandomNumUtil.RandomNum(2);
+        Integer integer = Integer.valueOf(s);
+        if (integer < 70){
+            hotword = hotword.subList(integer,integer+20);
+        }else{
+            hotword = hotword.subList(integer-20,integer);
         }
         //将list放到请求域里
         map.put("list",hotword);
@@ -294,4 +348,5 @@ public class ViewController extends BeanController {
         }
         return end();
     }
+
 }

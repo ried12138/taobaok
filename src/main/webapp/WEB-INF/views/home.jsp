@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: liuweiran
@@ -18,7 +20,9 @@
     <title>技术学习分享</title>
     <link type="text/css" rel="stylesheet" href="../../css/style.css" />
     <script type="text/javascript" src="../../js/jquery-1.8.1.min.js"></script>
-    <script type="text/javascript" src="../../js/banner.js"></script>
+    <script type="text/javascript" src="../../js/banner.js">
+
+    </script>
 </head>
 <body>
 <body>
@@ -34,30 +38,30 @@
 <div class="banner">
     <div id="fade_focus">
         <div class="loading"></div>
-        <ul>
-            <li><img src="../../images/banner.jpg"/></li>
-            <li><img src="../../images/banner.jpg"/></li>
-            <li><img src="../../images/banner.jpg"/></li>
-            <li><img src="../../images/banner.jpg"/></li>
+        <ul id="bannerid" >
+            <c:forEach items="${topicBean}" var="list">
+                    <li><a href="${list.activityLink}"><img src="${list.materialLink}" /></a></li>
+            </c:forEach>
+<%--            <li><img src="../../images/banner.jpg"/></li>--%>
         </ul>
     </div>
 </div>
 <div class="clear"></div>
 <div class="typeNav">
     <ul>
-<%--        <li>--%>
-<%--            <!-- 跳转请求-->--%>
-<%--            <a href="${pageContext.request.contextPath }/item">--%>
-<%--                <img src="../../images/typeicon1.png" />--%>
-<%--                <p>今日特惠</p>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="shoplist.html">--%>
-<%--                <img src="../../images/typeicon2.png" />--%>
-<%--                <p>全球购</p>--%>
-<%--            </a>--%>
-<%--        </li>--%>
+        <%--        <li>--%>
+        <%--            <!-- 跳转请求-->--%>
+        <%--            <a href="${pageContext.request.contextPath }/item">--%>
+        <%--                <img src="../../images/typeicon1.png" />--%>
+        <%--                <p>今日特惠</p>--%>
+        <%--            </a>--%>
+        <%--        </li>--%>
+        <%--        <li>--%>
+        <%--            <a href="shoplist.html">--%>
+        <%--                <img src="../../images/typeicon2.png" />--%>
+        <%--                <p>全球购</p>--%>
+        <%--            </a>--%>
+        <%--        </li>--%>
         <li>
             <a href="javascript:void()">
                 <img src="../../images/typeicon5.png" />
@@ -84,31 +88,31 @@
         </li>
 
 
-<%--        <li>--%>
-<%--            <a href="shoplist.html">--%>
-<%--                <img src="../../images/typeicon7.png" />--%>
-<%--                <p>闪电购</p>--%>
-<%--            </a>--%>
-<%--        </li>--%>
-<%--        <li>--%>
-<%--            <a href="shopType.html">--%>
-<%--                <img src="../../images/typeicon8.png" />--%>
-<%--                <p>分类</p>--%>
-<%--            </a>--%>
-<%--        </li>--%>
+        <%--        <li>--%>
+        <%--            <a href="shoplist.html">--%>
+        <%--                <img src="../../images/typeicon7.png" />--%>
+        <%--                <p>闪电购</p>--%>
+        <%--            </a>--%>
+        <%--        </li>--%>
+        <%--        <li>--%>
+        <%--            <a href="shopType.html">--%>
+        <%--                <img src="../../images/typeicon8.png" />--%>
+        <%--                <p>分类</p>--%>
+        <%--            </a>--%>
+        <%--        </li>--%>
     </ul>
 </div>
-<div class="clear"></div>
-<div class="hotTit">
-    <div class="hotTitL">
-        <img src="../../images/hotit.png" />
-    </div>
-    <div class="hotTitR">
-        <p>商城开业狂欢！四重大礼等你来抢！</p>
-    </div>
-</div>
-<div class="clear"></div>
-<div class="kbox"></div>
+<%--<div class="clear"></div>--%>
+<%--<div class="hotTit">--%>
+<%--    <div class="hotTitL">--%>
+<%--        <img src="../../images/hotit.png" />--%>
+<%--    </div>--%>
+<%--    <div class="hotTitR">--%>
+<%--        <p>商城开业狂欢！四重大礼等你来抢！</p>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<div class="clear"></div>--%>
+<%--<div class="kbox"></div>--%>
 <%--<div class="timeBuy">--%>
 <%--    <div class="Buybox">--%>
 <%--        <p><span>限时</span>抢购</p>--%>
@@ -143,15 +147,15 @@
 <%--    </ul>--%>
 <%--    <div class="clear"></div>--%>
 <%--</div>--%>
-<div class="clear"></div>
-<div class="kbox"></div>
-<div class="clear"></div>
+<%--<div class="clear"></div>--%>
+<%--<div class="kbox"></div>--%>
+<%--<div class="clear"></div>--%>
 <%--<div class="w100">--%>
 <%--    <img src="../../images/ad.jpg" />--%>
 <%--</div>--%>
-<div class="clear"></div>
-<div class="kbox"></div>
-<div class="clear"></div>
+<%--<div class="clear"></div>--%>
+<%--<div class="kbox"></div>--%>
+<%--<div class="clear"></div>--%>
 <%--<div class="hotMarket">--%>
 <%--    <div class="hotM_1">--%>
 <%--        <div class="hotM_1L">--%>
@@ -176,8 +180,8 @@
 <%--        </div>--%>
 <%--    </div>--%>
 <%--</div>--%>
-<div class="clear"></div>
-<div class="kbox"></div>
+<%--<div class="clear"></div>--%>
+<%--<div class="kbox"></div>--%>
 <%--<div class="hotMarket">--%>
 <%--    <div class="hotM_2">--%>
 <%--        <p><span>品牌</span>特卖</p>--%>
@@ -204,8 +208,8 @@
 <%--        </div>--%>
 <%--    </div>--%>
 <%--</div>--%>
-<div class="clear"></div>
-<div class="kbox"></div>
+<%--<div class="clear"></div>--%>
+<%--<div class="kbox"></div>--%>
 <%--<div class="hotMarket">--%>
 <%--    <div class="hotM_2">--%>
 <%--        <p><span>热门</span>主题</p>--%>
@@ -246,11 +250,11 @@
 <%--        </div>--%>
 <%--    </div>--%>
 <%--</div>--%>
-<div class="clear"></div>
-<div class="kbox"></div>
+<%--<div class="clear"></div>--%>
+<%--<div class="kbox"></div>--%>
 <div class="likebox">
     <div class="likeTit">
-        <img src="../../images/heart.png" /><span>猜你喜欢</span>
+        <img src="../../images/heart.png" /><span>精品推荐</span>
     </div>
     <ul>
         <li>
@@ -322,9 +326,9 @@
                 </a>
             </li>
             <li>
-                <a href="message.html">
+                <a href="${APP_PATH}/category">
                     <img src="../../images/f02.png" />
-                    <p>发现</p>
+                    <p>分类</p>
                 </a>
             </li>
             <li>
@@ -334,7 +338,7 @@
                 </a>
             </li>
             <li>
-                <a href="my.html">
+                <a onclick="gotologin()">
                     <img src="../../images/f04.png" />
                     <p>我的</p>
                 </a>
@@ -342,6 +346,20 @@
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    //页面加载完后执行
+    window.onload = function(){
+        recommend();
+    }
+    //实现相关推荐的请求逻辑
+    function recommend() {
+
+    }
+    //登陆状态跳转
+    function gotologin() {
+        window.location.href="${APP_PATH }/user/login";
+    }
+</script>
 </body>
 </body>
 </html>

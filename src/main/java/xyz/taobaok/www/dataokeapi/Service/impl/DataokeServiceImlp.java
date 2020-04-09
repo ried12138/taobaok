@@ -120,6 +120,64 @@ public class DataokeServiceImlp implements DataokeService {
         return jsonString;
     }
 
+    /**
+     * 精彩专辑
+     * @return
+     */
+    @Override
+    public String SendDaTaoKeCatalogue() {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("version","v1.1.0");
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = HttpUtils.sendGet(SystemPropsUtil.catalogue, paraMap);
+        return jsonString;
+    }
+
+    /**
+     * 获取官方活动
+     * @return
+     */
+    @Override
+    public String senDaTaoKetbTopic(Integer pageSize,String pageId,Integer type) {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("version","v1.2.0");
+        paraMap.put("pageSize",pageSize);
+        paraMap.put("pageId",pageId);
+        paraMap.put("type",type);
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = HttpUtils.sendGet(SystemPropsUtil.tbTopic, paraMap);
+        return jsonString;
+    }
+
+    /**
+     * 各大榜单
+     * @param rankType
+     * @return
+     */
+    @Override
+    public String senDaTaoKetbrankingList(Integer rankType) {
+        return null;
+    }
+
+    /**
+     * 超级分类
+     * @return
+     */
+    @Override
+    public String SendDaTaoKeCategory() {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("version","v1.1.0");
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = HttpUtils.sendGet(SystemPropsUtil.category, paraMap);
+        return jsonString;
+    }
+
 //    public String sendGet(String getUrl, Map<String, String> paraMap){
 //        if(paraMap == null){
 //            paraMap = new HashMap<String,String>();

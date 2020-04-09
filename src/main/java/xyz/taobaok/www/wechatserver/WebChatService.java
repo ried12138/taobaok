@@ -1,4 +1,4 @@
-package xyz.taobaok.www.weixinserver;
+package xyz.taobaok.www.wechatserver;
 
 import java.io.IOException;
 import java.util.Map;

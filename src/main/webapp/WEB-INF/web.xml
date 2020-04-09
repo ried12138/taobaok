@@ -82,14 +82,17 @@
     <filter-name>HiddenHttpMethodFilter</filter-name>
     <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
   </filter>
+  <!-- session过期时间3天 -->
   <session-config>
-    <session-timeout>30</session-timeout>
+    <session-timeout>4320</session-timeout>
   </session-config>
   <filter-mapping>
     <filter-name>HiddenHttpMethodFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
   <welcome-file-list>
+    <welcome-file>index.php</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

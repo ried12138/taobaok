@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import xyz.taobaok.www.util.wechatutil.MessageType;
-import xyz.taobaok.www.weixinserver.WebChatService;
+import xyz.taobaok.www.wechatserver.WebChatService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,0 +1,217 @@
+@import url('bottom_style.css');
+*{margin:0;padding:0;}
+body{color:#333;background-color:#f0f0f0;font-family:"microsoft yahei";line-height:22px;font-size:14px;}	
+ul,li,dd,dt{list-style:none;}
+a{color:#333;text-decoration:none;}
+a:hover{color:#f82500;text-decoration:none;}	
+.marcen{margin:0 auto;}
+.clear{clear:both;height:0;overflow:hidden;}
+.color_red{color:#ff6063;}
+.color_red a{color:#ff6063;}
+.color_green{color:#60cb02;}
+.color_green a{color:#60cb02;}
+.color_99{color:#999;}
+.color_99 a{color:#999;}
+.color_66 {color:#666;}
+.color_66 a{color:#666;}
+a, input, textarea {text-decoration: none;outline: 0;-webkit-tap-highlight-color: rgba(0,0,0,0)}
+body, h1, h2, h3, p, dl, dd, ol, ul, th, td, form, fieldset, input, button, textarea {margin: 0;padding: 0}
+html{-webkit-text-size-adjust: none;word-wrap: break-word}
+li,img,label,input{vertical-align: middle}
+img{border:0;max-width: 100%;width: auto\9;/* ie8 */}
+.person_main{padding:0 3% 50px;}
+.person_top{ padding:0 1%;position:relative;height:48px;line-height:48px;background-color:#f0f0f0;overflow:hidden;background:#f0f0f0 url(http://egouimg1.qutu.com/m_egou/personal/p_top.png) repeat-x left bottom;}
+.person_top a.top_word{position:absolute;cursor:pointer;display:block;color:#ff5300;left:2%;}
+.person_top .jioantou_word{font-size:16px;float:left;color:#ff5300;padding:0 0 0 10px;display:inline-block;}
+.person_top .top_jiantou{float:left;display:inline-block;width:13px;top:14px;position:relative;height:20px;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_jt.png);}
+.person_top .top_close{float:left;display:inline-block;width:16px;height:16px;top:15px;position:relative;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_01.png);}
+.person_top .next{position:absolute;top:0;right:2%;}
+.top_word{display:block;text-align:center;}
+.person_poto{width:80px;height:80px;margin:0 auto;padding:17px 0 0;}
+.poto_user{width:80px;height:80px;border-radius:40px;-webkit-box-sizing:border-box;text-align:center;overflow:hidden}
+.poto_user_word{margin-top:10px;text-align:center;}
+.person_list{margin-top:15px;}
+.person_list li{height:50px;background:#fff;line-height:50px;position:relative;border:1px solid #e6e6e6;margin-top:-1px;}
+.person_list li a{display: block;padding:0 5%;color: #666;}
+.person_list li .icon{display:inline-block;margin-top:-3px;margin-right:3px;width:25px;height:25px;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;}
+.person_list li .icon_jfb{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_fl.png);}
+.person_list li .icon_yb{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_yb.png);}
+.person_list li .icon_dj{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_dj.png);}
+.person_list li .icon_sc{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_sc.png);}
+.person_list li .icon_dd{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_dd.png);}
+.person_list li .icon_tx{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_tx.png);}
+.person_list li .icon_aq{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_aq.png);}
+.person_list li .icon_hb{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_hb.png);}
+.person_list .icon_nologin li .icon_jfb{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_fl1.png);}
+.person_list .icon_nologin li .icon_yb{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_yb1.png);}
+.person_list .icon_nologin li .icon_dj{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_dj1.png);}
+.person_list .icon_nologin li .icon_sc{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_sc1.png);}
+.person_list .icon_nologin li .icon_dd{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_dd1.png);}
+.person_list .icon_nologin li .icon_tx{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_tx1.png);}
+.person_list .icon_nologin li .icon_aq{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_aq1.png);}
+.person_list .icon_nologin li .icon_hb{background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_hb1.png);}
+.person_list .person_list li .word{height:68px;}
+.person_list li .jt_icon{position:absolute;top:35%;right:5%;width:8px;height:15px;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_01.png);}
+.person_list li .money{color:#ff6063;position:absolute;right:10%;top:5%;}	
+.person_list li.margin_top{margin-top:20px;}
+.poto_nouser_word{padding:3% 0;margin-top:10px;text-align:center;}
+.poto_nouser_word p{padding:5px 0 0}
+.fanli_main{padding:0 0 50px;}
+.fanli_top{position:relative;padding:20px 2%;}
+.fanli_top .word{line-height:40px;}
+.fanli_top .tixian_botton{position:absolute;top:20px;right:2%;}
+.fanli_top .tixian_botton a{display:block;padding:10px 20px;background:#ff5000;color:#fff;}
+.fanli_list{border-top:1px solid #e6e6e6;background:#fff;}
+.fanli_list li{height:45px;line-height:45px;padding:0 2%;border-bottom:1px solid #e6e6e6;}
+.fanli_list li.li_info{padding:10px 2%;height:auto;line-height:30px;}
+.fanli_list li .name{width:34%;font-size:14px;display:inline-block;}
+.fanli_list li .time{width:43%;font-size:14px;display:inline-block;text-align:center;}
+.fanli_list li .money{width:20%;font-size:14px;display:inline-block;text-align:right;}
+.person_text{height:45px;background:#fff;padding:0 0 0 2%;border:1px solid #e6e6e6;}
+.margin_top10{margin-top:5px}
+.margin_top20{margin-top:10px}
+.margin_top30{margin-top:15px}
+.margin_top50{margin-top:25px}
+.margin_top100{padding-top:50px;}
+/* login */
+.login_list{margin-top:15px;}
+.login_list li{height:50px;background:#fff;line-height:50px;padding:0 0 0 5%;position:relative;border:1px solid #e6e6e6;margin-top:-1px;}
+.login_list li .icon{display:inline-block;margin-top:-3px;margin-right:3px;width:25px;height:25px;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;}
+.login_list li .icon_name{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_02.png);}
+.login_list li .icon_pw{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_03.png);}
+.login_list li .icon_yzm{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_05.png);}
+.login_list li .icon_mail{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_04.png);}
+.login_list li .icon_phone{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_06.png);}
+.login_list li .icon_sex{background-image:url(../images/sex.png);}
+.login_text{width:80%;padding:0 5px;font-size:16px;border:none;outline:0;font-family:"microsoft yahei";}
+.login_word{padding:2% 0;}
+.login_text_yzm{width:55%;}
+.login_yzm{width:20%;text-align:center;display:block;top:0;line-height:0;float:right;border-left:1px solid #e6e6e6;}
+.login_yzm img{height:50px;}
+.login_word span.gorget{float:left;display:inline-block;}
+.login_word span.register{float:right;display:inline-block;}
+.login_other_name{padding:10% 0 0;}
+.login_other_list{padding:2% 0 0;}
+.login_other_list li{display:inline-block;float:left;padding-right:2%;}
+.login_other_list li a{width:56px;height:56px;cursor:pointer;display:inline-block;float:left;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;}
+.login_other_list li a.taobao{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_t.png)}
+.login_other_list li a.weibo{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_w.png)}
+.login_other_list li a.qq{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_q.png)}
+.login_other_list li a.zfb{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_z.png)}
+/*.login_other_list li a:hover.taobao{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_t1.png)}
+.login_other_list li a:hover.weibo{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_w1.png)}
+.login_other_list li a:hover.qq{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_q1.png)}
+.login_other_list li a:hover.zfb{background-image:url(http://egouimg1.qutu.com/m_egou/personal/g_z1.png)}*/
+.login_options{margin:2% 0 4%;border:1px solid #ff7e44;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;-o-border-radius:6px;background:#fff;}
+.login_options li{width:50%;float:left;padding:2% 0;}
+.login_options li a{width:100%;display:block;cursor:pointer;text-align:center;float:left;color:#ff5000;}
+.login_options li a:hover{color:#ff5000}
+.login_options li.li_hover{color:#fff;background:#ff5000;}
+.login_options li.li_hover a{color:#fff;}
+.login_code{width:30%;height:50px;line-height:50px;display:inline-block;text-align:center;float:right;border-left:1px solid #e6e6e6;}
+.login_code a{color:#ff5000;display:block;background:#fcfcfc}
+.login_code a:hover{color:#ff5000;display:block;background:#d9d9d9}
+.login_code a.hover{color:#666;background:#d9d9d9;}
+/*  tixian  */
+.person_text_word{width:20%;display:inline-block;line-height:50px;}
+.person_text_input{width:80%;border:0;outline:0;display:inline-block;padding:0 10px;line-height:45px;vertical-align:top;font-family:"microsoft yahei";}
+.person_prompt{color:#999;padding:1% 0 0 2%;}
+.text_height100{padding-top:20px;padding-bottom:15px;}
+.person_bank_icon{width:45px;height:45px;vertical-align:top;display:inline-block;}
+.person_bank_word{padding-left:10px;display:inline-block;}
+.person_num{display:block;padding-top:3px;}
+.person_text_code{width:60%;}
+.person_code{width:30%;height:45px;line-height:45px;display:inline-block;text-align:center;float:right;border-left:1px solid #e6e6e6;}
+.hb_person_code{width:30%;height:50px;line-height:50px;display:inline-block;text-align:center;float:right;border-left:1px solid #e6e6e6;}
+.person_code a{color:#ff5000;display:block;background:#fcfcfc}
+.person_code a:hover{color:#ff5000;display:block;background:#d9d9d9}
+.person_code a.hover{color:#666;background:#d9d9d9;}
+.person_botton{height:40px;}
+.person_botton a{height:40px;line-height:40px;border-radius:7px;display:block;text-align:center;}
+.person_red_botton a{background:#ff5000;color:#fff;}
+.person_red_botton a:hover{color:#fff}
+.person_light_botton a{background:#fff;color:#666;border:1px solid #e6e6e6}
+.person_light_botton a:hover{color:#666}
+.person_bleak_botton a{background:#9d9d9d;color:#fff;border:1px solid #9d9d9d}
+.person_bleak_botton a:hover{color:#fff}
+.tx_suc_pic{width:100px;height:100px;margin:40px auto 0;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;}
+.tx_suc_word{text-align:center;color:#666;}
+.color33{color:#333;}
+.tx_suc_time{text-align:center;color:#999;}
+.person_text .jt_icon{position:absolute;top:35%;right:5%;width:8px;height:15px;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;background-image:url(http://egouimg1.qutu.com/m_egou/personal/p_01.png);}
+.person_textword{position:relative;line-height:50px;}
+.person_textword a{display:block;}
+.zh_zhf_name{width:100%;height:45px;border:1px solid #ff5000;background:#fff;border-radius:5px;}
+.zh_zhf_name li{width:50%;height:45px;line-height:45px;text-align:center;float:left;display:inline-block;}
+.zh_zhf_name li a{color:#ff5000;display:block;}
+.zh_zhf_name li a:hover{color:#fff;background:#ff5000;}
+.zh_zhf_name li a.hover{color:#fff;background:#ff5000;}
+.bank_list{margin-top:15px;}
+.bank_list li{height:50px;line-height:50px;background:#fff;position:relative;border:1px solid #e6e6e6;margin-top:-1px;}
+.bank_list li a{display: block;padding:0 5%;color: #666;}
+.bank_list li .icon{display:inline-block;margin-top:-3px;margin-right:3px;width:25px;height:25px;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;}
+.bank_list li .word{height:60px;}
+.bank_list li .jt_icon{position:absolute;top:35%;right:5%;width:20px;height:13px;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;background-image:url(http://egouimg1.qutu.com/m_egou/personal/bank_jt.png);}	
+.alter_phone_icon{width:25px;height:25px;display:inline-block;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;background-image:url(http://egouimg1.qutu.com/m_egou/personal/phone.png);}
+.myorder_list{margin:10px 0 0;}
+.myorder_list li{padding:5px 2%;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff;margin:10px 0 0;}
+.myorder_list li .shop_name{height:30px;line-height:30px;position:relative;border-bottom:1px solid #eaeaea}
+.myorder_list li .shop_name span{position:absolute;top:0;right:0;}
+.myorder_list li .shop_info{color:#999;position:relative;padding:5px 0;}
+.myorder_list li .shop_info p{padding:3px 0;}
+.myorder_list li .shop_info .zhuangtai{position:absolute;right:0;top:40%;}
+.myorder_list li .tixian_jilu_name{line-height:25px;height:25px;position:relative;}
+.myorder_list li .tixian_jilu_name span{position:absolute;top:0;right:0;}
+.hb_icon{width:20px;height:20px;display:inline-block;vertical-align:middle;background-position:center center;background-repeat:no-repeat;background-color:transparent;background-size:contain;background-image:url(http://egouimg1.qutu.com/m_egou/personal/hb_error.png);}
+/* layer*/
+.layer_nr{width:80%;background:#fff;border-radius:10px;padding:15px;margin:0 auto;z-index: 99;left: 5%;top: 50%;margin-left:0;margin-top: -60px!important;margin-top: 0px;position: fixed!important;position: absolute;_top: expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/ document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);}
+.layer_bg{background-color: #000;width: 100%;height: 100%;left: 0;top: 0;filter: alpha(opacity=50);opacity: 0.5;z-index: 1;position: fixed!important;position: absolute;_top: expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 : document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);}
+.reg_tishi{ width:100%; margin:0 auto; text-align:center; display:none; position:absolute; top:50%; left:0; z-index:9;}
+.reg_tishi span{ width:80%; line-height:2rem; padding:1rem 1.5rem; display:inline-block; font-size:1.4rem;background:rgba(0,0,0,0.4); color:#fff;overflow:hidden; border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-webkit-border-radius:5px;}
+@media only screen and (max-width:320px){body {font-size: 14px;}
+}
+@media only screen and (max-width:360px) and (min-width:320px) {body {font-size: 14px;line-height:17px;}
+}
+@media only screen and (max-width:540px) and (min-width:360px) {body {font-size: 14px;}
+}
+@media only screen and (max-width:640px) and (min-width:540px) {body {font-size: 14px;}
+}
+@media screen and (min-width:640px) {body {font-size: 24.77778px;}
+.person_top{position:relative;height:72px;line-height:72px;}
+.person_top .top_jiantou{top:20px;width:20px;height:31px;}
+.person_top .jioantou_word{font-size:25px;}
+.person_poto{width:100px;height:100px;}
+.poto_user{width:100px;height:100px;}
+.person_list li .icon{width:38px;height:38px;}
+.person_list li{height:68px;line-height:68px;}
+.person_list li .jt_icon{width:11px;height:20px;}
+.person_top .top_close{top:22px;width:24px;height:24px;}
+.fanli_list li{height:66px;line-height:66px;}
+.person_text{height:60px;}
+.person_text_word{line-height:60px;}
+.person_textword{line-height:60px;}
+.person_text_input{line-height:60px;font-size:24px}
+.person_botton{height:60px;}
+.person_botton a{height:60px;line-height:60px;}
+.margin_top10{margin-top:10px}
+.margin_top20{margin-top:20px}
+.margin_top30{margin-top:30px}
+.margin_top50{margin-top:50px}
+.margin_top100{padding-top:100px;}
+.person_code{height:60px;line-height:60px;}
+.hb_person_code{height:68px;line-height:68px;}
+.login_code{height:68px;line-height:68px;}
+.tx_suc_pic{width:150px;height:150px;margin:70px auto 0;}
+.person_text .jt_icon{width:11px;height:20px;}
+.bank_list li .icon{width:37px;height:37px;}
+.bank_list li{height:60px;line-height:60px;}
+.bank_list li .jt_icon{width:35px;height:23px;}
+.alter_phone_icon{width:31px;height:31px;}
+.login_list li .icon{width:33px;height:33px;}
+.login_list li{height:68px;line-height:68px;}
+.login_yzm img{height:68px;}
+.login_list li .icon{width:33px;height:33px;}
+.login_text{font-size:22px;}
+.login_other_list li a{width:76px;height:76px;cursor:pointer;}
+.hb_icon{width:52px;height:52px;}
+}
