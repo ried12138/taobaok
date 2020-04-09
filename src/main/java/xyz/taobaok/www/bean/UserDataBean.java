@@ -20,6 +20,12 @@ public class UserDataBean {
 
     private String email;
 
+    private Integer vip;
+
+    private Integer collectionNum;
+
+    private String portrait;
+
     private String creatDate;
 
     public UserDataBean() {
@@ -97,5 +103,29 @@ public class UserDataBean {
 
     public void setCreatDate(String creatDate) {
         this.creatDate = creatDate;
+    }
+
+    public Integer getVip() {
+        return vip;
+    }
+
+    public void setVip(Integer vip) {
+        this.vip = vip;
+    }
+
+    public Integer getCollectionNum() {
+        return collectionNum;
+    }
+
+    public void setCollectionNum(Integer collectionNum) {
+        this.collectionNum = collectionNum;
+    }
+
+    public String getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        this.portrait = portrait;
     }
 }

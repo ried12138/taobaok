@@ -1,6 +1,5 @@
 package xyz.taobaok.www.databaseServer;
 
-import org.apache.ibatis.annotations.Param;
 import xyz.taobaok.www.bean.UserDataBean;
 
 /**

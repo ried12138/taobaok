@@ -19,10 +19,8 @@
     <script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
     <title>技术学习分享</title>
     <link type="text/css" rel="stylesheet" href="../../css/style.css" />
-    <script type="text/javascript" src="../../js/jquery-1.8.1.min.js"></script>
-    <script type="text/javascript" src="../../js/banner.js">
-
-    </script>
+    <script type="text/javascript" src="${APP_PATH }/js/jquery-1.8.1.min.js"> </script>
+    <script type="text/javascript" src="${APP_PATH }/js/banner.js"> </script>
 </head>
 <body>
 <body>
@@ -38,9 +36,13 @@
 <div class="banner">
     <div id="fade_focus">
         <div class="loading"></div>
-        <ul id="bannerid" >
+        <ul id="bannerid">
             <c:forEach items="${topicBean}" var="list">
-                    <li><a href="${list.activityLink}"><img src="${list.materialLink}" /></a></li>
+                <li>
+                    <a href="${list.activityLink}">
+                        <img src="${list.materialLink}" />
+                    </a>
+                </li>
             </c:forEach>
 <%--            <li><img src="../../images/banner.jpg"/></li>--%>
         </ul>
@@ -338,7 +340,7 @@
                 </a>
             </li>
             <li>
-                <a onclick="gotologin()">
+                <a href="${APP_PATH }/user/login">
                     <img src="../../images/f04.png" />
                     <p>我的</p>
                 </a>
@@ -347,18 +349,14 @@
     </div>
 </div>
 <script type="text/javascript">
-    //页面加载完后执行
-    window.onload = function(){
-        recommend();
-    }
-    //实现相关推荐的请求逻辑
-    function recommend() {
-
-    }
-    //登陆状态跳转
-    function gotologin() {
-        window.location.href="${APP_PATH }/user/login";
-    }
+    // //页面加载完后执行
+    // window.onload = function(){
+    //     recommend();
+    // }
+    // //实现相关推荐的请求逻辑
+    // function recommend() {
+    //
+    // }
 </script>
 </body>
 </body>
