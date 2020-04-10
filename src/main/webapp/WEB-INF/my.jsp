@@ -42,16 +42,16 @@
         <ul>
             <li>
                 <a href="javascript:void()">
-                    <p class="p1">13</p>
+                    <p class="p1">${sessionScope.userinfo.collectionNum}</p>
                     <p class="p2">收藏夹</p>
                 </a>
             </li>
-            <li>
-                <a href="javascript:void()">
-                    <p class="p1">1</p>
-                    <p class="p2">关注商品</p>
-                </a>
-            </li>
+<%--            <li>--%>
+<%--                <a href="javascript:void()">--%>
+<%--                    <p class="p1">1</p>--%>
+<%--                    <p class="p2">关注商品</p>--%>
+<%--                </a>--%>
+<%--            </li>--%>
             <li>
                 <a href="javascript:void()">
                     <p class="p1">3</p>
@@ -313,7 +313,7 @@
                 </a>
             </li>
             <li>
-                <a href="gwc.html">
+                <a href="${APP_PATH }/user/collection">
                     <img src="../images/f03.png" />
                     <p>收藏</p>
                 </a>

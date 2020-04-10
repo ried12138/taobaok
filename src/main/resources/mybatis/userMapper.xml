@@ -11,4 +11,22 @@
     <select id="checkUserInfo" resultType="xyz.taobaok.www.bean.UserDataBean">
         SELECT id,vip,collection_num AS collectionNum,sex,`name`,phone,email,cookie_id AS cookieId FROM user_data WHERE phone = #{phone} AND `password` = #{password}
     </select>
+    <select id="selectGoodsid" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user_behavior_data WHERE id= #{userid} AND collection_id = #{goodsId}
+    </select>
+    <select id="selectCollection" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user_behavior_data WHERE id= #{userid}
+    </select>
+    <insert id="instCoolection" >
+        INSERT INTO user_behavior_data (id,collection_id,create_time,title,main_pic,originalPrice,actualPrice) VALUES (#{userid},#{goodsId},#{creatData},#{title},#{mainPic},#{originalPrice},#{actualPrice})
+    </insert>
+    <update id="updateUserInfoCoolection" parameterType="java.lang.Integer">
+        UPDATE user_data SET collection_num = #{num} WHERE id = #{userid}
+    </update>
+    <select id="queryShopId" parameterType="java.lang.Integer" resultType="xyz.taobaok.www.bean.UserBehaviorDataBean" >
+        SELECT id,create_time AS createTime, collection_id AS collectionId, main_pic AS mainPic,title,original_price AS originalPrice,actual_price AS actualPrice FROM user_behavior_data WHERE id = #{userid}
+    </select>
+    <delete id="delcollection" parameterType="java.lang.String">
+        DELETE FROM user_behavior_data WHERE id = #{userid} AND collection_id = #{collid}
+    </delete>
 </mapper>

@@ -334,7 +334,7 @@
                 </a>
             </li>
             <li>
-                <a href="gwc.html">
+                <a href="${APP_PATH }/user/collection">
                     <img src="../../images/f03.png" />
                     <p>收藏</p>
                 </a>

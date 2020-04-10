@@ -16,10 +16,11 @@
     <meta name="force-rendering" content="webkit"/>
     <script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
     <title></title>
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="${APP_PATH}/css/style.css" />
 
-    <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="${APP_PATH}/js/jquery-1.8.1.min.js"></script>
 <%--    <script type="text/javascript">--%>
+
 <%--        $(document).ready(function () {--%>
 <%--            //选择尺寸--%>
 <%--            $('.sizetype').click(function(){--%>
@@ -527,12 +528,12 @@
 <%--                </li>--%>
 
                 <!-- 后期开放收藏功能 -->
-<%--                <li>--%>
-<%--                    <a href="javascript:void()">--%>
-<%--                        <img src="images/xqf3.png" />--%>
-<%--                        <p>收藏</p>--%>
-<%--                    </a>--%>
-<%--                </li>--%>
+                <li>
+                    <a id="collimg" onclick="collection()">
+                        <img src="../../images/xqf3.png" />
+                        <p>收藏</p>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="xqbotboxR">
@@ -588,6 +589,39 @@
 <%--</div>--%>
 
 <script type="text/javascript">
+
+    //收藏
+    function collection() {
+        var pic = '${data.mainPic}';                        //图片地址
+        var id = '${data.goodsId}';                         //商品id
+        var title = '${data.title}';                        //标题
+        var originalPrice = '${data.originalPrice}';        //商品原价
+        var actualPrice = '${data.actualPrice}';            //券后价
+        $.ajax({
+            type:"post",
+            url:"${APP_PATH}/user/collection",
+            data:{
+                goodsId:id,
+                pic:pic,
+                title:title,
+                originalPrice:originalPrice,
+                actualPrice:actualPrice
+            },
+            success:function (result) {
+                if (result.success){
+                    //收藏成功
+                    $("#collimg").html('<img src="../../images/xqf03.png" /><p style="color:red">收藏</p>'); //局部刷新
+                }else{
+                    if (result.data == 1){
+                        $("#collimg").html('<img src="../../images/xqf03.png" /><p style="color:red">收藏</p>'); //局部刷新
+                    }
+                        //收藏失败
+                        alert(result.message)
+
+                }
+            }
+        })
+    }
     var obj;
     var durl;
     //显示遮罩弹窗
@@ -633,6 +667,7 @@
         $(".dislog").css("display","none");
         window.location.href=durl;
     }
+
 </script>
 </body>
 </html>

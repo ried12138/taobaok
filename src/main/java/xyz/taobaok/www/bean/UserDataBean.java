@@ -6,27 +6,27 @@ import java.util.Date;
  * 用户信息表user_data
  */
 public class UserDataBean {
-    private Integer id;
+    private Integer id;                 //唯一id
 
-    private Integer sex;
+    private Integer sex;                //性别
 
-    private String name;
+    private String name;                //姓名
 
-    private String password;
+    private String password;            //密码
 
-    private String cookieId;
+    private String cookieId;            //cookieid
 
-    private String phone;
+    private String phone;               //手机号
 
-    private String email;
+    private String email;               //邮箱地址
 
-    private Integer vip;
+    private Integer vip;                //vip等级
 
-    private Integer collectionNum;
+    private Integer collectionNum;      //收藏数
 
-    private String portrait;
+    private String portrait;            //头像地址
 
-    private String creatDate;
+    private String creatDate;           //创建时间
 
     public UserDataBean() {
     }
