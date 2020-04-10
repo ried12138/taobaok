@@ -18,7 +18,7 @@
         SELECT COUNT(*) FROM user_behavior_data WHERE id= #{userid}
     </select>
     <insert id="instCoolection" >
-        INSERT INTO user_behavior_data (id,collection_id,create_time,title,main_pic,originalPrice,actualPrice) VALUES (#{userid},#{goodsId},#{creatData},#{title},#{mainPic},#{originalPrice},#{actualPrice})
+        INSERT INTO user_behavior_data (id,collection_id,create_time,title,main_pic,original_price,actual_price) VALUES (#{userid},#{goodsId},#{creatData},#{title},#{mainPic},#{originalPrice},#{actualPrice})
     </insert>
     <update id="updateUserInfoCoolection" parameterType="java.lang.Integer">
         UPDATE user_data SET collection_num = #{num} WHERE id = #{userid}
