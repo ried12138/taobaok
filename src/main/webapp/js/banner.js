@@ -3,6 +3,7 @@ var s=function(){
     var interv2=10; //切换速速
     var opac1=80; //文字背景的透明度
     var source="fade_focus" //焦点轮换图片容器的id名称
+    tuijian();
 //获取对象
     function getTag(tag,obj){
         if(obj==null){

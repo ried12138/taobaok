@@ -37,4 +37,6 @@ public interface UserMapper {
     void instShopItem(@Param("list")ItemBean list);
 
     Integer delcollection(@Param("userid")String userid, @Param("collid")String collid);
+
+    UserDataBean selectUserInfo(@Param("userid")Integer id);
 }

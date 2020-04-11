@@ -71,10 +71,10 @@
                             <%--                <div class="go1">--%>
                             <%--                    <div class="gwccheck on"></div>--%>
                             <%--                </div>--%>
-                        <div class="go2"><a href="xq.html"><img src="${list.mainPic}" /></a></div>
+                        <div class="go2"><a href="${APP_PATH}/item?id=${list.collectionId}"><img src="${list.mainPic}" /></a></div>
                         <div class="go3">
                             <div class="go3_1">
-                                <a href="xq.html"><p class="p1">${list.title}</p></a>
+                                <a href="${APP_PATH}/item?id=${list.collectionId}"><p class="p1">${list.title}</p></a>
                                 <p class="p2">￥${list.originalPrice}</p>
                             </div>
                             <div class="go3_2">

@@ -27,8 +27,8 @@
         </div>
         <div class="headerC0">
             <div class="ssdiv">
-                <input id="search" name="search" type="text" placeholder="${list.get(19).toString()}" />
-                <a onclick="todo()"><img src="images/ss.png" /></a>
+                <input id="search" onkeypress="todo()" name="search" type="text" placeholder="${list.get(19).toString()}" />
+                <a onclick="todo()"><img src="../../images/ss.png" /></a>
 <%--                <a href="shoplist.html"><img src="images/ss.png" /></a>--%>
             </div>
         </div>
@@ -73,7 +73,8 @@
 <%--    <a href="shoplist.html"></a><a href="shoplist.html">毛呢外套</a><a href="shoplist.html">水杯</a><a href="shoplist.html">打底裤</a><a href="shoplist.html">茶壶</a><a href="shoplist.html">面膜</a><a href="shoplist.html">保温杯</a><a href="shoplist.html">宽松毛衣女</a><a href="shoplist.html">剃须刀</a><a href="shoplist.html">核桃夹子</a>--%>
 
 </div>
-<script src="js/jquery-1.8.1.min.js"></script>
+<script src="js/jquery-1.8.1.min.js">
+</script>
 <script>
     //获取热搜词id执行搜索
     $(".iclist").each(function(){

@@ -28,6 +28,8 @@ public class UserDataBean {
 
     private String creatDate;           //创建时间
 
+    private Integer score;              //用户积分
+
     public UserDataBean() {
     }
 
@@ -39,6 +41,29 @@ public class UserDataBean {
         this.phone = phone;
         this.email = email;
         this.creatDate = creatDate;
+    }
+
+    public UserDataBean(Integer id, Integer sex, String name, String password, String cookieId, String phone, String email, Integer vip, Integer collectionNum, String portrait, String creatDate, Integer score) {
+        this.id = id;
+        this.sex = sex;
+        this.name = name;
+        this.password = password;
+        this.cookieId = cookieId;
+        this.phone = phone;
+        this.email = email;
+        this.vip = vip;
+        this.collectionNum = collectionNum;
+        this.portrait = portrait;
+        this.creatDate = creatDate;
+        this.score = score;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public Integer getSex() {

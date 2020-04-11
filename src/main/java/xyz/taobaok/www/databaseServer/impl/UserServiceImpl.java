@@ -109,7 +109,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer selectCollection(Integer id) {
-        Integer num = userMapper.selectCollection(id);
+        Integer num = null;
+        try {
+            num = userMapper.selectCollection(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return num;
     }
 
@@ -161,5 +166,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer delcollection(String userid, String collid) {
         return userMapper.delcollection(userid,collid);
+    }
+
+    /**
+     * 查询用户信息
+     * @param id
+     * @return
+     */
+    @Override
+    public UserDataBean selectUserInfo(Integer id) {
+        UserDataBean userDataBean = userMapper.selectUserInfo(id);
+        return userDataBean;
     }
 }

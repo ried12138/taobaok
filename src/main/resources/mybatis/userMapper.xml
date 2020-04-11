@@ -9,7 +9,7 @@
         SELECT COUNT(*) FROM user_data WHERE phone = #{phone};
     </select>
     <select id="checkUserInfo" resultType="xyz.taobaok.www.bean.UserDataBean">
-        SELECT id,vip,collection_num AS collectionNum,sex,`name`,phone,email,cookie_id AS cookieId FROM user_data WHERE phone = #{phone} AND `password` = #{password}
+        SELECT id,sex,`name`,`password`,cookie_id,phone,email,creat_date AS createDate,vip,collection_num AS collectionNum, portrait, score FROM user_data WHERE phone = #{phone} AND `password` = #{password}
     </select>
     <select id="selectGoodsid" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM user_behavior_data WHERE id= #{userid} AND collection_id = #{goodsId}
@@ -29,4 +29,7 @@
     <delete id="delcollection" parameterType="java.lang.String">
         DELETE FROM user_behavior_data WHERE id = #{userid} AND collection_id = #{collid}
     </delete>
+    <select id="selectUserInfo" parameterType="java.lang.Integer" resultType="xyz.taobaok.www.bean.UserDataBean">
+        SELECT id,sex,`name`,`password`,cookie_id,phone,email,creat_date AS createDate,vip,collection_num AS collectionNum, portrait, score FROM user_data WHERE id = #{userid}
+    </select>
 </mapper>

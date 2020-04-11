@@ -1,6 +1,5 @@
 package xyz.taobaok.www.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,13 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.taobaok.www.bean.BeanController;
-import xyz.taobaok.www.bean.ItemBean;
 import xyz.taobaok.www.bean.UserBehaviorDataBean;
 import xyz.taobaok.www.bean.UserDataBean;
 import xyz.taobaok.www.databaseServer.UserService;
-import xyz.taobaok.www.dataokeapi.Service.DataokeService;
 import xyz.taobaok.www.util.CreateValidateCode;
-
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,8 +34,7 @@ public class UserController extends BeanController {
 
     @Autowired
     UserService userService;
-    @Autowired
-    DataokeService dataokeService;
+
     /**
      * 登陆系统，校验是否第一次登陆
      * @param session
@@ -58,6 +53,8 @@ public class UserController extends BeanController {
                 //跳转我的页面
                 try {
                     UserDataBean userinfo = (UserDataBean) user;
+                    userinfo = userService.selectUserInfo(userinfo.getId());
+                    session.setAttribute("userinfo",userinfo);
                 } catch (Exception e) {
                     //跳转登陆页面
                     mode.setViewName("tologin");
@@ -69,7 +66,11 @@ public class UserController extends BeanController {
         }
         return mode;
     }
-
+    @RequestMapping(value = "/outuser",method = RequestMethod.GET)
+    public String outuser(HttpSession session){
+        session.removeAttribute("userinfo");
+       return "views/home";
+    }
     /**
      * 跳转收藏页面
      * @param session

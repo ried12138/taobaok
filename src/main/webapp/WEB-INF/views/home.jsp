@@ -33,6 +33,7 @@
         </a>
     </div>
 </div>
+
 <div class="banner">
     <div id="fade_focus">
         <div class="loading"></div>
@@ -255,66 +256,37 @@
 <%--<div class="clear"></div>--%>
 <%--<div class="kbox"></div>--%>
 <div class="likebox">
+
     <div class="likeTit">
         <img src="../../images/heart.png" /><span>精品推荐</span>
+        <div class="totop"><a href="javascript:scrollTo(0,0)"><img src="images/totop.png" /></a></div>
     </div>
-    <ul>
-        <li>
-            <a href="xq.html">
-                <img src="../../images/21.png" class="proimg"/>
-                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>
-                <p class="price">￥29.9<span>￥49.9</span><img src="../../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../../images/22.png" class="proimg"/>
-                <p class="tit">韩国代购正品超爆款 </p>
-                <p class="price">￥198.0<span>￥286.0</span><img src="../../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../../images/23.png" class="proimg"/>
-                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>
-                <p class="price">￥29.9<span>￥49.9</span><img src="../../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../../images/24.png" class="proimg"/>
-                <p class="tit">韩国代购正品超爆款 休闲迷彩磨砂真皮运动鞋女单鞋</p>
-                <p class="price">￥198.0<span>￥286.0</span><img src="../../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../../images/25.png" class="proimg"/>
-                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>
-                <p class="price">￥29.9<span>￥49.9</span><img src="../../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../../images/26.png" class="proimg"/>
-                <p class="tit">韩国代购正品超爆款 休闲迷彩磨砂真皮运动鞋女单鞋</p>
-                <p class="price">￥198.0<span>￥286.0</span><img src="../../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../../images/27.png" class="proimg"/>
-                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>
-                <p class="price">￥29.9<span>￥49.9</span><img src="../../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../../images/28.png" class="proimg"/>
-                <p class="tit">韩国代购正品超爆款 休闲迷彩磨砂真皮运动鞋女单鞋</p>
-                <p class="price">￥198.0<span>￥286.0</span><img src="../../images/f3.png" /></p>
-            </a>
-        </li>
+    <ul id="shoplistsub">
+<%--        <li>--%>
+<%--            <a href="xq.html">--%>
+<%--                <img src="../../images/21.png" class="proimg"/>--%>
+<%--                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>--%>
+<%--                <p class="price">￥29.9<span>￥49.9</span><img src="../../images/f3.png" /></p>--%>
+<%--            </a>--%>
+<%--        </li>--%>
+    </ul>
+    <ul id="shoplistsub1">
+
+    </ul>
+    <ul id="shoplistsub2">
+
+    </ul>
+    <ul id="shoplistsub3">
+
+    </ul>
+    <ul id="shoplistsub4">
+
+    </ul>
+    <ul id="shoplistsub5">
+
+    </ul>
+    <ul id="shoplistsub6">
+
     </ul>
 </div>
 <div class="fbox"></div>
@@ -348,16 +320,91 @@
         </ul>
     </div>
 </div>
+</body>
 <script type="text/javascript">
+    var page =1;
+    var scrollTop = 0;
+    var windowHeight = 0;
+    window.onscroll = function () {
+        //scrollTop就是触发滚轮事件时滚轮的高度
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        // console.log("滚动距离" + scrollTop);
+        //变量windowHeight是可视区的高度
+        var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        // console.log("可视高度" + windowHeight);
+        //变量scrollHeight是滚动条的总高度
+        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+        console.log("总高度" + scrollHeight);
+        //判断滚动条是否到底部
+        if (scrollTop + windowHeight == scrollHeight) {
+            tuijian();
+        }
+    }
+    // $(document).ready(function(){
+        function tuijian(){
+            $.ajax({
+                type:"post",
+                url:"${APP_PATH}/Recommend",
+                data:{
+                    pageId:page
+                },
+                success:function (result) {
+                    if (result.success){
+                        //获取成功
+                        var content = '';
+                        $.each(result.data,function (i,list) {
+                            content+='<li>';
+                            content+='    <a href="${APP_PATH}/item?id='+list.goodsId+'">';
+                            content+='        <img src="'+list.mainPic+'" class="proimg"/>';
+                            content+='        <p class="tit">'+list.title+'</p>';
+                            content+='        <p class="price">￥'+list.actualPrice+'<span>￥'+list.originalPrice+'</span><img src="../../images/f3.png" /></p>';
+                            content+='    </a>';
+                            content+='</li>';
+                        })
+                        switch (page) {
+                            case 1:
+                                $("#shoplistsub").html(content); //局部刷新
+                                page = 1+1;
+                                break;
+                            case 2:
+                                $("#shoplistsub1").html(content); //局部刷新
+                                page = 2+1;
+                                break;
+                            case 3:
+                                $("#shoplistsub2").html(content); //局部刷新
+                                page = 3+1;
+                                break;
+                            case 4:
+                                $("#shoplistsub3").html(content); //局部刷新
+                                page = 4+1;
+                                break;
+                            case 5:
+                                $("#shoplistsub4").html(content); //局部刷新
+                                page = 5+1;
+                                break;
+                            case 6:
+                                $("#shoplistsub5").html(content); //局部刷新
+                                page = 6+1;
+                                break;
+                            case 7:
+                                $("#shoplistsub6").html(content); //局部刷新
+                                page = 7+1;
+                                break;
+                        }
+                    }else{
+                        //获取失败
+                    }
+                }
+            })
+        }
+    // });
     // //页面加载完后执行
-    // window.onload = function(){
-    //     recommend();
-    // }
+
     // //实现相关推荐的请求逻辑
     // function recommend() {
     //
     // }
 </script>
-</body>
 </body>
 </html>

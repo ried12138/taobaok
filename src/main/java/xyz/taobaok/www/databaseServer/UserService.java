@@ -36,4 +36,6 @@ public interface UserService {
     void instShopItem(ItemBean list);
     //删除收藏夹
     Integer delcollection(String userid, String collid);
+    //查询用户信息
+    UserDataBean selectUserInfo(Integer id);
 }

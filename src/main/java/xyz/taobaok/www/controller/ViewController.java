@@ -44,6 +44,41 @@ public class ViewController extends BeanController {
     }
 
     /**
+     * 首页推荐
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/Recommend",method = RequestMethod.POST)
+    public Object Recommend(String pageId){
+        start();
+        try {
+            Integer integer = Integer.valueOf(pageId);
+            String hotWords = dataokeService.SendDaTaoKeApiTop();
+            List<String> hots = JSONObject.parseObject(hotWords, List.class);
+            String s = RandomNumUtil.RandomNum(2);
+            Integer num = Integer.valueOf(s);
+            String hot = hots.get(num);
+
+//            Integer page = (Integer) session.getAttribute("pageid");
+            String jsonString = dataokeService.SendDaTaoKeListSuperGoods(hot, integer, 70, "total_sales_des");
+            if (!jsonString.contains("成功")){
+                success(false);
+                message("获取商品失败，请重试");
+                return end();
+            }
+            JSONObject jsonObject = JSON.parseObject(jsonString);
+            String data = jsonObject.getString("data");
+            JSONObject jsonObject1 = JSON.parseObject(data);
+            String list= jsonObject1.getString("list");
+            List<ShopListBean> shopList = JSONObject.parseArray(list, ShopListBean.class);
+            success(true);
+            data(shopList);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return end();
+    }
+    /**
      * 超级分类
      * @return
      */
