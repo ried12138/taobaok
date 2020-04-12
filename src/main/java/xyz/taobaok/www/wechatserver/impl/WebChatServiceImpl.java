@@ -43,7 +43,12 @@ public class WebChatServiceImpl implements WebChatService {
             String content = map.get("Content");
             StringBuffer info = new StringBuffer("");
             String id = "";
-            if (content.contains("https://item.taobao.com/item.htm?id=")){
+            if (content.contains("省钱购物网站")){
+                replyMap.put("MsgType",MessageType.RESP_MESSAGE_TYPE_IMG);
+                replyMap.put("MediaId","an2LCdCPgk5X6bx8lA3O65Ahi_gpGq7Ig9huo8zBBb8");
+                respXml = XmlUtil.xmlFormatImg(replyMap, true);
+                return respXml;
+            }else if (content.contains("https://item.taobao.com/item.htm?id=")){
                 int i = content.indexOf("=");
                 id = content.substring(i+1,content.length());
                 String goods = dataokeService.SenDaTaoKeApiGoods(id);

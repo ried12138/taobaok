@@ -20,6 +20,7 @@ public class MessageType {
 
     public static final String TEXT_MESSAGE = "text";
     public static final String RESP_MESSAGE_TYPE_TEXT = "text";
+    public static final String RESP_MESSAGE_TYPE_IMG = "image";
     public static final String REQ_MESSAGE_TYPE_EVENT = "event";
     public static final String EVENT_TYPE_UNSUBSCRIBE = "unsubscribe";
     public static final String EVENT_TYPE_SUBSCRIBE = "subscribe";

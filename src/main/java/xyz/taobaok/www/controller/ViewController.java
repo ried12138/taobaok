@@ -13,6 +13,7 @@ import xyz.taobaok.www.bean.*;
 import xyz.taobaok.www.databaseServer.UserService;
 import xyz.taobaok.www.dataokeapi.Service.DataokeService;
 import xyz.taobaok.www.util.RandomNumUtil;
+import xyz.taobaok.www.util.wechatutil.AccessTokenUtil;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -35,7 +36,6 @@ public class ViewController extends BeanController {
         //精彩专辑
         ModelAndView modelAndView = new ModelAndView("views/home");
 //        System.out.println(" //----------------------------测试代码--------------------------->>");
-
 //        System.out.println("//<<---------------------------测试代码结束-------------------------");
         try {
             String json = dataokeService.senDaTaoKetbTopic(4,"1",2);

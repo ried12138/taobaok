@@ -41,6 +41,18 @@ public class XmlUtil {
         return stringBuffer.append(SUFFIX_XML).toString();
     }
 
-
+    //回复图片xml模版
+    public static String xmlFormatImg(Map<String, String> parm, boolean isAddCDATA){
+        StringBuffer stringBuffer = new StringBuffer(PREFIX_XML);
+        stringBuffer.append("<ToUserName><![CDATA["+parm.get("ToUserName")+"]]></ToUserName>");
+        stringBuffer.append("<FromUserName><![CDATA["+parm.get("FromUserName")+"]]></FromUserName>");
+        stringBuffer.append("<CreateTime>"+parm.get("CreateTime")+"</CreateTime>");
+        stringBuffer.append("<MsgType><![CDATA[image]]></MsgType>");
+        stringBuffer.append("<Image>");
+        stringBuffer.append("<MediaId><![CDATA["+parm.get("MediaId")+"]]></MediaId>");
+        stringBuffer.append("</Image>");
+        stringBuffer.append(SUFFIX_XML);
+        return stringBuffer.toString();
+    }
 }
 
