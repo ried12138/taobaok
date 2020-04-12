@@ -1,25 +1,28 @@
 package xyz.taobaok.www.dataokeapi.Service;
 
+import java.io.UnsupportedEncodingException;
+
 public interface DataokeService {
 
-    String senDaTaoKeApiLink(String id);
+    String senDaTaoKeApiLink(String id) throws UnsupportedEncodingException;
 
-    String SenDaTaoKeApiGoods(String id);
+    String SenDaTaoKeApiGoods(String id) throws UnsupportedEncodingException;
 
-    String SendDaTaoKeApiTop();
+    String SendDaTaoKeApiTop() throws UnsupportedEncodingException;
 
-    String SendDaTaoKeListSuperGoods(String wordName, Integer pageid, Integer pagesize, String sort);
+    String SendDaTaoKeListSuperGoods(String wordName, Integer pageid, Integer pagesize, String sort) throws UnsupportedEncodingException;
 
-    String SendDaTaoKeByOpen(Integer id, int pagesize);
+    String SendDaTaoKeByOpen(Long id, int pagesize) throws UnsupportedEncodingException;
 
-    String SendDaTaoKeNinePriceOPen(Integer pageSize,String pageId,String nineCid);
+    String SendDaTaoKeNinePriceOPen(Integer pageSize,String pageId,String nineCid) throws UnsupportedEncodingException;
 
-    String SendDaTaoKeCatalogue();
+    String SendDaTaoKeCatalogue() throws UnsupportedEncodingException;
 
-    String senDaTaoKetbTopic(Integer pageSize,String pageId,Integer type);
+    String senDaTaoKetbTopic(Integer pageSize,String pageId,Integer type) throws UnsupportedEncodingException;
 
     String senDaTaoKetbrankingList(Integer rankType);
 
-    String SendDaTaoKeCategory();
-//    sendGet(String getUrl, Map<String, String> paraMap);
+    String SendDaTaoKeCategory() throws UnsupportedEncodingException;
+
+    String senDaTaoKeflashSale(String creatData);
 }

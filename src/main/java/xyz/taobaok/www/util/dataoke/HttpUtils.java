@@ -8,6 +8,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -48,7 +50,7 @@ public class HttpUtils {
     }
 
 
-    public static String sendGet(String getUrl,Map<String, Object> paraMap){
+    public static String sendGet(String getUrl,Map<String, Object> paraMap) throws UnsupportedEncodingException {
         if(paraMap == null){
             paraMap = new HashMap<String,Object>();
         }

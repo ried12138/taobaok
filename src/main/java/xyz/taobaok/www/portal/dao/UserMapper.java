@@ -39,4 +39,6 @@ public interface UserMapper {
     Integer delcollection(@Param("userid")String userid, @Param("collid")String collid);
 
     UserDataBean selectUserInfo(@Param("userid")Integer id);
+
+    Integer updateUserInfoRegister(@Param("user")UserDataBean userinfo);
 }

@@ -1,5 +1,7 @@
 package xyz.taobaok.www.controller;
 
+import com.alibaba.fastjson.JSON;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import xyz.taobaok.www.bean.BeanController;
 import xyz.taobaok.www.bean.UserBehaviorDataBean;
 import xyz.taobaok.www.bean.UserDataBean;
+import xyz.taobaok.www.bean.signListBean;
 import xyz.taobaok.www.databaseServer.UserService;
 import xyz.taobaok.www.util.CreateValidateCode;
 import javax.imageio.ImageIO;
@@ -18,7 +21,8 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 实现用户信息的模块controller
@@ -66,10 +70,135 @@ public class UserController extends BeanController {
         }
         return mode;
     }
+
+    /**
+     * 退出账号
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/outuser",method = RequestMethod.GET)
     public String outuser(HttpSession session){
         session.removeAttribute("userinfo");
-       return "views/home";
+       return "forward:/index";
+    }
+
+    /**
+     * 跳转积分系统
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    public Object register(HttpSession session){
+        ModelAndView mode = new ModelAndView();
+        Object user = session.getAttribute("userinfo");
+        if (user == null){
+            //跳转登陆页面
+            mode.setViewName("tologin");
+        }else{
+            mode.setViewName("register/index");
+        }
+        return mode;
+    }
+
+    /**
+     * 查询签到信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/registerInfo",method = RequestMethod.GET)
+    public Object registerInfo(HttpSession session){
+        start();
+        Object user = session.getAttribute("userinfo");
+        if (user == null){
+            success(false);
+            message("还没有登陆，需要登陆后才可以签到");
+        }else{
+            UserDataBean userinfo = (UserDataBean) user;
+            Calendar cal = Calendar.getInstance();
+            //当前几号
+            int Day = cal.get(Calendar.DAY_OF_MONTH);
+            //签到持续天数
+            Integer continueDay = userinfo.getContinueDay();
+            //本月第一次签到的日期时间
+            String rigninDay = userinfo.getRigninDay();
+            String daynum = "";
+            if (!rigninDay.equals("")){
+                //取日期
+                daynum = rigninDay.substring(rigninDay.length() - 2);
+                if (continueDay > Day){
+                    userinfo.setContinueDay(0);
+                }else{
+                    if (continueDay !=0){
+                        List<signListBean> list = new ArrayList<>();
+                        signListBean signList = new signListBean();
+                        for (int i = 0;i < continueDay;i++){
+                            signList.setSignDay(String.valueOf(Integer.valueOf(daynum)+i));
+                            list.add(signList);
+                        }
+                        data(list);
+                        success(true);
+                    }else{
+                    }
+                }
+            }else{
+                success(false);
+            }
+            session.setAttribute("userinfo",userinfo);
+        }
+        return end();
+    }
+
+    /**
+     * 提交签到信息
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/registersub",method = RequestMethod.GET)
+    public Object registersub(HttpSession session){
+        start();
+        try {
+            Object user = session.getAttribute("userinfo");
+            if (user == null){
+                success(false);
+                message("还没有登陆，需要登陆后才可以签到");
+            }else{
+                UserDataBean userinfo = (UserDataBean) user;
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                //当前日期
+                String format = sdf.format(new Date());
+                //签到日期
+                String rigninTime = userinfo.getRigninTime();
+                if (rigninTime == null ||!rigninTime.equals(format)){
+                    userinfo.setRigninTime(format);
+                    //积分+1
+                    userinfo.setScore(userinfo.getScore()+1);
+                    //签到持续天数+1
+                    userinfo.setContinueDay(userinfo.getContinueDay()+1);
+                    //签到累计天数+1
+                    userinfo.setRigninCount(userinfo.getRigninCount()+1);
+                    //添加本月第一次签到日期
+                    userinfo.setRigninDay(format);
+                    //提交签到信息
+                    Integer integer = userService.updateUserInfoRegister(userinfo);
+                    if (integer >= 1){
+                        success(true);
+                        data(userinfo);
+                        session.setAttribute("userinfo",userinfo);
+                    }else{
+                        success(false);
+                        message("签到失败，请联系管理员");
+                    }
+                }else if (rigninTime.equals(format)){
+                    success(false);
+                    message("你已经签到了，请明天再来吧");
+                }
+            }
+        } catch (Exception e) {
+            success(false);
+            message("签到出现了异常，请联系管理员");
+        }
+        return end();
     }
     /**
      * 跳转收藏页面
@@ -112,11 +241,17 @@ public class UserController extends BeanController {
      */
     @ResponseBody
     @RequestMapping(value = "/collectiondel",method = RequestMethod.POST)
-    public Object collectiondel(String userid,String collid){
+    public Object collectiondel(HttpSession session,String userid,String collid){
         start();
         try {
             Integer sum = userService.delcollection(userid,collid);
             if (sum == 1){
+                Integer nu = userService.selectCollection(Integer.valueOf(userid));
+                userService.updateUserInfoCoolection(Integer.valueOf(userid),nu);
+                Object userinfo = session.getAttribute("userinfo");
+                UserDataBean user = (UserDataBean) userinfo;
+                user.setCollectionNum(nu);
+                session.setAttribute("userinfo",user);
                 success(true);
                 message("移除收藏夹");
                 data(1);
@@ -161,7 +296,8 @@ public class UserController extends BeanController {
                             success(true);
                             data(1);
                             message("收藏成功");
-                            userService.updateUserInfoCoolection(user.getId(),nu);
+                            user.setCollectionNum(nu);
+                            session.setAttribute("userinfo",user);
                         }else{
                             success(false);
                             message("收藏失败，请检查网络后重试");

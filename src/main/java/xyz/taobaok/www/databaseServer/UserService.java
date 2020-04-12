@@ -38,4 +38,7 @@ public interface UserService {
     Integer delcollection(String userid, String collid);
     //查询用户信息
     UserDataBean selectUserInfo(Integer id);
+    //签到积分修改
+    Integer updateUserInfoRegister(UserDataBean userinfo);
+
 }

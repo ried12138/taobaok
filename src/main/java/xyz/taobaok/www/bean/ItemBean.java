@@ -1,6 +1,7 @@
 package xyz.taobaok.www.bean;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Data
 public class ItemBean {
-    private Integer id;	    				//商品id,若查询结果id=-1，则说明该商品非大淘客平台商品，数据为淘宝直接返回的数据，由于淘宝数据的缓存时间相对较长，会出现商品信息和详情信息不一致的情况	Number	18926311
+    private Long id;	    				//商品id,若查询结果id=-1，则说明该商品非大淘客平台商品，数据为淘宝直接返回的数据，由于淘宝数据的缓存时间相对较长，会出现商品信息和详情信息不一致的情况	Number	18926311
     private String goodsId;					//淘宝商品id															String	“589284195570”
     private String itemLink;				//商品淘宝链接														String	“https://detail.tmall.com/item.htm?id=589284195570“
     private String title;					//淘宝标题															String	“西维里男士睡衣夏季韩版真丝短袖丝绸薄款宽松青年冰丝家居服套装”
@@ -25,9 +26,9 @@ public class ItemBean {
     private Integer tbcid;					//商品在淘宝的分类id													Number	50012772
     private String mainPic;					//商品主图链接														String	“//img.alicdn.com/imgextra/i2/4014489195/O1CN01kYlVPs2HnMKYwLLRm_!!4014489195.jpg”
     private String marketingMainPic;		//营销主图链接														String	“https://sr.ffquan.com/super_pic/o_1d6fpckjs1ii3h9dkibk9b7h38.jpg“
-    private Integer originalPrice;			//商品原价															Number	38.5
-    private Integer actualPrice;			//券后价																number	28.5
-    private Integer discounts;				//折扣力度															Number	0.74
+    private BigDecimal originalPrice;			//商品原价															Number	38.5
+    private BigDecimal actualPrice;			//券后价																number	28.5
+    private BigDecimal discounts;				//折扣力度															Number	0.74
     private Integer commissionType;			//佣金类型，0-通用，1-定向，2-高佣，3-营销计划							number	3
     private Integer commissionRate;			//佣金比例															Number	20
     private String couponLink;				//优惠券链接															String	“https://uland.taobao.com/quan/detail?sellerId=4“

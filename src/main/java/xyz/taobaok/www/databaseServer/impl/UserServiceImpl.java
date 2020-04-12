@@ -178,4 +178,20 @@ public class UserServiceImpl implements UserService {
         UserDataBean userDataBean = userMapper.selectUserInfo(id);
         return userDataBean;
     }
+
+    /**
+     * 签到
+     * @param userinfo
+     * @return
+     */
+    @Override
+    public Integer updateUserInfoRegister(UserDataBean userinfo) {
+        Integer num = null;
+        try {
+            num = userMapper.updateUserInfoRegister(userinfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return num;
+    }
 }

@@ -17,6 +17,7 @@
     <script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
     <title></title>
     <link type="text/css" rel="stylesheet" href="../css/style.css" />
+    <script type="text/javascript" src="${APP_PATH}/js/jquery-1.8.1.min.js"></script>
 </head>
 
 <body>
@@ -46,12 +47,12 @@
                     <p class="p2">收藏夹</p>
                 </a>
             </li>
-<%--            <li>--%>
-<%--                <a href="javascript:void()">--%>
-<%--                    <p class="p1">1</p>--%>
-<%--                    <p class="p2">关注商品</p>--%>
-<%--                </a>--%>
-<%--            </li>--%>
+            <li>
+                <a href="javascript:void()">
+                    <p class="p1">${sessionScope.userinfo.score}</p>
+                    <p class="p2">我的积分</p>
+                </a>
+            </li>
 <%--            <li>--%>
 <%--                <a href="javascript:void()">--%>
 <%--                    <p class="p1">3</p>--%>
@@ -202,9 +203,9 @@
 <%--            </a>--%>
 <%--        </li>--%>
         <li>
-            <a href="jifen.html">
+            <a href="${APP_PATH}/user/register">
                 <img src="../images/my9.png" />
-                <p>我的积分</p>
+                <p>签到领积分</p>
             </a>
         </li>
         <li>
@@ -236,63 +237,13 @@
     <img src="../images/my15.png" />
 </div>
 <div class="likebox my">
-    <ul>
-        <li>
-            <a href="xq.html">
-                <img src="../images/21.png" class="proimg"/>
-                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>
-                <p class="price">￥29.9<span>￥49.9</span><img src="../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../images/22.png" class="proimg"/>
-                <p class="tit">韩国代购正品超爆款 </p>
-                <p class="price">￥198.0<span>￥286.0</span><img src="../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../images/23.png" class="proimg"/>
-                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>
-                <p class="price">￥29.9<span>￥49.9</span><img src="images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../images/24.png" class="proimg"/>
-                <p class="tit">韩国代购正品超爆款 休闲迷彩磨砂真皮运动鞋女单鞋</p>
-                <p class="price">￥198.0<span>￥286.0</span><img src="../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../images/25.png" class="proimg"/>
-                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>
-                <p class="price">￥29.9<span>￥49.9</span><img src="../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../images/26.png" class="proimg"/>
-                <p class="tit">韩国代购正品超爆款 休闲迷彩磨砂真皮运动鞋女单鞋</p>
-                <p class="price">￥198.0<span>￥286.0</span><img src="../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../images/27.png" class="proimg"/>
-                <p class="tit">三利 毛巾家纺纯棉吸水 提缎面巾两条装</p>
-                <p class="price">￥29.9<span>￥49.9</span><img src="../images/f3.png" /></p>
-            </a>
-        </li>
-        <li>
-            <a href="xq.html">
-                <img src="../images/28.png" class="proimg"/>
-                <p class="tit">韩国代购正品超爆款 休闲迷彩磨砂真皮运动鞋女单鞋</p>
-                <p class="price">￥198.0<span>￥286.0</span><img src="../images/f3.png" /></p>
-            </a>
-        </li>
+    <ul id="tuijianshop">
+    </ul>
+    <ul id="tuijianshop1">
+    </ul>
+    <ul id="tuijianshop2">
+    </ul>
+    <ul id="tuijianshop3">
     </ul>
 </div>
 <div class="clear"></div>
@@ -327,5 +278,72 @@
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    var page =1;
+
+    window.onload = function(){
+        xiangguantuijian();
+    }
+    var scrollTop = 0;
+    var windowHeight = 0;
+    window.onscroll = function () {
+        //scrollTop就是触发滚轮事件时滚轮的高度
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        // console.log("滚动距离" + scrollTop);
+        //变量windowHeight是可视区的高度
+        var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        // console.log("可视高度" + windowHeight);
+        //变量scrollHeight是滚动条的总高度
+        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+
+        console.log("总高度" + scrollHeight);
+        //判断滚动条是否到底部
+        if (scrollTop + windowHeight == scrollHeight) {
+            xiangguantuijian();
+        }
+    }
+    function xiangguantuijian(){
+       $.ajax({
+           type:"post",
+           url:"${APP_PATH}/Recommend",
+           data:{
+               pageId:page
+           },
+           success:function (result) {
+               if (result.success){
+                   //获取成功
+                   var content = '';
+                   $.each(result.data,function (i,list) {
+                       content+='<li>';
+                       content+='    <a href="${APP_PATH}/item?id='+list.goodsId+'">';
+                       content+='        <img src="'+list.mainPic+'" class="proimg"/>';
+                       content+='        <p class="tit">'+list.title+'</p>';
+                       content+='        <p class="price">￥'+list.actualPrice+'<span>￥'+list.originalPrice+'</span><img src="../../images/f3.png" /></p>';
+                       content+='    </a>';
+                       content+='</li>';
+                   })
+                   switch (page) {
+                       case 1:
+                           $("#tuijianshop").html(content); //局部刷新
+                           page = 1+1;
+                           break;
+                       case 2:
+                           $("#tuijianshop1").html(content); //局部刷新
+                           page = 2+1;
+                           break;
+                       case 3:
+                           $("#tuijianshop2").html(content); //局部刷新
+                           page = 3+1;
+                           break;
+                       case 4:
+                           $("#tuijianshop3").html(content); //局部刷新
+                           page = 4+1;
+                           break;
+                   }
+               }
+           }
+       })
+    }
+</script>
 </body>
 </html>

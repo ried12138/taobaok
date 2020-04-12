@@ -9,7 +9,7 @@
         SELECT COUNT(*) FROM user_data WHERE phone = #{phone};
     </select>
     <select id="checkUserInfo" resultType="xyz.taobaok.www.bean.UserDataBean">
-        SELECT id,sex,`name`,`password`,cookie_id,phone,email,creat_date AS createDate,vip,collection_num AS collectionNum, portrait, score FROM user_data WHERE phone = #{phone} AND `password` = #{password}
+        SELECT id,sex,`name`,`password`,cookie_id,phone,email,creat_date AS createDate,vip,collection_num AS collectionNum, portrait, score,continue_day AS continueDay,rignin_time AS rigninTime,rignin_count AS rigninCount, rignin_day AS rigninDay FROM user_data WHERE phone = #{phone} AND `password` = #{password}
     </select>
     <select id="selectGoodsid" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM user_behavior_data WHERE id= #{userid} AND collection_id = #{goodsId}
@@ -30,6 +30,9 @@
         DELETE FROM user_behavior_data WHERE id = #{userid} AND collection_id = #{collid}
     </delete>
     <select id="selectUserInfo" parameterType="java.lang.Integer" resultType="xyz.taobaok.www.bean.UserDataBean">
-        SELECT id,sex,`name`,`password`,cookie_id,phone,email,creat_date AS createDate,vip,collection_num AS collectionNum, portrait, score FROM user_data WHERE id = #{userid}
+        SELECT id,sex,`name`,`password`,cookie_id,phone,email,creat_date AS createDate,vip,collection_num AS collectionNum, portrait, score,continue_day AS continueDay,rignin_time AS rigninTime,rignin_count AS rigninCount, rignin_day AS rigninDay FROM user_data WHERE id = #{userid}
     </select>
+    <update id="updateUserInfoRegister" parameterType="xyz.taobaok.www.bean.UserDataBean">
+        UPDATE user_data SET continue_day = #{user.continueDay},rignin_time = #{user.rigninTime},rignin_count = #{user.rigninCount},rignin_day = #{user.rigninDay},score = #{user.score} WHERE id = #{user.id}
+    </update>
 </mapper>

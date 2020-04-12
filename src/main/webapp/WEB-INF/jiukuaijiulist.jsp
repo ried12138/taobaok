@@ -234,7 +234,6 @@
                         contentlist+='       <div class="listL"><img src="'+lists.mainPic+'" /></div>';
                         contentlist+='       <div class="listR">';
                         contentlist+='           <div class="v1">'+lists.title+'</div>';
-                        // contentlist+='           <div class="v2"><span>包邮</span></div>';
                         contentlist+='           <div class="v3">';
                         contentlist+='               <p class="p1">￥'+lists.actualPrice+'<span>￥'+lists.originalPrice+'</span></p>';
                         contentlist+='               <p class="p2">'+lists.dailySales+'人付款</p>';

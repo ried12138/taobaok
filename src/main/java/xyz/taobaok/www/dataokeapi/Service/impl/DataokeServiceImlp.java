@@ -8,6 +8,7 @@ import xyz.taobaok.www.util.SystemPropsUtil;
 import xyz.taobaok.www.util.dataoke.HttpUtils;
 import xyz.taobaok.www.util.dataoke.SignMD5Util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.TreeMap;
 
 //链接大淘客api对接工具类
@@ -17,7 +18,7 @@ public class DataokeServiceImlp implements DataokeService {
 
     //转换推广链接
     @Override
-    public String senDaTaoKeApiLink(String id){
+    public String senDaTaoKeApiLink(String id) throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("version","v1.1.1");
         paraMap.put("appKey",SystemPropsUtil.appKey);
@@ -30,7 +31,7 @@ public class DataokeServiceImlp implements DataokeService {
 
     //获取商品详情
     @Override
-    public String SenDaTaoKeApiGoods(String id){
+    public String SenDaTaoKeApiGoods(String id) throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("version","v1.2.1");
         paraMap.put("appKey",SystemPropsUtil.appKey);
@@ -44,7 +45,7 @@ public class DataokeServiceImlp implements DataokeService {
 
     //获取大淘客热搜词top100
     @Override
-    public String SendDaTaoKeApiTop() {
+    public String SendDaTaoKeApiTop() throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("version","v1.0.1");
         paraMap.put("appKey",SystemPropsUtil.appKey);
@@ -68,7 +69,7 @@ public class DataokeServiceImlp implements DataokeService {
      * @return
      */
     @Override
-    public String SendDaTaoKeListSuperGoods(String search, Integer pageId, Integer pageSize, String sort) {
+    public String SendDaTaoKeListSuperGoods(String search, Integer pageId, Integer pageSize, String sort) throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("version","v1.2.1");
@@ -90,7 +91,7 @@ public class DataokeServiceImlp implements DataokeService {
      * @return
      */
     @Override
-    public String SendDaTaoKeByOpen(Integer id, int size) {
+    public String SendDaTaoKeByOpen(Long id, int size) throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("version","v1.1.1");
@@ -107,7 +108,7 @@ public class DataokeServiceImlp implements DataokeService {
      * @return
      */
     @Override
-    public String SendDaTaoKeNinePriceOPen(Integer pageSize,String pageId,String nineCid) {
+    public String SendDaTaoKeNinePriceOPen(Integer pageSize,String pageId,String nineCid) throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("version","v1.1.0");
@@ -125,7 +126,7 @@ public class DataokeServiceImlp implements DataokeService {
      * @return
      */
     @Override
-    public String SendDaTaoKeCatalogue() {
+    public String SendDaTaoKeCatalogue() throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("version","v1.1.0");
@@ -140,7 +141,7 @@ public class DataokeServiceImlp implements DataokeService {
      * @return
      */
     @Override
-    public String senDaTaoKetbTopic(Integer pageSize,String pageId,Integer type) {
+    public String senDaTaoKetbTopic(Integer pageSize,String pageId,Integer type) throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("version","v1.2.0");
@@ -168,13 +169,35 @@ public class DataokeServiceImlp implements DataokeService {
      * @return
      */
     @Override
-    public String SendDaTaoKeCategory() {
+    public String SendDaTaoKeCategory() throws UnsupportedEncodingException {
         TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
         paraMap.put("appKey",SystemPropsUtil.appKey);
         paraMap.put("version","v1.1.0");
         paraMap.put("pid",SystemPropsUtil.pid);
         paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
         String jsonString = HttpUtils.sendGet(SystemPropsUtil.category, paraMap);
+        return jsonString;
+    }
+
+    /**
+     * 限时抢购
+     * @param creatData
+     * @return
+     */
+    @Override
+    public String senDaTaoKeflashSale(String creatData) {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("version","v1.2.0");
+//        paraMap.put("roundTime",creatData);
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = null;
+        try {
+            jsonString = HttpUtils.sendGet(SystemPropsUtil.flashSale, paraMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return jsonString;
     }
 

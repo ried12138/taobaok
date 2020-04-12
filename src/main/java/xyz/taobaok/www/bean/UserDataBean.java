@@ -30,6 +30,14 @@ public class UserDataBean {
 
     private Integer score;              //用户积分
 
+    private Integer continueDay;        //签到持续天数
+
+    private String rigninTime;          //签到时间戳
+
+    private Integer rigninCount;        //累计签到天数
+
+    private String rigninDay;          //本月第一次签到的日期时间
+
     public UserDataBean() {
     }
 
@@ -43,7 +51,7 @@ public class UserDataBean {
         this.creatDate = creatDate;
     }
 
-    public UserDataBean(Integer id, Integer sex, String name, String password, String cookieId, String phone, String email, Integer vip, Integer collectionNum, String portrait, String creatDate, Integer score) {
+    public UserDataBean(Integer id, Integer sex, String name, String password, String cookieId, String phone, String email, Integer vip, Integer collectionNum, String portrait, String creatDate, Integer score, Integer continueDay, String rigninTime, Integer rigninCount, String rigninDay) {
         this.id = id;
         this.sex = sex;
         this.name = name;
@@ -56,6 +64,42 @@ public class UserDataBean {
         this.portrait = portrait;
         this.creatDate = creatDate;
         this.score = score;
+        this.continueDay = continueDay;
+        this.rigninTime = rigninTime;
+        this.rigninCount = rigninCount;
+        this.rigninDay = rigninDay;
+    }
+
+    public String getRigninDay() {
+        return rigninDay;
+    }
+
+    public void setRigninDay(String rigninDay) {
+        this.rigninDay = rigninDay;
+    }
+
+    public Integer getContinueDay() {
+        return continueDay;
+    }
+
+    public void setContinueDay(Integer continueDay) {
+        this.continueDay = continueDay;
+    }
+
+    public String getRigninTime() {
+        return rigninTime;
+    }
+
+    public void setRigninTime(String rigninTime) {
+        this.rigninTime = rigninTime;
+    }
+
+    public Integer getRigninCount() {
+        return rigninCount;
+    }
+
+    public void setRigninCount(Integer rigninCount) {
+        this.rigninCount = rigninCount;
     }
 
     public Integer getScore() {

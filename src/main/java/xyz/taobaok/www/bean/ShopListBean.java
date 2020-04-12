@@ -2,6 +2,7 @@ package xyz.taobaok.www.bean;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 //商品列表
@@ -11,8 +12,8 @@ public class ShopListBean {
     private String goodsId;               //淘宝商品id
     private String title;                 //淘宝标题
     private String dtitle;                //短标题
-    private Integer originalPrice;        //商品原价
-    private Integer actualPrice;          //券后价
+    private BigDecimal originalPrice;        //商品原价
+    private BigDecimal actualPrice;          //券后价
     private Integer shopType;             //店铺类型，1-天猫，0-淘宝
     private Integer goldSellers;          //是否金牌卖家，1-金牌卖家，0-非金牌卖家
     private Integer monthSales;           //30天销量
@@ -23,7 +24,7 @@ public class ShopListBean {
     private String couponLink;            //优惠券链接
     private String couponEndTime;         //优惠券结束时间
     private String couponStartTime;       //优惠券开始时间
-    private Integer couponPrice;          //优惠券金额
+    private BigDecimal couponPrice;          //优惠券金额
     private String couponConditions;      //优惠券使用条件
     private Integer activityType;         //活动类型，1-无活动，2-淘抢购，3-聚划算
     private String createTime;            //商品上架时间
@@ -33,7 +34,7 @@ public class ShopListBean {
     private Integer cid;                  //商品在大淘客的分类id
     private List<Integer> subcid;         //商品在大淘客的二级分类id，该分类为前端分类，一个商品可能有多个二级分类id
     private Integer tbcid;                //商品在淘宝的分类id
-    private Integer discounts;            //折扣力度
+    private BigDecimal discounts;            //折扣力度
     private Integer commissionRate;       //佣金比例
     private Integer couponTotalNum;       //券总量
     private Integer haitao;               //是否海淘,1-海淘商品，0-非海淘商品

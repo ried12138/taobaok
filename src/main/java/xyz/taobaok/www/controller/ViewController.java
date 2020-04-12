@@ -10,20 +10,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.taobaok.www.bean.*;
+import xyz.taobaok.www.databaseServer.UserService;
 import xyz.taobaok.www.dataokeapi.Service.DataokeService;
 import xyz.taobaok.www.util.RandomNumUtil;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class ViewController extends BeanController {
 
     @Autowired
     DataokeService dataokeService;
+    @Autowired
+    UserService userService;
 
     //首页访问
     @ResponseBody
@@ -31,54 +34,148 @@ public class ViewController extends BeanController {
     public Object ViewIndex(){
         //精彩专辑
         ModelAndView modelAndView = new ModelAndView("views/home");
-        String json = dataokeService.senDaTaoKetbTopic(4,"1",2);
-        if (!json.contains("成功")){
+//        System.out.println(" //----------------------------测试代码--------------------------->>");
 
-        }else{
-            JSONObject jsonObject = JSON.parseObject(json);
-            String data = jsonObject.getString("data");
-            List<TopicBean> topicBean = JSONObject.parseArray(data, TopicBean.class);
-            modelAndView.addObject("topicBean",topicBean);
+//        System.out.println("//<<---------------------------测试代码结束-------------------------");
+        try {
+            String json = dataokeService.senDaTaoKetbTopic(4,"1",2);
+            if (!json.contains("成功")){
+
+            }else{
+                JSONObject jsonObject = JSON.parseObject(json);
+                String data = jsonObject.getString("data");
+                List<TopicBean> topicBean = JSONObject.parseArray(data, TopicBean.class);
+                modelAndView.addObject("topicBean",topicBean);
+            }
+            //限时抢购封页
+            SimpleDateFormat df = new SimpleDateFormat("HH");
+            String date = df.format(new Date());
+            date = date+":00:00";
+//            creatData = URLEncoder.encode(creatData, "UTF-8");
+//            String creatData = "2020-04-11 17:00:00";
+            String jsondata = dataokeService.senDaTaoKeflashSale(date);
+            if (!jsondata.contains("成功")){
+
+            }else{
+                JSONObject jsonObject = JSON.parseObject(jsondata);
+                String data = jsonObject.getString("data");
+                JSONObject jsonObject1 = JSON.parseObject(data);
+                String goodsList = jsonObject1.getString("goodsList");
+                List<FlashSaleShopBean> flashSaleBeans = JSONObject.parseArray(goodsList, FlashSaleShopBean.class);
+                modelAndView.addObject("flashSale",flashSaleBeans);
+                modelAndView.addObject("dateTime",date);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         return modelAndView;
     }
 
+    /**
+     * 限时抢购
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/flashSale",method = RequestMethod.GET)
+    public Object flashSale(){
+        ModelAndView mode = new ModelAndView("flashSale");
+        try {
+            String jsondata = dataokeService.senDaTaoKeflashSale("");
+            if (!jsondata.contains("成功")){
+            }else{
+                JSONObject jsonObject = JSON.parseObject(jsondata);
+                String data = jsonObject.getString("data");
+                JSONObject jsonObject1 = JSON.parseObject(data);
+                String goodsList = jsonObject1.getString("goodsList");
+                List<FlashSaleShopBean> flashSaleBeans = JSONObject.parseArray(goodsList, FlashSaleShopBean.class);
+                mode.addObject("flashSale",flashSaleBeans);
+                SimpleDateFormat df = new SimpleDateFormat("HH");
+                String date = df.format(new Date());
+                date = date+":00:00";
+                mode.addObject("dateTime",date);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mode;
+    }
     /**
      * 首页推荐
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/Recommend",method = RequestMethod.POST)
-    public Object Recommend(String pageId){
+    public Object Recommend(HttpSession session,String pageId){
         start();
-        try {
-            Integer integer = Integer.valueOf(pageId);
-            String hotWords = dataokeService.SendDaTaoKeApiTop();
-            List<String> hots = JSONObject.parseObject(hotWords, List.class);
-            String s = RandomNumUtil.RandomNum(2);
-            Integer num = Integer.valueOf(s);
-            String hot = hots.get(num);
-
-//            Integer page = (Integer) session.getAttribute("pageid");
-            String jsonString = dataokeService.SendDaTaoKeListSuperGoods(hot, integer, 70, "total_sales_des");
-            if (!jsonString.contains("成功")){
-                success(false);
-                message("获取商品失败，请重试");
-                return end();
+            Object userinfo = session.getAttribute("userinfo");
+            if (userinfo != null) {
+                try {
+                    //如果登陆账号，推荐为收藏夹的内容相关
+                    UserDataBean user = (UserDataBean) userinfo;
+                    List<UserBehaviorDataBean> userBehaviorDataBeans = userService.queryShopId(user.getId());
+                    int size = userBehaviorDataBeans.size();
+                    if (size != 0){
+                        Random rand = new Random();
+                        int i = rand.nextInt(size - 1);
+                        if (i >= 0){
+                            UserBehaviorDataBean userBehaviorDataBean = userBehaviorDataBeans.get(i);
+                            String collectionId = userBehaviorDataBean.getCollectionId();
+                            String item = dataokeService.SendDaTaoKeByOpen(Long.valueOf(collectionId), 20);
+                            if (item.contains("成功")){
+                                JSONObject jsonObject1 = JSONObject.parseObject(item);
+                                String data1 = jsonObject1.getString("data");
+                                List<ItemBean> itemBeans = JSONObject.parseArray(data1, ItemBean.class);
+                                data(itemBeans);
+                                success(true);
+                                return end();
+                            }
+                        }
+                    }
+                    Object object = hotRecommend(pageId);
+                    if (object !=null){
+                        List<ShopListBean> shopList = (List<ShopListBean>) object;
+                        success(true);
+                        data(shopList);
+                    }else{
+                        success(false);
+                        message("获取商品失败，请重试");
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }else{
+//                    //如果没有登陆推荐热搜词的相关内容
+//                    Integer integer = Integer.valueOf(pageId);
+//                    String hotWords = dataokeService.SendDaTaoKeApiTop();
+//                    List<String> hots = JSONObject.parseObject(hotWords, List.class);
+//                    String s = RandomNumUtil.RandomNum(2);
+//                    Integer num = Integer.valueOf(s);
+//                    String hot = hots.get(num);
+//                    String jsonString = dataokeService.SendDaTaoKeListSuperGoods(hot, integer, 40, "total_sales_des");
+//                    if (!jsonString.contains("成功")){
+//                        success(false);
+//                        message("获取商品失败，请重试");
+//                        return end();
+//                    }
+//                    JSONObject jsonObject = JSON.parseObject(jsonString);
+//                    String data = jsonObject.getString("data");
+//                    JSONObject jsonObject1 = JSON.parseObject(data);
+//                    String list= jsonObject1.getString("list");
+//                    List<ShopListBean> shopList = JSONObject.parseArray(list, ShopListBean.class);
+                    Object object = hotRecommend(pageId);
+                    if (object !=null){
+                        List<ShopListBean> shopList = (List<ShopListBean>) object;
+                        success(true);
+                        data(shopList);
+                    }else{
+                        success(false);
+                        message("获取商品失败，请重试");
+                    }
             }
-            JSONObject jsonObject = JSON.parseObject(jsonString);
-            String data = jsonObject.getString("data");
-            JSONObject jsonObject1 = JSON.parseObject(data);
-            String list= jsonObject1.getString("list");
-            List<ShopListBean> shopList = JSONObject.parseArray(list, ShopListBean.class);
-            success(true);
-            data(shopList);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        return end();
+            return end();
     }
-    /**
+
+        /**
      * 超级分类
      * @return
      */
@@ -86,12 +183,16 @@ public class ViewController extends BeanController {
     @RequestMapping(value = "/category",method = RequestMethod.GET)
     public Object category(){
         ModelAndView modelAndView = new ModelAndView("shoptype");
-        String shoptype = dataokeService.SendDaTaoKeCategory();
-        if (shoptype.contains("成功")){
-            JSONObject jsonObject = JSON.parseObject(shoptype);
-            String data = jsonObject.getString("data");
-            List<ShopTypeBean> shopTypeBeans = JSONObject.parseArray(data, ShopTypeBean.class);
-            modelAndView.addObject("shoptype",shopTypeBeans);
+        try {
+            String shoptype = dataokeService.SendDaTaoKeCategory();
+            if (shoptype.contains("成功")){
+                JSONObject jsonObject = JSON.parseObject(shoptype);
+                String data = jsonObject.getString("data");
+                List<ShopTypeBean> shopTypeBeans = JSONObject.parseArray(data, ShopTypeBean.class);
+                modelAndView.addObject("shoptype",shopTypeBeans);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         return modelAndView;
     }
@@ -175,22 +276,26 @@ public class ViewController extends BeanController {
      */
     @RequestMapping(value = "/search",method = RequestMethod.GET)
     public String searchIndex(Map<String,Object> map,HttpSession session){
-        List<String> hotword = (List<String>) session.getAttribute("hotword");
-        if (hotword==null){
-            String hotWords = dataokeService.SendDaTaoKeApiTop();
-            List<String> strings = JSONObject.parseObject(hotWords, List.class);
-            session.setAttribute("hotword",strings);
-            hotword = strings;
+        try {
+            List<String> hotword = (List<String>) session.getAttribute("hotword");
+            if (hotword==null){
+                String hotWords = dataokeService.SendDaTaoKeApiTop();
+                List<String> strings = JSONObject.parseObject(hotWords, List.class);
+                session.setAttribute("hotword",strings);
+                hotword = strings;
+            }
+            String s = RandomNumUtil.RandomNum(2);
+            Integer integer = Integer.valueOf(s);
+            if (integer < 70){
+                hotword = hotword.subList(integer,integer+20);
+            }else{
+                hotword = hotword.subList(integer-20,integer);
+            }
+            //将list放到请求域里
+            map.put("list",hotword);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        String s = RandomNumUtil.RandomNum(2);
-        Integer integer = Integer.valueOf(s);
-        if (integer < 70){
-            hotword = hotword.subList(integer,integer+20);
-        }else{
-            hotword = hotword.subList(integer-20,integer);
-        }
-        //将list放到请求域里
-        map.put("list",hotword);
         //获取热词top100
         return "search/search";
     }
@@ -384,4 +489,32 @@ public class ViewController extends BeanController {
         return end();
     }
 
+
+
+
+    //首页推荐方法
+    private Object hotRecommend(String pageId){
+        try {
+            //如果没有登陆推荐热搜词的相关内容
+            Integer integer = Integer.valueOf(pageId);
+            String hotWords = dataokeService.SendDaTaoKeApiTop();
+            List<String> hots = JSONObject.parseObject(hotWords, List.class);
+            String s = RandomNumUtil.RandomNum(2);
+            Integer num = Integer.valueOf(s);
+            String hot = hots.get(num);
+            String jsonString = dataokeService.SendDaTaoKeListSuperGoods(hot, integer, 40, "total_sales_des");
+            if (!jsonString.contains("成功")){
+                return null;
+            }
+            JSONObject jsonObject = JSON.parseObject(jsonString);
+            String data = jsonObject.getString("data");
+            JSONObject jsonObject1 = JSON.parseObject(data);
+            String list= jsonObject1.getString("list");
+            List<ShopListBean> shopList = JSONObject.parseArray(list, ShopListBean.class);
+            return shopList;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
