@@ -251,7 +251,18 @@ public class ViewController extends BeanController {
                     JSONObject jsonObject1 = JSONObject.parseObject(item);
                     String data1 = jsonObject1.getString("data");
                     itemBean = JSONObject.parseArray(data1, ItemBean.class);
-                    byopen.put("itemBean",itemBean);
+                    if (itemBean.size() > 4){
+                        //猜你喜欢固定取4个商品
+                        List<ItemBean> itemBeans = new ArrayList<>();
+                        for (int i = 0;i < 4;i++){
+                            itemBeans.add(itemBean.get(i));
+                        }
+                        byopen.put("itemBean",itemBeans);
+                    }else{
+                        byopen.put("itemBean",itemBean);
+                    }
+
+
                 }else{
 
                 }

@@ -130,8 +130,8 @@ public class UserController extends BeanController {
                 }else{
                     if (continueDay !=0){
                         List<signListBean> list = new ArrayList<>();
-                        signListBean signList = new signListBean();
                         for (int i = 0;i < continueDay;i++){
+                            signListBean signList = new signListBean();
                             signList.setSignDay(String.valueOf(Integer.valueOf(daynum)+i));
                             list.add(signList);
                         }
@@ -169,7 +169,8 @@ public class UserController extends BeanController {
                 String format = sdf.format(new Date());
                 //签到日期
                 String rigninTime = userinfo.getRigninTime();
-                if (rigninTime == null ||!rigninTime.equals(format)){
+                if (rigninTime == null){
+                    //第一次签到，签到时间戳改为今天
                     userinfo.setRigninTime(format);
                     //积分+1
                     userinfo.setScore(userinfo.getScore()+1);
@@ -189,7 +190,26 @@ public class UserController extends BeanController {
                         success(false);
                         message("签到失败，请联系管理员");
                     }
-                }else if (rigninTime.equals(format)){
+                }else if (!rigninTime.equals(format)){
+                    //积分+1
+                    userinfo.setScore(userinfo.getScore()+1);
+                    //签到持续天数+1
+                    userinfo.setContinueDay(userinfo.getContinueDay()+1);
+                    //签到累计天数+1
+                    userinfo.setRigninCount(userinfo.getRigninCount()+1);
+                    //签到时间戳改为今天
+                    userinfo.setRigninTime(format);
+                    //提交签到信息
+                    Integer integer = userService.updateUserInfoRegister(userinfo);
+                    if (integer >= 1){
+                        success(true);
+                        data(userinfo);
+                        session.setAttribute("userinfo",userinfo);
+                    }else{
+                        success(false);
+                        message("签到失败，请联系管理员");
+                    }
+                }else if(rigninTime.equals(format)){
                     success(false);
                     message("你已经签到了，请明天再来吧");
                 }

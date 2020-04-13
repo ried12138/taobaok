@@ -39,11 +39,13 @@
         <div class="loading"></div>
         <ul id="bannerid">
             <c:forEach items="${topicBean}" var="list">
-                <li>
-                    <a href="${list.activityLink}">
-                        <img src="${list.materialLink}" />
-                    </a>
-                </li>
+                <c:if test="${not empty list.activityLink}" >
+                    <li>
+                        <a href="${list.activityLink}">
+                            <img src="${list.materialLink}" />
+                        </a>
+                    </li>
+                </c:if>
             </c:forEach>
 <%--            <li><img src="../../images/banner.jpg"/></li>--%>
         </ul>
