@@ -167,15 +167,15 @@
 <div class="mypart3">
     <ul>
         <li>
-            <a href="javascript:void()">
-                <img src="../images/my11.png" />
-                <p>我的活动</p>
+            <a href="${APP_PATH}/user/register">
+                <img src="../images/my9.png" />
+                <p>签到领积分</p>
             </a>
         </li>
         <li>
-            <a href="javascript:void()">
-                <img src="../images/my12.png" />
-                <p>社区</p>
+            <a onclick="qunpopup()">
+                <img src="${APP_PATH}/images/redqun.png" />
+                <p>红包微信群</p>
             </a>
         </li>
 <%--        <li>--%>
@@ -203,19 +203,21 @@
 <%--            </a>--%>
 <%--        </li>--%>
         <li>
-            <a href="${APP_PATH}/user/register">
-                <img src="../images/my9.png" />
-                <p>签到领积分</p>
+            <a onclick="popup()">
+                <img src="../images/gongzhonhao.png" />
+                <p>我的公众号</p>
             </a>
         </li>
         <li>
             <a href="javascript:void()">
-                <img src="../images/my10.png" />
-                <p>我的客服</p>
+                <img src="../images/codeing.png" />
+                <p>开发中...</p>
             </a>
         </li>
     </ul>
 </div>
+<div id="wechatqunBox" style="display: none;"><h3 align="center" style="text-decoration:underline;color:red;">点击图片关闭</h3><a onclick="quncloseP()"><img src="${APP_PATH}/images/wechatqun.png" /></a></div>
+<div id="wechatBox" style="display: none;"><h3 align="center" style="text-decoration:underline;color:red;">点击图片关闭</h3><a onclick="closeP()"><img src="${APP_PATH}/images/wechat.jpg" /></a></div>
 <div class="clear"></div>
 <%--<div class="kbox"></div><div class="kbox"></div>--%>
 <%--<div class="clear"></div>--%>
@@ -343,6 +345,26 @@
                }
            }
        })
+    }
+    /*弹窗功能*/
+    function popup() {
+        var wxb = document.getElementById("wechatBox");//大图
+        wxb.style.display = "block";
+    }
+    /*关闭e799bee5baa6e997aee7ad94e78988e69d8331333365633965弹窗功能*/
+    function closeP() {
+        var wxb = document.getElementById("wechatBox");//大图
+        wxb.style.display = "none";
+    }
+
+    function qunpopup() {
+        var wxb = document.getElementById("wechatqunBox");//大图
+        wxb.style.display = "block";
+    }
+    /*关闭e799bee5baa6e997aee7ad94e78988e69d8331333365633965弹窗功能*/
+    function quncloseP() {
+        var wxb = document.getElementById("wechatqunBox");//大图
+        wxb.style.display = "none";
     }
 </script>
 </body>

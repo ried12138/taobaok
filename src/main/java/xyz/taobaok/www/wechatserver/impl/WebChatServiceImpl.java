@@ -43,7 +43,7 @@ public class WebChatServiceImpl implements WebChatService {
             String content = map.get("Content");
             StringBuffer info = new StringBuffer("");
             String id = "";
-            if (content.contains("省钱购物网站")){
+            if (content.contains("涿鹿省钱购")){
                 replyMap.put("MsgType",MessageType.RESP_MESSAGE_TYPE_IMG);
                 replyMap.put("MediaId","an2LCdCPgk5X6bx8lA3O65Ahi_gpGq7Ig9huo8zBBb8");
                 respXml = XmlUtil.xmlFormatImg(replyMap, true);
@@ -60,7 +60,7 @@ public class WebChatServiceImpl implements WebChatService {
                     content = "【"+title+"】";
                 }else{
                     id ="";
-                    info.append("抱歉,该商品没有优惠券！正在努力开发中...");
+                    info.append("抱歉,该商品没有优惠券！你可以尝试登陆Http://www.taobaok.xyz 搜索你要的商品价格会更低哦！");
                     replyMap.put("Content",info.toString());
                     respXml = XmlUtil.xmlFormat(replyMap, true);
                     return respXml;
@@ -75,7 +75,7 @@ public class WebChatServiceImpl implements WebChatService {
                     url = substring.substring(0, last);
                 } catch (Exception e) {
                     //异常处理
-                    info.append("请输入正确的商品链接！不然我无法帮你找到优惠券。");
+                    info.append("请输入正确的商品链接！或者尝试登陆Http://www.taobaok.xyz 搜索你要的商品价格会更低哦！");
                     replyMap.put("Content",info.toString());
                     respXml = XmlUtil.xmlFormat(replyMap, true);
                     return  respXml;
@@ -83,12 +83,12 @@ public class WebChatServiceImpl implements WebChatService {
                 //返回商品id
                 id = SendPostUtil.SendGetTaobaoUrl(url);
             }else if (!content.contains("https://")){
-                info.append("请输入正确的商品链接！不然我无法帮你找到优惠券。");
+                info.append("请输入正确的商品链接！或者尝试登陆Http://www.taobaok.xyz 搜索你要的商品价格会更低哦！");
                 replyMap.put("Content",info.toString());
                 respXml = XmlUtil.xmlFormat(replyMap, true);
                 return respXml;
             }else{
-                info.append("抱歉,该商品没有优惠券！正在努力开发中...");
+                info.append("抱歉,该商品没有优惠券！你可以尝试登陆Http://www.taobaok.xyz 搜索你要的商品价格会更低哦！");
                 replyMap.put("Content",info.toString());
                 respXml = XmlUtil.xmlFormat(replyMap, true);
                 return respXml;
@@ -116,7 +116,7 @@ public class WebChatServiceImpl implements WebChatService {
                 replyMap.put("Content",info.toString());
                 respXml = XmlUtil.xmlFormat(replyMap, true);
             }else{
-                replyMap.put("Content","抱歉,该商品没有优惠券！正在努力开发中...");
+                replyMap.put("Content","抱歉,该商品没有优惠券！你可以尝试登陆Http://www.taobaok.xyz 搜索你要的商品价格会更低哦！");
                 respXml = XmlUtil.xmlFormat(replyMap, true);
                 return respXml;
             }

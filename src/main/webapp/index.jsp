@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="refresh" content="3;URL=${APP_PATH }/index">
-    <title>技术学习分享</title>
+    <title>涿鹿领券分享</title>
 </head>
 <body>
 <a href="${APP_PATH }/index">3后后自动跳转首页</a>
