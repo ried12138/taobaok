@@ -330,6 +330,7 @@ public class UserController extends BeanController {
                     }else{
                         //添加收藏信息
                         Integer set = userService.instCoolection(user.getId(),goodsId,title,pic,originalPrice,actualPrice);
+                        userService.updateUserInfoCoolection(user.getId(),nu+1);
                         if (set == 1){
                             success(true);
                             data(1);

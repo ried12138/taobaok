@@ -55,7 +55,7 @@
             <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>
         </div>
         <div class="headerC0">
-            <a href="seacher.html" style="display:block; width:100%; height:100%"></a>
+            <a><h3>九块九包邮</h3></a>
         </div>
         <div class="headerR">
             <a href="javascript:history.back(-1)">取消</a>
