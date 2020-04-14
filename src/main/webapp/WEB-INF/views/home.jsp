@@ -86,7 +86,7 @@
             </a>
         </li>
         <li>
-            <a href="jifen.html">
+            <a href="javascript:scoreshop()">
                 <img src="../../images/typeicon4.png" />
                 <p>鹿豆商城</p>
             </a>
@@ -144,7 +144,7 @@
             </a>
         </li>
         <li>
-            <a href="xq.html">
+            <a href="${APP_PATH}/flashSale">
                 <img src="${flashSale.get(3).mainPic}" />
                 <p>${flashSale.get(3).ddqDesc}</p>
             </a>
@@ -322,8 +322,14 @@
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    function scoreshop() {
+        window.location.href="${APP_PATH}/scoreshop";
+    }
+</script>
 </body>
 <script type="text/javascript">
+
     var page =1;
     var scrollTop = 0;
     var windowHeight = 0;
@@ -545,6 +551,8 @@
                 }
             })
         }
+
+
     // });
     // //页面加载完后执行
 

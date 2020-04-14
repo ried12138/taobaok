@@ -593,7 +593,7 @@
     //收藏
     function collection() {
         var pic = '${data.mainPic}';                        //图片地址
-        var id = '${data.id}';                         //商品id
+        var id = '${data.id}';                              //商品id
         var title = '${data.title}';                        //标题
         var originalPrice = '${data.originalPrice}';        //商品原价
         var actualPrice = '${data.actualPrice}';            //券后价

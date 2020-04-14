@@ -72,6 +72,21 @@ public class ViewController extends BeanController {
     }
 
     /**
+     * 鹿豆商城跳转
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/scoreshop",method = RequestMethod.GET)
+    public Object scoreshop(){
+        ModelAndView modelAndView = new ModelAndView();
+        //获取商品的逻辑
+        //封装商品信息
+//        modelAndView.addObject("shoplist",null);
+        //发送到页面
+        modelAndView.setViewName("scoreshop");
+        return modelAndView;
+    }
+    /**
      *  跳转活动热卖
      */
     @RequestMapping(value = "/hotcatalogue",method = RequestMethod.GET)
