@@ -72,6 +72,36 @@ public class ViewController extends BeanController {
     }
 
     /**
+     *  跳转活动热卖
+     */
+    @RequestMapping(value = "/hotcatalogue",method = RequestMethod.GET)
+    public String rankingList(){
+        return "hotcatalogue";
+    }
+    /**
+     * 商品列表活动热卖
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/hotcatalogue",method = RequestMethod.POST)
+    public Object hotcatalogue(Integer num){
+        start();
+        try {
+            String json = dataokeService.SendDaTaoKeHotcatalogue(num);
+            if (json.contains("成功")){
+                JSONObject jsonObject = JSON.parseObject(json);
+                String data = jsonObject.getString("data");
+                List<RankingListBean> rankingListBeans = JSONObject.parseArray(data, RankingListBean.class);
+                data(rankingListBeans);
+                success(true);
+            }
+        } catch (Exception e) {
+            success(false);
+            message("获取列表失败，请重试！");
+        }
+        return end();
+    }
+    /**
      * 限时抢购
      * @return
      */
@@ -145,23 +175,6 @@ public class ViewController extends BeanController {
                 }
             }else{
 //                    //如果没有登陆推荐热搜词的相关内容
-//                    Integer integer = Integer.valueOf(pageId);
-//                    String hotWords = dataokeService.SendDaTaoKeApiTop();
-//                    List<String> hots = JSONObject.parseObject(hotWords, List.class);
-//                    String s = RandomNumUtil.RandomNum(2);
-//                    Integer num = Integer.valueOf(s);
-//                    String hot = hots.get(num);
-//                    String jsonString = dataokeService.SendDaTaoKeListSuperGoods(hot, integer, 40, "total_sales_des");
-//                    if (!jsonString.contains("成功")){
-//                        success(false);
-//                        message("获取商品失败，请重试");
-//                        return end();
-//                    }
-//                    JSONObject jsonObject = JSON.parseObject(jsonString);
-//                    String data = jsonObject.getString("data");
-//                    JSONObject jsonObject1 = JSON.parseObject(data);
-//                    String list= jsonObject1.getString("list");
-//                    List<ShopListBean> shopList = JSONObject.parseArray(list, ShopListBean.class);
                     Object object = hotRecommend(pageId);
                     if (object !=null){
                         List<ShopListBean> shopList = (List<ShopListBean>) object;

@@ -80,15 +80,15 @@
             </a>
         </li>
         <li>
-            <a href="quanNews1.html">
+            <a href="${APP_PATH}/hotcatalogue">
                 <img src="../../images/typeicon6.png" />
-                <p>优惠券</p>
+                <p>活动热卖</p>
             </a>
         </li>
         <li>
             <a href="jifen.html">
                 <img src="../../images/typeicon4.png" />
-                <p>我的积分</p>
+                <p>鹿豆商城</p>
             </a>
         </li>
 

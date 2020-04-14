@@ -25,4 +25,6 @@ public interface DataokeService {
     String SendDaTaoKeCategory() throws UnsupportedEncodingException;
 
     String senDaTaoKeflashSale(String creatData);
+
+    String SendDaTaoKeHotcatalogue(Integer num);
 }

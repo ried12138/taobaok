@@ -41,6 +41,8 @@ public class SystemPropsUtil {
     public static String category="https://openapi.dataoke.com/api/category/get-super-category";
     //限时抢购
     public static String flashSale ="https://openapi.dataoke.com/api/category/ddq-goods-list";
+    //热门活动
+    public static String hotcatalogue="https://openapi.dataoke.com/api/goods/activity/catalogue";
     /**
      * 初始化所有配置参数
      */
@@ -63,6 +65,7 @@ public class SystemPropsUtil {
         rankingList = p.getValue("rankingList");
         category = p.getValue("category");
         flashSale = p.getValue("flashSale");
+        hotcatalogue = p.getValue("hotcatalogue");
     }
 
 }

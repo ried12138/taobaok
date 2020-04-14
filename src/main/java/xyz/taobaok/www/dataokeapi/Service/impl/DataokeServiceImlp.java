@@ -201,6 +201,27 @@ public class DataokeServiceImlp implements DataokeService {
         return jsonString;
     }
 
+    /**
+     * 各大榜单 默认提取实时榜单
+     * @return
+     */
+    @Override
+    public String SendDaTaoKeHotcatalogue(Integer num) {
+        TreeMap<String,Object> paraMap = new TreeMap<String,Object>();
+        paraMap.put("appKey",SystemPropsUtil.appKey);
+        paraMap.put("version","v1.2.2");
+        paraMap.put("rankType",num);
+        paraMap.put("pid",SystemPropsUtil.pid);
+        paraMap.put("sign", SignMD5Util.getSignStr(paraMap,SystemPropsUtil.appSecret));
+        String jsonString = null;
+        try {
+            jsonString = HttpUtils.sendGet(SystemPropsUtil.rankingList, paraMap);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return jsonString;
+    }
+
 //    public String sendGet(String getUrl, Map<String, String> paraMap){
 //        if(paraMap == null){
 //            paraMap = new HashMap<String,String>();

@@ -1,4 +1,5 @@
 <%--
+ 活动热卖
   Created by IntelliJ IDEA.
   User: liuweiran
   Date: 2020/4/2
@@ -49,13 +50,27 @@
     </script>
 </head>
 <body>
+<%--<div class="headerbox">--%>
+<%--    <div class="header">--%>
+<%--        <div class="headerL">--%>
+<%--            <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>--%>
+<%--        </div>--%>
+<%--        <div class="headerC0">--%>
+<%--            <a href="seacher.html" style="display:block; width:100%; height:100%"></a>--%>
+<%--        </div>--%>
+<%--        <div class="headerR">--%>
+<%--            <a href="javascript:void()">取消</a>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<div class="clear"></div>--%>
 <div class="headerbox">
     <div class="header">
         <div class="headerL">
             <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>
         </div>
         <div class="headerC0">
-            <a href="seacher.html" style="display:block; width:100%; height:100%"></a>
+            <a><h3>活动热卖</h3></a>
         </div>
         <div class="headerR">
             <a href="javascript:history.back(-1)">取消</a>
@@ -63,35 +78,53 @@
     </div>
 </div>
 <div class="clear"></div>
-
 <!-- 导航 -->
-<%--<div id="navBox" >--%>
-<%--    <ul class="tab-head">--%>
-<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="reqpage('','-1')">精选</a></li>--%>
-<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="reqpage('','1')">居家百货</a></li>--%>
-<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="reqpage('','2')">美食</a></li>--%>
-<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="reqpage('','3')">服饰</a></li>--%>
-<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="reqpage('','5')">美妆</a></li>--%>
-<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="reqpage('','6')">内衣</a></li>--%>
-<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="reqpage('','7')">母婴</a></li>--%>
-<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="reqpage('','9')">数码配件</a></li>--%>
-<%--    </ul>--%>
-<%--</div>--%>
 <div class="shopType">
     <ul>
-        <li id="selected" class="on">
-            <a onclick="reqpage('','-1')">精选</a>
+        <li id="actualSales" class="on">
+            <a onclick="res(1)">实时销量</a>
         </li>
-        <li id="homeStore">
-            <a onclick="reqpage('','1')">居家百货</a>
+        <li id="buyandbuy">
+            <a onclick="res(4)">买了又买</a>
         </li>
-        <li id="food">
-            <a onclick="reqpage('','2')">美食</a>
+        <li id="hottop">
+            <a onclick="res(7)">综合热搜排行</a>
+<%--            <span id="asc" onclick="priceasc()" style="display:none" class="pricebtn1"></span>--%>
+<%--            <span id="des" onclick="pricedes()" style="display:none" class="pricebtn2"></span>--%>
         </li>
     </ul>
+
 </div>
 <div class="clear"></div>
 <div class="hbox1"></div>
+<%--<div id="navBox" >--%>
+<%--    <ul class="tab-head">--%>
+<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="res(1)">实时销量</a></li>--%>
+<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="res(4)">买了又买</a></li>--%>
+<%--        <li class="tab-head-item"><a class="tab-head-item" onclick="res(7)">综合热搜排行</a></li>--%>
+<%--    </ul>--%>
+<%--</div>--%>
+<%--<div class="shopType">--%>
+<%--    <ul>--%>
+<%--        <li class="on">--%>
+<%--            <a href="shoplist.html">精选</a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="shoplist.html">居家百货</a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="shoplist.html">美食</a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="shoplist.html">服饰</a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a href="shoplist.html">母婴</a>--%>
+<%--        </li>--%>
+<%--    </ul>--%>
+<%--</div>--%>
+<%--<div class="clear"></div>--%>
+<%--<div class="hbox1"></div>--%>
 <%--<div class="tolist"><img src="images/tolist.png" /></div>--%>
 <div class="totop"><a href="javascript:scrollTo(0,0)"><img src="images/totop.png" /></a></div>
 <div class="kbox"></div>
@@ -106,20 +139,9 @@
 <%--        </li>--%>
 <%--</div>--%>
 <div class="shoplist">
-    <ul id="shoplistbox1">
+    <ul id="shoplistbox">
     </ul>
-    <ul id="shoplistbox2">
-    </ul>
-    <ul id="shoplistbox3">
-    </ul>
-    <ul id="shoplistbox4">
-    </ul>
-    <ul id="shoplistbox5">
-    </ul>
-    <ul id="shoplistbox6">
-    </ul>
-    <ul id="shoplistbox7">
-    </ul>
+
 </div>
 <%--<div class="sxbox">--%>
 <%--    <div class="sxbox0">--%>
@@ -161,80 +183,16 @@
 <%--    </div>--%>
 <%--</div>--%>
 <script type="text/javascript">
-    var page =1;
-    var roll ="roll";
-    var nineCid = "-1";
     window.onload = function(){
-        reqpage(roll,nineCid);
-    }
-    var scrollTop = 0;
-    var windowHeight = 0;
-    window.onscroll = function () {
-        //scrollTop就是触发滚轮事件时滚轮的高度
-        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        // console.log("滚动距离" + scrollTop);
-        //变量windowHeight是可视区的高度
-        var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
-        // console.log("可视高度" + windowHeight);
-        //变量scrollHeight是滚动条的总高度
-        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-
-        console.log("总高度" + scrollHeight);
-        //判断滚动条是否到底部
-        if (scrollTop + windowHeight == scrollHeight) {
-            reqpage(roll,nineCid);
-
-        }
+        res(1);
     }
     //列表加载逻辑
-    function reqpage(roll,nineCid) {
-        switch (nineCid) {
-            case "-1":
-                $("#selected").attr('class','on');
-                $("#homeStore").attr('class','off');
-                $("#food").attr('class','off');
-                break;
-            case "1":
-                $("#selected").attr('class','off');
-                $("#homeStore").attr('class','on');
-                $("#food").attr('class','off');
-                break;
-            case "2":
-                $("#selected").attr('class','off');
-                $("#homeStore").attr('class','off');
-                $("#food").attr('class','on');
-                break;
-        }
-        if (page >= 7) {
-            var con = '';
-            con += '<li>';
-            con += ' <a>';
-            con += '<p>已经到底了</p>';
-            con += '</a>';
-            con += '</li>';
-            $("#shoplistbox7").html(con);
-        } else {
-            if (roll == "") {
-                nineCid = nineCid;
-                scrollTo(0, 0)
-                $("#shoplistbox2").html("");//局部刷新
-                $("#shoplistbox3").html("");
-                $("#shoplistbox4").html("");
-                $("#shoplistbox5").html("");
-                $("#shoplistbox6").html("");
-                var scrollTop = 0;
-                var windowHeight = 0;
-                page = 1;            //初始化页码
-            }
-            nineCid = nineCid;
-        }
+    function res(num) {
         $.ajax({
             type:"post",
-            url:"${APP_PATH}/jiukuaijiulist",
+            url:"${APP_PATH}/hotcatalogue",
             data:{
-                pageId:page,
-                pageSize:50,
-                nineCid:nineCid
+                num:num
             },
             success:function(result){
                 if (result.success){
@@ -253,32 +211,27 @@
                         contentlist+='   </a>';
                         contentlist+='</li>';
                     })
-                    switch (page) {
+                    switch (num) {
                         case 1:
-                            $("#shoplistbox1").html(contentlist);//局部刷新
-                            page = 1+1;
-                            break;
-                        case 2:
-                            $("#shoplistbox2").html(contentlist);//局部刷新
-                            page = 2+1;
-                            break;
-                        case 3:
-                            $("#shoplistbox3").html(contentlist);//局部刷新
-                            page = 3+1;
+                            $("#actualSales").attr('class','on');
+                            $("#buyandbuy").attr('class','off');
+                            $("#hottop").attr('class','off');
                             break;
                         case 4:
-                            $("#shoplistbox4").html(contentlist);//局部刷新
-                            page = 4+1;
+                            $("#actualSales").attr('class','off');
+                            $("#buyandbuy").attr('class','on');
+                            $("#hottop").attr('class','off');
                             break;
-                        case 5:
-                            $("#shoplistbox5").html(contentlist);//局部刷新
-                            page = 5+1;
-                            break;
-                        case 6:
-                            $("#shoplistbox6").html(contentlist);//局部刷新
-                            aaa = 6+1;
+                        case 7:
+                            $("#actualSales").attr('class','off');
+                            $("#buyandbuy").attr('class','off');
+                            $("#hottop").attr('class','on');
                             break;
                     }
+
+                    $("#shoplistbox").html(contentlist);//局部刷新
+                }else{
+                    //失败
                 }
             }
         })

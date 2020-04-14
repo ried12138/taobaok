@@ -50,7 +50,7 @@
             <li>
                 <a href="javascript:void()">
                     <p class="p1">${sessionScope.userinfo.score}</p>
-                    <p class="p2">我的积分</p>
+                    <p class="p2">我的鹿豆</p>
                 </a>
             </li>
 <%--            <li>--%>
@@ -169,7 +169,7 @@
         <li>
             <a href="${APP_PATH}/user/register">
                 <img src="../images/my9.png" />
-                <p>签到领积分</p>
+                <p>签到领鹿豆</p>
             </a>
         </li>
         <li>
