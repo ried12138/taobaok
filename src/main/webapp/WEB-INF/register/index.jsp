@@ -43,7 +43,7 @@
 <%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
 <%--                                </a>--%>
 <%--                                <div class="media-body">--%>
-<%--                                    <div class="">5天礼包（200菲亚时尚欢乐豆）</div>--%>
+<%--                                    <div class="">5天礼包（200鹿豆）</div>--%>
 <%--                                    <div class="text-muted font12">连续签到5天即可领取</div>--%>
 <%--                                </div>--%>
 <%--                            </div>--%>
@@ -59,7 +59,7 @@
 <%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
 <%--                                </a>--%>
 <%--                                <div class="media-body">--%>
-<%--                                    <div class="">10天礼包（400菲亚时尚欢乐豆）</div>--%>
+<%--                                    <div class="">10天礼包（400鹿豆）</div>--%>
 <%--                                    <div class="text-muted font12">连续签到10天即可领取</div>--%>
 <%--                                </div>--%>
 <%--                            </div>--%>
@@ -75,7 +75,7 @@
 <%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
 <%--                                </a>--%>
 <%--                                <div class="media-body">--%>
-<%--                                    <div class="">15天礼包（800菲亚时尚欢乐豆）</div>--%>
+<%--                                    <div class="">15天礼包（800鹿豆）</div>--%>
 <%--                                    <div class="text-muted font12">连续签到15天即可领取</div>--%>
 <%--                                </div>--%>
 <%--                            </div>--%>
@@ -91,7 +91,7 @@
 <%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
 <%--                                </a>--%>
 <%--                                <div class="media-body">--%>
-<%--                                    <div class="">20天礼包（1200菲亚时尚欢乐豆）</div>--%>
+<%--                                    <div class="">20天礼包（1200鹿豆）</div>--%>
 <%--                                    <div class="text-muted font12">连续签到20天即可领取</div>--%>
 <%--                                </div>--%>
 <%--                            </div>--%>
@@ -107,7 +107,7 @@
 <%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
 <%--                                </a>--%>
 <%--                                <div class="media-body">--%>
-<%--                                    <div class="">25天礼包（1800菲亚时尚欢乐豆）</div>--%>
+<%--                                    <div class="">25天礼包（1800鹿豆）</div>--%>
 <%--                                    <div class="text-muted font12">连续签到25天即可领取</div>--%>
 <%--                                </div>--%>
 <%--                            </div>--%>
@@ -123,7 +123,7 @@
 <%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
 <%--                                </a>--%>
 <%--                                <div class="media-body">--%>
-<%--                                    <div class="">30天礼包（3000菲亚时尚欢乐豆）</div>--%>
+<%--                                    <div class="">30天礼包（3000鹿豆）</div>--%>
 <%--                                    <div class="text-muted font12">连续签到30天即可领取</div>--%>
 <%--                                </div>--%>
 <%--                            </div>--%>
@@ -140,7 +140,7 @@
 <div class="maskbox"></div>
 <div class="qdbox">
     <div class="text-center text-green font18"><strong>签到成功！</strong></div>
-    <div class="text-center pt10">您已经连续签到&nbsp;<span class="text-green">${sessionScope.userinfo.continueDay+1}</span>&nbsp;天</div>
+    <div class="text-center pt10">您已经连续签到&nbsp;<span class="text-green" id="spantext"></span>&nbsp;天</div>
     <div class="text-center ptb15"><img src="${APP_PATH}/registerimages/gift.png" style="width:125px;margin-left:20px;"></div>
 <%--    <div class="text-center"><button class="btn btn-lottery"><a href="turnlate.html" target="_blank">去抽奖</a></button></div>--%>
 </div>
@@ -154,6 +154,8 @@
             url:"${APP_PATH}/user/registersub",
             success:function (result) {
                 if (result.success){
+                    var num =result.data.continueDay;
+                    document.getElementById("spantext").innerHTML = num;
                     //签到成功
                     $(".maskbox").fadeIn();
                     $(".qdbox").fadeIn();

@@ -9,10 +9,11 @@
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <html>
 <head>
-    <meta http-equiv="refresh" content="3;URL=${APP_PATH }/index">
+    <meta http-equiv="refresh" content="4;URL=${APP_PATH }/index">
     <title>涿鹿领券分享</title>
 </head>
 <body>
-<a href="${APP_PATH }/index">3后后自动跳转首页</a>
+<div align="center"><a href="${APP_PATH }/index"><h1>3秒后自动跳转首页<br>感谢使用涿鹿领券分享<br><h1 style="color: red">请关注公众号：《涿鹿领券分享》</h1><br><h1>感谢您的支持^v^!</h1></h1></a></div>
+
 </body>
 </html>

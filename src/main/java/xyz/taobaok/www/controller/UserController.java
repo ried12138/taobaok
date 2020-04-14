@@ -178,7 +178,7 @@ public class UserController extends BeanController {
                     userinfo.setContinueDay(userinfo.getContinueDay()+1);
                     //签到累计天数+1
                     userinfo.setRigninCount(userinfo.getRigninCount()+1);
-                    //添加本月第一次签到日期
+                    //添加本月第一次签到日期（签到连续时常标示)
                     userinfo.setRigninDay(format);
                     //提交签到信息
                     Integer integer = userService.updateUserInfoRegister(userinfo);
@@ -191,10 +191,28 @@ public class UserController extends BeanController {
                         message("签到失败，请联系管理员");
                     }
                 }else if (!rigninTime.equals(format)){
+                    //校验是否连续签到
+                    String rigninDay = userinfo.getRigninDay();
+                    String dayString = rigninDay.substring(rigninDay.length() - 2);
+                    //取第一次连续签到的日期 也就是几号
+                    Integer daynum = Integer.valueOf(dayString);
+                    //持续天数
+                    Integer continueDay = userinfo.getContinueDay();
+                    //取当前日期是几号
+                    String formatstr = format.substring(format.length() - 2);
+                    Integer formatnum = Integer.valueOf(formatstr);
+                    if (((daynum+continueDay)) == formatnum){
+                        //签到持续天数+1
+                        userinfo.setContinueDay(userinfo.getContinueDay()+1);
+                    }else{
+                        //签到持续天数0第一天开始
+                        userinfo.setContinueDay(1);
+                        //修改本月第一次签到日期（签到连续时常标示)
+                        userinfo.setRigninDay(format);
+                    }
+
                     //积分+1
                     userinfo.setScore(userinfo.getScore()+1);
-                    //签到持续天数+1
-                    userinfo.setContinueDay(userinfo.getContinueDay()+1);
                     //签到累计天数+1
                     userinfo.setRigninCount(userinfo.getRigninCount()+1);
                     //签到时间戳改为今天
@@ -202,9 +220,9 @@ public class UserController extends BeanController {
                     //提交签到信息
                     Integer integer = userService.updateUserInfoRegister(userinfo);
                     if (integer >= 1){
+                        session.setAttribute("userinfo",userinfo);
                         success(true);
                         data(userinfo);
-                        session.setAttribute("userinfo",userinfo);
                     }else{
                         success(false);
                         message("签到失败，请联系管理员");

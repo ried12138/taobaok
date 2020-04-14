@@ -68,7 +68,7 @@
         <%--            </a>--%>
         <%--        </li>--%>
         <li>
-            <a href="javascript:void()">
+            <a href="${APP_PATH}/user/register">
                 <img src="../../images/typeicon5.png" />
                 <p>签到</p>
             </a>
