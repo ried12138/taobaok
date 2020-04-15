@@ -84,6 +84,7 @@ public class UserController extends BeanController {
 
     /**
      * 跳转积分系统
+     * 2020/04/15 未完成 获取到连续签到标示，需要发到前端执行
      * @return
      */
     @ResponseBody
@@ -95,6 +96,13 @@ public class UserController extends BeanController {
             //跳转登陆页面
             mode.setViewName("tologin");
         }else{
+            UserDataBean userinfo = (UserDataBean) user;
+            String day = userService.selectReward(userinfo.getId());
+            if (day != null){
+                String[] split = day.split(",");
+                mode.addObject(split);
+            }
+
             mode.setViewName("register/index");
         }
         return mode;
@@ -148,6 +156,100 @@ public class UserController extends BeanController {
         return end();
     }
 
+    /**
+     * 连续签到奖励
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/continuityReward",method = RequestMethod.POST)
+    public Object continuityReward(HttpSession session,String day){
+        start();
+        try {
+            Object user = session.getAttribute("userinfo");
+            if (user ==null){
+                success(false);
+                message("你还没有登陆，请登陆后领取");
+                return end();
+            }else{
+                UserDataBean userinfo = (UserDataBean) user;
+                UserDataBean userDataBean = userService.selectUserInfo(userinfo.getId());
+                String continuousReward = userDataBean.getContinuousReward();
+                StringBuffer stringDay = new StringBuffer();
+                //从来没有领取过奖励
+                SimpleDateFormat sdf = new SimpleDateFormat("dd");
+                //当前日期
+                String format = sdf.format(new Date());
+                Integer rigninCount = userDataBean.getRigninCount();
+                if (rigninCount >=Integer.valueOf(day)){
+                    if (continuousReward.equals("") || format.equals("01")){
+                        //初始化领取奖励
+                        userDataBean.setContinuousReward("5,10,15,20,25,30");
+                    }else{
+                        String[] split = continuousReward.split(",");
+                        for (String s : split) {
+                            if (!s.equals(day)){
+                                stringDay.append(s+",");
+                            }else{
+                                Integer score = userDataBean.getScore();
+                                switch (s){
+                                    case "5":
+                                        userDataBean.setScore(score+200);
+                                        message("领取成功！获得200鹿豆");
+                                        break;
+                                    case "10":
+                                        userDataBean.setScore(score+400);
+                                        message("领取成功！获得400鹿豆");
+                                        break;
+                                    case "15":
+                                        userDataBean.setScore(score+800);
+                                        message("领取成功！获得800鹿豆");
+                                        break;
+                                    case "20":
+                                        userDataBean.setScore(score+1200);
+                                        message("领取成功！获得1200鹿豆");
+                                        break;
+                                    case "25":
+                                        userDataBean.setScore(score+1800);
+                                        message("领取成功！获得1800鹿豆");
+                                        break;
+                                    case "30":
+                                        userDataBean.setScore(score+3000);
+                                        message("领取成功！获得3000鹿豆");
+                                        break;
+                                }
+                            }
+                        }
+                        //判断是否领取过奖励
+                        String substring = stringDay.substring(0, stringDay.length() - 1);
+                        if (continuousReward.equals(substring)){
+                            success(false);
+                            data(0);
+                            message("您已经领取过奖励了，请下个月在来领这个奖励吧！");
+                        }else{
+                            Integer num = userService.updateUserInfoContinuousReward(userinfo.getId(),substring,userDataBean.getScore());
+                            if (num == 1){
+                                success(true);
+                                data(1);
+                                userDataBean.setContinuousReward(substring);
+                                session.setAttribute("userinfo",userDataBean);
+                            }else{
+                                success(false);
+                                message("签到失败，请联系管理员");
+                            }
+                        }
+                    }
+                }else{
+                    success(false);
+                    data(0);
+                    message("你连续签到天数不够，坚持每天签到哦！");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return end();
+    }
     /**
      * 提交签到信息
      * @param session
@@ -213,8 +315,14 @@ public class UserController extends BeanController {
 
                     //积分+1
                     userinfo.setScore(userinfo.getScore()+1);
-                    //签到累计天数+1
-                    userinfo.setRigninCount(userinfo.getRigninCount()+1);
+                    Integer rigninCount = userinfo.getRigninCount();
+                    if (rigninCount > 30){
+                        //累计签到天数设置为1
+                        userinfo.setRigninCount(1);
+                    }else{
+                        //签到累计天数+1
+                        userinfo.setRigninCount(userinfo.getRigninCount()+1);
+                    }
                     //签到时间戳改为今天
                     userinfo.setRigninTime(format);
                     //提交签到信息
@@ -229,6 +337,7 @@ public class UserController extends BeanController {
                     }
                 }else if(rigninTime.equals(format)){
                     success(false);
+                    data(1);
                     message("你已经签到了，请明天再来吧");
                 }
             }

@@ -237,5 +237,6 @@
         })
     }
 </script>
+<jsp:include page="zhanzhangtongji.jsp"/>
 </body>
 </html>

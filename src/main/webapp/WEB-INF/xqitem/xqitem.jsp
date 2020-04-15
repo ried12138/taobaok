@@ -185,7 +185,7 @@
 <div class="hdbox">
     <div class="hdbox0">
         <div class="hdbox_1">
-            <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png"></a>
+            <a onclick="javascript:history.back(-1)" class="goback"><img src="${APP_PATH}/images/goback.png"></a>
         </div>
         <div class="hdbox_2">
             <ul>
@@ -195,8 +195,8 @@
             </ul>
         </div>
         <div class="hdbox_3">
-            <a onclick="javascript:history.back(-1)"><img src="images/h2.png" /></a>
-            <a onclick="javascript:history.back(-1)"><img src="images/h1.png" /></a>
+            <a onclick="javascript:history.back(-1)"><img src="${APP_PATH}/images/h2.png" /></a>
+            <a onclick="javascript:history.back(-1)"><img src="${APP_PATH}/images/h1.png" /></a>
         </div>
     </div>
 </div>
@@ -204,7 +204,8 @@
 <a name="m1">
 
     <div class="xqbox1">
-        <img src="${data.mainPic}" width="100%"/>
+        <img src="${data.imgs.get(0)}" width="100%"/>
+<%--        <img src="${data.mainPic}" width="100%"/>--%>
         <p class="tit">${data.title}</p>
         <div class="qita">
             <p class="p1">￥${data.originalPrice}<span>新品促销</span></p>
@@ -222,14 +223,14 @@
 </a>
 <div class="xqbox2">
     <div class="xqbox2L">
-        <img src="images/my3.png" />
+        <img src="${APP_PATH}/images/my3.png" />
         <a href="${data.couponLink}">
         <span>领取优惠券</span>
             <span>满${data.couponConditions}减${data.couponPrice}</span>
         </a>
     </div>
     <div class="xqbox2R">
-        <img src="images/more.png">
+        <img src="${APP_PATH}/images/more.png">
     </div>
 </div>
 <div class="clear"></div>
@@ -384,7 +385,7 @@
     <div class="Contentbox">
         <div id="con_two_1">
             <div class="xqsub">
-                <c:forEach items="${data.imgs}" var="list">
+                <c:forEach items="${data.imgs}" var="list" begin="1">
                     <img src="${list}" />
                 </c:forEach>
             </div>
@@ -669,5 +670,6 @@
     }
 
 </script>
+<jsp:include page="../zhanzhangtongji.jsp"/>
 </body>
 </html>

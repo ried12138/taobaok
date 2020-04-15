@@ -40,5 +40,8 @@ public interface UserService {
     UserDataBean selectUserInfo(Integer id);
     //签到积分修改
     Integer updateUserInfoRegister(UserDataBean userinfo);
-
+    //查询连续签到天数
+    String selectReward(Integer id);
+    //修改签到奖励标示
+    Integer updateUserInfoContinuousReward(Integer id, String continuousReward, Integer score);
 }

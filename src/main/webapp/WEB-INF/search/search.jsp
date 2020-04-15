@@ -23,7 +23,7 @@
 <div class="headerbox">
     <div class="header">
         <div class="headerL">
-            <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>
+            <a onclick="javascript:history.back(-1)" class="goback"><img src="${APP_PATH}/images/goback.png" /></a>
         </div>
         <div class="headerC0">
             <div class="ssdiv">
@@ -40,9 +40,9 @@
 <div class="clear"></div>
 <div class="hbox"></div>
 <div class="zjssbox">
-    <img src="images/s.png" class="i1"/>
+    <img src="${APP_PATH}/images/s.png" class="i1"/>
     <p class="sstxt">最近搜索</p>
-    <img src="images/del.png" onclick="delword()" class="i2"/>
+    <img src="${APP_PATH}/images/del.png" onclick="delword()" class="i2"/>
 </div>
 <div class="clear"></div>
 <div class="ssbox">
@@ -58,7 +58,7 @@
     <div class="line0"></div>
 </div>
 <div class="zjssbox">
-    <img src="images/huo.png" class="i1"/>
+    <img src="${APP_PATH}/images/huo.png" class="i1"/>
     <p class="sstxt">热门搜索</p>
 </div>
 <div class="clear"></div>
@@ -128,6 +128,7 @@
         })
     }
 </script>
+<jsp:include page="../zhanzhangtongji.jsp"/>
 </body>
 </html>
 

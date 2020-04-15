@@ -38,6 +38,8 @@ public class UserDataBean {
 
     private String rigninDay;          //本月第一次签到的日期时间
 
+    private String continuousReward;    //连续签到领取标记,用,分割来标记
+
     public UserDataBean() {
     }
 
@@ -51,7 +53,7 @@ public class UserDataBean {
         this.creatDate = creatDate;
     }
 
-    public UserDataBean(Integer id, Integer sex, String name, String password, String cookieId, String phone, String email, Integer vip, Integer collectionNum, String portrait, String creatDate, Integer score, Integer continueDay, String rigninTime, Integer rigninCount, String rigninDay) {
+    public UserDataBean(Integer id, Integer sex, String name, String password, String cookieId, String phone, String email, Integer vip, Integer collectionNum, String portrait, String creatDate, Integer score, Integer continueDay, String rigninTime, Integer rigninCount, String rigninDay, String continuousReward) {
         this.id = id;
         this.sex = sex;
         this.name = name;
@@ -68,6 +70,15 @@ public class UserDataBean {
         this.rigninTime = rigninTime;
         this.rigninCount = rigninCount;
         this.rigninDay = rigninDay;
+        this.continuousReward = continuousReward;
+    }
+
+    public String getContinuousReward() {
+        return continuousReward;
+    }
+
+    public void setContinuousReward(String continuousReward) {
+        this.continuousReward = continuousReward;
     }
 
     public String getRigninDay() {

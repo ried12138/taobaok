@@ -359,5 +359,6 @@
         window.location.href="${APP_PATH }/shoplists?wordName="+name;
     }
 </script>
+<jsp:include page="zhanzhangtongji.jsp"/>
 </body>
 </html>

@@ -11,9 +11,7 @@ import xyz.taobaok.www.util.dataoke.SignMD5Util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 实现用户数据库操作服务
@@ -192,6 +190,30 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return num;
+    }
+
+    /**
+     * 查询连续签到的奖励标示
+     * @param id
+     * @return
+     */
+    @Override
+    public String selectReward(Integer id) {
+        String day = userMapper.selectReward(id);
+        return day;
+    }
+
+    /**
+     * 修改签到奖励标示
+     * @param id
+     * @param continuousReward
+     * @param score
+     * @return
+     */
+    @Override
+    public Integer updateUserInfoContinuousReward(Integer id, String continuousReward, Integer score) {
+        Integer num = userMapper.updateUserInfoContinuousReward(id,continuousReward,score);
         return num;
     }
 }

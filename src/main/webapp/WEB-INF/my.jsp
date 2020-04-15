@@ -367,5 +367,6 @@
         wxb.style.display = "none";
     }
 </script>
+<jsp:include page="zhanzhangtongji.jsp"/>
 </body>
 </html>

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,107 +34,107 @@
                     <button class="btn btn-qiandao" onClick="signIn()">马上签到</button>
                 </div>
             </div>
-<%--            <div class="padding10">--%>
-<%--                <div class="font16 pb10 borderb"><strong>连续签到礼包</strong></div>--%>
-<%--                <div class="libaolist">--%>
-<%--                    <div class="clearfix borderb ptb10">--%>
-<%--                        <div class="col-xs-9 clearPadding">--%>
-<%--                            <div class="media">--%>
-<%--                                <a class="media-left pt3" href="javascript:void(0);">--%>
-<%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
-<%--                                </a>--%>
-<%--                                <div class="media-body">--%>
-<%--                                    <div class="">5天礼包（200鹿豆）</div>--%>
-<%--                                    <div class="text-muted font12">连续签到5天即可领取</div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-xs-3 clearPadding text-right pt2">--%>
-<%--                            <button class="btn btn-lingqu">领取</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="clearfix borderb ptb10">--%>
-<%--                        <div class="col-xs-9 clearPadding">--%>
-<%--                            <div class="media">--%>
-<%--                                <a class="media-left pt3" href="javascript:void(0);">--%>
-<%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
-<%--                                </a>--%>
-<%--                                <div class="media-body">--%>
-<%--                                    <div class="">10天礼包（400鹿豆）</div>--%>
-<%--                                    <div class="text-muted font12">连续签到10天即可领取</div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-xs-3 clearPadding text-right pt2">--%>
-<%--                            <button class="btn btn-disable" disable>已领取</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="clearfix borderb ptb10">--%>
-<%--                        <div class="col-xs-9 clearPadding">--%>
-<%--                            <div class="media">--%>
-<%--                                <a class="media-left pt3" href="javascript:void(0);">--%>
-<%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
-<%--                                </a>--%>
-<%--                                <div class="media-body">--%>
-<%--                                    <div class="">15天礼包（800鹿豆）</div>--%>
-<%--                                    <div class="text-muted font12">连续签到15天即可领取</div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-xs-3 clearPadding text-right pt2">--%>
-<%--                            <button class="btn btn-lingqu">领取</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="clearfix borderb ptb10">--%>
-<%--                        <div class="col-xs-9 clearPadding">--%>
-<%--                            <div class="media">--%>
-<%--                                <a class="media-left pt3" href="javascript:void(0);">--%>
-<%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
-<%--                                </a>--%>
-<%--                                <div class="media-body">--%>
-<%--                                    <div class="">20天礼包（1200鹿豆）</div>--%>
-<%--                                    <div class="text-muted font12">连续签到20天即可领取</div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-xs-3 clearPadding text-right pt2">--%>
-<%--                            <button class="btn btn-lingqu">领取</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="clearfix borderb ptb10">--%>
-<%--                        <div class="col-xs-9 clearPadding">--%>
-<%--                            <div class="media">--%>
-<%--                                <a class="media-left pt3" href="javascript:void(0);">--%>
-<%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
-<%--                                </a>--%>
-<%--                                <div class="media-body">--%>
-<%--                                    <div class="">25天礼包（1800鹿豆）</div>--%>
-<%--                                    <div class="text-muted font12">连续签到25天即可领取</div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-xs-3 clearPadding text-right pt2">--%>
-<%--                            <button class="btn btn-lingqu">领取</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="clearfix borderb ptb10">--%>
-<%--                        <div class="col-xs-9 clearPadding">--%>
-<%--                            <div class="media">--%>
-<%--                                <a class="media-left pt3" href="javascript:void(0);">--%>
-<%--                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">--%>
-<%--                                </a>--%>
-<%--                                <div class="media-body">--%>
-<%--                                    <div class="">30天礼包（3000鹿豆）</div>--%>
-<%--                                    <div class="text-muted font12">连续签到30天即可领取</div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="col-xs-3 clearPadding text-right pt2">--%>
-<%--                            <button class="btn btn-lingqu">领取</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <div class="padding10">
+                <div class="font16 pb10 borderb"><strong>连续签到礼包</strong></div>
+                <div class="libaolist">
+                    <div class="clearfix borderb ptb10">
+                        <div class="col-xs-9 clearPadding">
+                            <div class="media">
+                                <a class="media-left pt3" href="javascript:void(0);">
+                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">
+                                </a>
+                                <div class="media-body">
+                                    <div class="">5天礼包（200鹿豆）</div>
+                                    <div class="text-muted font12">连续签到5天即可领取</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="jiangli5" class="col-xs-3 clearPadding text-right pt2">
+                            <button onclick="lingqu('5')" class="btn btn-lingqu">领取</button>
+                        </div>
+                    </div>
+                    <div class="clearfix borderb ptb10">
+                        <div class="col-xs-9 clearPadding">
+                            <div class="media">
+                                <a class="media-left pt3" href="javascript:void(0);">
+                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">
+                                </a>
+                                <div class="media-body">
+                                    <div class="">10天礼包（400鹿豆）</div>
+                                    <div class="text-muted font12">连续签到10天即可领取</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 clearPadding text-right pt2">
+                            <button onclick="lingqu('10')" class="btn btn-lingqu">领取</button>
+                        </div>
+                    </div>
+                    <div class="clearfix borderb ptb10">
+                        <div class="col-xs-9 clearPadding">
+                            <div class="media">
+                                <a class="media-left pt3" href="javascript:void(0);">
+                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">
+                                </a>
+                                <div class="media-body">
+                                    <div class="">15天礼包（800鹿豆）</div>
+                                    <div class="text-muted font12">连续签到15天即可领取</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 clearPadding text-right pt2">
+                            <button onclick="lingqu('15')" class="btn btn-lingqu">领取</button>
+                        </div>
+                    </div>
+                    <div class="clearfix borderb ptb10">
+                        <div class="col-xs-9 clearPadding">
+                            <div class="media">
+                                <a class="media-left pt3" href="javascript:void(0);">
+                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">
+                                </a>
+                                <div class="media-body">
+                                    <div class="">20天礼包（1200鹿豆）</div>
+                                    <div class="text-muted font12">连续签到20天即可领取</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 clearPadding text-right pt2">
+                            <button onclick="lingqu('20')" class="btn btn-lingqu">领取</button>
+                        </div>
+                    </div>
+                    <div class="clearfix borderb ptb10">
+                        <div class="col-xs-9 clearPadding">
+                            <div class="media">
+                                <a class="media-left pt3" href="javascript:void(0);">
+                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">
+                                </a>
+                                <div class="media-body">
+                                    <div class="">25天礼包（1800鹿豆）</div>
+                                    <div class="text-muted font12">连续签到25天即可领取</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 clearPadding text-right pt2">
+                            <button onclick="lingqu('25')" class="btn btn-lingqu">领取</button>
+                        </div>
+                    </div>
+                    <div class="clearfix borderb ptb10">
+                        <div class="col-xs-9 clearPadding">
+                            <div class="media">
+                                <a class="media-left pt3" href="javascript:void(0);">
+                                    <img src="${APP_PATH}/registerimages/dou.png" style="width:30px;height:30px;">
+                                </a>
+                                <div class="media-body">
+                                    <div class="">30天礼包（3000鹿豆）</div>
+                                    <div class="text-muted font12">连续签到30天即可领取</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 clearPadding text-right pt2">
+                            <button onclick="lingqu('30')" class="btn btn-lingqu">领取</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -166,7 +167,48 @@
                 }
             }
         })
-
+    }
+    //连续签到奖励
+    function lingqu(day){
+        $.ajax({
+            type:"post",
+            url:"${APP_PATH}/user/continuityReward",
+            data:{
+                day:day
+            },
+            success:function (result) {
+                if (result.success){
+                    //成功          修改状态
+                    var content = '<button class="btn btn-disable" disable>已领取</button>';
+                    switch (day) {
+                        case '5':
+                            $("#jiangli5").html(content); //局部刷新
+                            break;
+                        case '10':
+                            $("#jiangli10").html(content); //局部刷新
+                            break;
+                        case '15':
+                            $("#jiangli15").html(content); //局部刷新
+                            break;
+                        case '20':
+                            $("#jiangli20").html(content); //局部刷新
+                            break
+                        case '25':
+                            $("#jiangli25").html(content); //局部刷新
+                            break;
+                        case '30':
+                            $("#jiangli30").html(content); //局部刷新
+                            break;
+                    }
+                    alert(result.message);
+                }else{
+                    //失败
+                    if (result.data ==0){
+                        alert(result.message);
+                    }
+                }
+            }
+        })
     }
     $(".maskbox").click(function(){
         $(".maskbox").fadeOut();
@@ -192,5 +234,6 @@
         });
     }
 </script>
+<jsp:include page="../zhanzhangtongji.jsp"/>
 </body>
 </html>

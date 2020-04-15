@@ -91,8 +91,6 @@
                 <p>鹿豆商城</p>
             </a>
         </li>
-
-
         <%--        <li>--%>
         <%--            <a href="shoplist.html">--%>
         <%--                <img src="../../images/typeicon7.png" />--%>
@@ -120,7 +118,7 @@
 <%--<div class="kbox"></div>--%>
 <div class="timeBuy">
     <div class="Buybox">
-        <p><span>限时</span>抢购</p>
+        <a href="${APP_PATH}/flashSale"><p><span>限时</span>抢购</p></a>
         <a href="${APP_PATH}/flashSale" class="more"></a>
         <a href="${APP_PATH}/flashSale" class="btn">${dateTime}场</a>
     </div>
@@ -257,11 +255,11 @@
 <%--</div>--%>
 <%--<div class="clear"></div>--%>
 <%--<div class="kbox"></div>--%>
-<div class="likebox">
 
+<div class="likebox">
     <div class="likeTit">
         <img src="../../images/heart.png" /><span>精品推荐</span>
-        <div class="totop"><a href="javascript:scrollTo(0,0)"><img src="images/totop.png" /></a></div>
+        <div class="totop"><a href="javascript:scrollTo(0,0)"><img src="${APP_PATH}/images/totop.png"/></a></div>
     </div>
     <ul id="shoplistsub">
 <%--        <li>--%>
@@ -551,15 +549,13 @@
                 }
             })
         }
-
-
     // });
     // //页面加载完后执行
-
     // //实现相关推荐的请求逻辑
     // function recommend() {
     //
     // }
 </script>
+<jsp:include page="../zhanzhangtongji.jsp"/>
 </body>
 </html>

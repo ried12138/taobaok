@@ -17,7 +17,7 @@
     <meta name="renderer" content="webkit"/>
     <meta name="force-rendering" content="webkit"/>
     <script>/*@cc_on window.location.href="http://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); @*/</script>
-    <title></title>
+    <title>限时抢购</title>
     <link type="text/css" rel="stylesheet" href="css/style.css" />
 
 </head>
@@ -38,13 +38,22 @@
 <%--<div class="clear"></div>--%>
 
 <!-- 导航 -->
-<header class="person_top">
-    <ul class="tab-head">
-    <li ><a onclick="javascript:history.back(-1)" class="goback"><img src="../images/goback.png" /></a></li>
-    <li class="tab-head-item">${dateTime}的场次</li>
-    </ul>
-</header>
-
+<div class="headerbox">
+    <div class="header">
+        <div class="headerL">
+            <a onclick="javascript:history.back(-1)" class="goback"><img src="images/goback.png" /></a>
+        </div>
+        <div class="headerC0">
+            <a><h3 style="color: red">${dateTime}的场次</h3></a>
+        </div>
+        <div class="headerR">
+            <a href="javascript:history.back(-1)">取消</a>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="clear"></div>
+<div class="hbox1"></div>
 <div class="totop"><a href="javascript:scrollTo(0,0)"><img src="images/totop.png" /></a></div>
 <div class="kbox"></div>
 <div class="shoplist">
@@ -67,6 +76,6 @@
         </c:if>
     </ul>
 </div>
-
+<jsp:include page="zhanzhangtongji.jsp"/>
 </body>
 </html>

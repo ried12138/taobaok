@@ -88,8 +88,8 @@
 </div>
 <div class="clear"></div>
 <div class="hbox1"></div>
-<div class="tolist"><img src="images/tolist.png" /></div>
-<div class="totop"><a href="javascript:scrollTo(0,0)"><img src="images/totop.png" /></a></div>
+<div class="tolist"><img src="${APP_PATH}/images/tolist.png" /></div>
+<div class="totop"><a href="javascript:scrollTo(0,0)"><img src="${APP_PATH}/images/totop.png" /></a></div>
 <div class="kbox"></div>
 <div class="likebox">
     <ul id="shoplikebox1">
@@ -435,5 +435,6 @@
         }
     }
 </script>
+<jsp:include page="zhanzhangtongji.jsp"/>
 </body>
 </html>

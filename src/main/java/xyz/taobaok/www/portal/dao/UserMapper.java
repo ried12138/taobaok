@@ -41,4 +41,8 @@ public interface UserMapper {
     UserDataBean selectUserInfo(@Param("userid")Integer id);
 
     Integer updateUserInfoRegister(@Param("user")UserDataBean userinfo);
+
+    String selectReward(@Param("userid")Integer id);
+
+    Integer updateUserInfoContinuousReward(@Param("userid") Integer id, @Param("continuousReward")String continuousReward, @Param("score")Integer score);
 }
