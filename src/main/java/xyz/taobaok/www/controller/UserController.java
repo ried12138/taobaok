@@ -100,7 +100,7 @@ public class UserController extends BeanController {
             String day = userService.selectReward(userinfo.getId());
             if (day != null){
                 String[] split = day.split(",");
-                mode.addObject(split);
+                mode.addObject("split",split);
             }
 
             mode.setViewName("register/index");

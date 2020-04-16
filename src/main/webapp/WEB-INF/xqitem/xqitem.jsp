@@ -196,7 +196,7 @@
         </div>
         <div class="hdbox_3">
             <a onclick="javascript:history.back(-1)"><img src="${APP_PATH}/images/h2.png" /></a>
-            <a onclick="javascript:history.back(-1)"><img src="${APP_PATH}/images/h1.png" /></a>
+<%--            <a onclick="javascript:history.back(-1)"><img src="${APP_PATH}/images/h1.png" /></a>--%>
         </div>
     </div>
 </div>

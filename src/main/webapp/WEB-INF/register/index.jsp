@@ -50,7 +50,14 @@
                             </div>
                         </div>
                         <div id="jiangli5" class="col-xs-3 clearPadding text-right pt2">
-                            <button onclick="lingqu('5')" class="btn btn-lingqu">领取</button>
+                            <c:choose>
+                                <c:when test="${split[0] == '5'}">
+                                    <button onclick="lingqu('5')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-disable" disable>已领取</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="clearfix borderb ptb10">
@@ -66,7 +73,17 @@
                             </div>
                         </div>
                         <div class="col-xs-3 clearPadding text-right pt2">
-                            <button onclick="lingqu('10')" class="btn btn-lingqu">领取</button>
+                            <c:choose>
+                                <c:when test="${split[0] == '10'}">
+                                    <button onclick="lingqu('10')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[1] == '10'}">
+                                    <button onclick="lingqu('10')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-disable" disable>已领取</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="clearfix borderb ptb10">
@@ -82,7 +99,20 @@
                             </div>
                         </div>
                         <div class="col-xs-3 clearPadding text-right pt2">
-                            <button onclick="lingqu('15')" class="btn btn-lingqu">领取</button>
+                            <c:choose>
+                                <c:when test="${split[0] == '15'}">
+                                    <button onclick="lingqu('15')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[1] == '15'}">
+                                    <button onclick="lingqu('15')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[2] == '15'}">
+                                    <button onclick="lingqu('15')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-disable" disable>已领取</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="clearfix borderb ptb10">
@@ -98,7 +128,23 @@
                             </div>
                         </div>
                         <div class="col-xs-3 clearPadding text-right pt2">
-                            <button onclick="lingqu('20')" class="btn btn-lingqu">领取</button>
+                            <c:choose>
+                                <c:when test="${split[0] == '20'}">
+                                    <button onclick="lingqu('20')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[1] == '20'}">
+                                    <button onclick="lingqu('20')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[2] == '20'}">
+                                    <button onclick="lingqu('20')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[3] == '20'}">
+                                    <button onclick="lingqu('20')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-disable" disable>已领取</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="clearfix borderb ptb10">
@@ -114,7 +160,26 @@
                             </div>
                         </div>
                         <div class="col-xs-3 clearPadding text-right pt2">
-                            <button onclick="lingqu('25')" class="btn btn-lingqu">领取</button>
+                            <c:choose>
+                                <c:when test="${split[0] == '25'}">
+                                <button onclick="lingqu('25')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[1] == '25'}">
+                                    <button onclick="lingqu('25')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[2] == '25'}">
+                                    <button onclick="lingqu('25')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[3] == '25'}">
+                                    <button onclick="lingqu('25')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[4] == '25'}">
+                                    <button onclick="lingqu('25')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-disable" disable>已领取</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="clearfix borderb ptb10">
@@ -130,7 +195,29 @@
                             </div>
                         </div>
                         <div class="col-xs-3 clearPadding text-right pt2">
-                            <button onclick="lingqu('30')" class="btn btn-lingqu">领取</button>
+                            <c:choose>
+                                <c:when test="${split[0] == '30'}">
+                                    <button onclick="lingqu('30')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[1] == '30'}">
+                                    <button onclick="lingqu('30')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[2] == '30'}">
+                                    <button onclick="lingqu('30')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[3] == '30'}">
+                                    <button onclick="lingqu('30')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[4] == '30'}">
+                                    <button onclick="lingqu('30')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:when test="${split[5] == '30'}">
+                                    <button onclick="lingqu('30')" class="btn btn-lingqu">领取</button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button class="btn btn-disable" disable>已领取</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
